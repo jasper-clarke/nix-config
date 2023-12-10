@@ -161,6 +161,7 @@
       jetbrains-mono
       liberation_ttf
       freetype
+      source-han-sans
       inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.inter
 
       # Customs
