@@ -1,5 +1,3 @@
-#!/bin/bash
-
 CNT="[\e[1;36mNOTE\e[0m]"
 COK="[\e[1;32mOK\e[0m]"
 CER="[\e[1;31mERROR\e[0m]"
@@ -22,32 +20,27 @@ echo -e "$CNT - Installing config/script symlinks and arranging directories"
 mkdir ~/.config/xmonad
 mkdir ~/.config/rofi
 mkdir ~/.config/polybar
-mkdir ~/.config/dunst
-mkdir ~/.config/picom
-mkdir ~/.config/scripts
+mkdir ~/.config/compfy
 
 rm ~/.zshrc
 
 ln -s ~/.flake/setup/.zshrc ~/.zshrc
 
-ln -s ~/.flake/setup/scripts/lightdm.sh ~/.config/scripts/lightdm.sh
-ln -s ~/.flake/setup/scripts/polybar.sh ~/.config/scripts/polybar.sh
-ln -s ~/.flake/setup/scripts/kill.sh ~/.config/scripts/kill.sh
 ln -s ~/.flake/setup/configs/starship.toml ~/.config/starship.toml
 ln -s ~/.flake/setup/configs/xmonad.hs ~/.config/xmonad/xmonad.hs
-ln -s ~/.flake/setup/configs/dunstrc ~/.config/dunst/dunstrc
-ln -s ~/.flake/setup/configs/picom.conf ~/.config/picom/picom.conf
-ln -s ~/.flake/setup/configs/polybar-left.ini ~/.config/polybar/polybar-left.ini
-ln -s ~/.flake/setup/configs/polybar-right.ini ~/.config/polybar/polybar-right.ini
-ln -s ~/.flake/setup/configs/doom.d/doom-rose-pine-moon-theme.el ~/.doom.d/themes/doom-rose-pine-moon-theme.el
+ln -s ~/.flake/setup/configs/compfy.conf ~/.config/compfy/compfy.conf
+ln -s ~/.flake/setup/configs/polybar-config.ini ~/.config/polybar/config.ini
 
 echo -e "$COK - Done, Moving to next step..."
 
-echo -e "$CNT - Getting rofi configs..."
+echo -e "$CNT - linking rofi configs..."
 
-git clone https://github.com/allusive-dev/Rofi ~/.config/rofi
-
-rm -rf ~/.config/rofi/.git
+ln -s ~/.flake/setup/configs/rofi/colors.rasi ~/.config/rofi/colors.rasi
+ln -s ~/.flake/setup/configs/rofi/config.rasi ~/.config/rofi/config.rasi
+ln -s ~/.flake/setup/configs/rofi/launcher.rasi ~/.config/rofi/launcher.rasi
+ln -s ~/.flake/setup/configs/rofi/pm-confirm.rasi ~/.config/rofi/pm-confirm.rasi
+ln -s ~/.flake/setup/configs/rofi/powermenu.rasi ~/.config/rofi/powermenu.rasi
+ln -s ~/.flake/setup/configs/rofi/powermenu.sh ~/.config/rofi/powermenu.sh
 
 echo -e "$COK - Done! Moving On..."
 
@@ -76,7 +69,5 @@ ln -s ~/.flake/setup/configs/doom.d/config.el ~/.doom.d/config.el
 ln -s ~/.flake/setup/configs/doom.d/custom.el ~/.doom.d/custom.el
 ln -s ~/.flake/setup/configs/doom.d/init.el ~/.doom.d/init.el
 ln -s ~/.flake/setup/configs/doom.d/packages.el ~/.doom.d/packages.el
-
-cp ~/.flake/setup/configs/doom.d/splash.png ~/.doom.d/splash.png
 
 echo -e "$COK - Configs linked!"

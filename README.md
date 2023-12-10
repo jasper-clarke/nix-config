@@ -70,4 +70,4 @@ nixos-install --flake /mnt/etc/nixos/allusive#nixos
 
 ## Install
 
-Head over to allusive-dev/dotfiles for the rest of the setup.
+Run the `install.sh` to finish everything else up!

@@ -189,6 +189,10 @@
             default_permissions = "rx",
         })
       '';
+      ".ssh/config".text = ''
+        Host gitlab.com
+          IdentityFile ~/.ssh/gitlab
+      '';
     };
   };
 }
