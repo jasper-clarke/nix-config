@@ -239,12 +239,11 @@ myStartupHook = do
   spawnOnce "nvidia-settings --load-config-only"
   spawnOnce "emacs --daemon"
   spawnOnce "compfy -b"
-  spawnOnce "feh --bg-fill ~/Files/wallpapers/gruvbox-japan.png"
+  spawnOnce "feh --bg-fill ~/.flake/setup/gruvbox-japan.png"
   spawnOnce "copyq"
   spawnOnce "polybar"
   spawnOnce "alarm-clock-applet --hidden"
   spawnOnce "/home/allusive/.config/scripts/lights.sh"
-  -- spawnOnce "trayer --edge top --align left --widthtype request --padding 8 --iconspacing 8 --SetPartialStrut true --SetDockType true --expand true --monitor 0 --height 22 --margin 55 --distancefrom top --distance 21 --transparent true --alpha 0 --tint 0x#071632"
   spawnOnce "element-desktop"
   spawnOnce "firefox 'https://wol.jw.org/en/wol/h/r1/lp-e'"
 
