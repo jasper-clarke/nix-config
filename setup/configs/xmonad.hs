@@ -193,7 +193,7 @@ myLayout = onWorkspaces [ "1_\984479", "1_\60100", "1_\984180" ] myVerticalLayou
 ------------------------------------------------------------------------
 
 myManageHook = manageDocks <+> composeAll
-    [ className =? "copyq"            --> doFloat
+    [ className =? "feh"            --> doFloat
     , title     =? "Borkski"        --> doFloat
     , title     =? "Friends List"   --> doFloat
     , title     =? "Steam - News"   --> doFloat
@@ -243,7 +243,6 @@ myStartupHook = do
   spawnOnce "copyq"
   spawnOnce "polybar"
   spawnOnce "alarm-clock-applet --hidden"
-  spawnOnce "/home/allusive/.config/scripts/lights.sh"
   spawnOnce "element-desktop"
   spawnOnce "firefox 'https://wol.jw.org/en/wol/h/r1/lp-e'"
 

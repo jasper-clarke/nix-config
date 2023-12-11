@@ -14,10 +14,10 @@
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
-    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-    extraModprobeConfig = ''
-      options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    '';
+    #extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    #extraModprobeConfig = ''
+    #  options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    #'';
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -42,13 +42,14 @@
   };
 
   nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    # package = pkgs.nixFlakes;
+    # extraOptions = ''
+    #   experimental-features = nix-command flakes
+    # '';
     settings = {
       substituters = [ "https://ezkea.cachix.org" ];
       trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+      experimental-features = [ "nix-command" "flakes" ];
     };
   };
 
@@ -101,6 +102,7 @@
         };
         sessionCommands = ''
           sh /home/allusive/.flake/setup/scripts/lightdm.sh
+          sh /home/allusive/.flake/setup/scripts/lights.sh
         '';
       };
       videoDrivers = ["nvidia"];

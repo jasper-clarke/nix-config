@@ -53,23 +53,25 @@
 
   fonts.fontconfig.enable = true;
 
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "inode/directory" = ["pcmanfm.desktop"];
-      "text/plain" = ["emacsclient.desktop"];
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop"];
-      "application/pdf" = ["onlyoffice-desktopeditors.desktop"];
-      "application/zip" = ["xarchiver.desktop"];
-      "text/*" = ["emacsclient.desktop"];
-      "video/*" = ["mpv.desktop"];
-      "x-scheme-handler/https" = ["firefox.desktop"];
-      "x-scheme-handler/http" = ["firefox.desktop"];
-      "x-scheme-handler/mailto" = ["firefox.desktop"];
-      "image/*" = ["firefox.desktop"];
-      "image/png" = ["firefox.desktop"];
-      "image/jpeg" = ["firefox.desktop"];
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = ["pcmanfm.desktop"];
+        "text/plain" = ["emacsclient.desktop"];
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop"];
+        "application/pdf" = ["onlyoffice-desktopeditors.desktop"];
+        "application/zip" = ["xarchiver.desktop"];
+        "text/*" = ["emacsclient.desktop"];
+        "video/*" = ["mpv.desktop"];
+        "x-scheme-handler/https" = ["firefox.desktop"];
+        "x-scheme-handler/http" = ["firefox.desktop"];
+        "x-scheme-handler/mailto" = ["firefox.desktop"];
+        "image/*" = ["firefox.desktop"];
+        "image/png" = ["firefox.desktop"];
+        "image/jpeg" = ["firefox.desktop"];
+      };
     };
   };
 
@@ -120,7 +122,6 @@
       steam
       mpv
       feh
-      #spotify-tray
       vscodium
       emacs
       flameshot
@@ -183,7 +184,7 @@
         table.insert (default_access.rules,{
             matches = {
                 {
-                    { "application.process.binary", "=", ".electron-wrapped" }
+                    { "application.process.binary", "=", "electron" }
                 }
             },
             default_permissions = "rx",
