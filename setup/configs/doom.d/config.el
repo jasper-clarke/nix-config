@@ -27,7 +27,7 @@
 
 (setq doom-theme 'gruvbox-dark-soft)
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 17))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 19 :weight normal))
 
 ;; The custom entries
 

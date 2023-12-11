@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   user,
+  hostname,
   version,
   ...
 }:
@@ -58,7 +59,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "${hostname}";
     networkmanager.enable = true;
   };
 

@@ -4,13 +4,14 @@
   system,
   home-manager,
   user,
+  hostname,
   version,
   aagl,
   ...
 }: {
-  nixos = lib.nixosSystem {
+  ${hostname} = lib.nixosSystem {
     inherit system;
-    specialArgs = {inherit user version inputs;};
+    specialArgs = {inherit user hostname version inputs;};
     modules = [
       ./configuration.nix
       home-manager.nixosModules.home-manager

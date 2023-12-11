@@ -39,6 +39,7 @@
     system = "x86_64-linux";
     version = "23.11";
     user = "allusive";
+    hostname = "nixos";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -48,7 +49,7 @@
     nixosConfigurations = (
       import ./nix {
         inherit (nixpkgs) lib;
-        inherit inputs user system version home-manager aagl;
+        inherit inputs user hostname system version home-manager aagl;
       }
     );
   };
