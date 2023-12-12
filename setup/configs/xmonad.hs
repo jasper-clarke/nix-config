@@ -245,6 +245,7 @@ myStartupHook = do
   spawnOnce "alarm-clock-applet --hidden"
   spawnOnce "element-desktop"
   spawnOnce "firefox 'https://wol.jw.org/en/wol/h/r1/lp-e'"
+  spawnOnce "sh ~/.flake/setup/scripts/lights.sh"
 
 ------------------------------------------------------------------------
 

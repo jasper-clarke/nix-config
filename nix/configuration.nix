@@ -59,7 +59,7 @@
   };
 
   networking = {
-    hostName = "${hostname}";
+    hostName = "nixos";
     networkmanager.enable = true;
   };
 
@@ -103,7 +103,6 @@
         };
         sessionCommands = ''
           sh /home/allusive/.flake/setup/scripts/lightdm.sh
-          sh /home/allusive/.flake/setup/scripts/lights.sh
         '';
       };
       videoDrivers = ["nvidia"];
