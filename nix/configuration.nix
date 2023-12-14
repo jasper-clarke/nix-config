@@ -112,6 +112,15 @@
       };
     };
 
+    #greetd = {
+    #  enable = true;
+    #  settings = {
+    #    default_session = {
+    #      command = "Hyprland";
+    #    };
+    #  };
+    #};
+
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -140,6 +149,12 @@
     direnv.enable = true;
     dconf.enable = true;
     noisetorch.enable = true;
+
+    #hyprland = {
+    #  enable = true;
+    #  enableNvidiaPatches = true;
+    #  xwayland.enable = true;
+    #};
   };
 
   systemd = {
@@ -172,8 +187,9 @@
   fonts.fontDir.enable = true;
 
   environment = {
-    #etc = {
-    #  "openal/alsoft.conf".text = "drivers=pulse\n";
+    #sessionVariables = {
+    #  WLR_NO_HARDWARE_CURSORS = "1";
+    #  NIXOS_OZONE_WL = "1";
     #};
     systemPackages = with pkgs; [
       vim

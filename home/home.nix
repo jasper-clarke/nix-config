@@ -72,9 +72,9 @@
         "x-scheme-handler/https" = ["firefox.desktop"];
         "x-scheme-handler/http" = ["firefox.desktop"];
         "x-scheme-handler/mailto" = ["firefox.desktop"];
-        "image/*" = ["firefox.desktop"];
-        "image/png" = ["firefox.desktop"];
-        "image/jpeg" = ["firefox.desktop"];
+        "image/*" = ["feh-custom.desktop"];
+        "image/png" = ["feh-custom.desktop"];
+        "image/jpeg" = ["feh-custom.desktop"];
       };
     };
   };
