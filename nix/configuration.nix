@@ -93,33 +93,24 @@
     xserver = {
       enable = true;
       layout = "us";
-      autorun = true;
+      #autorun = true;
       displayManager = {
         #startx.enable = true;
-        defaultSession = "none+xmonad";
-        lightdm = {
+        #defaultSession = "none+xmonad";
+        gdm = {
           enable = true;
-          greeters.slick.enable = true;
+          wayland = true;
         };
-        sessionCommands = ''
-          sh /home/allusive/.flake/setup/scripts/lightdm.sh
-        '';
+        #sessionCommands = ''
+        #  sh /home/allusive/.flake/setup/scripts/lightdm.sh
+        #'';
       };
       videoDrivers = ["nvidia"];
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
+      #windowManager.xmonad = {
+      #  enable = true;
+      #  enableContribAndExtras = true;
+      #};
     };
-
-    #greetd = {
-    #  enable = true;
-    #  settings = {
-    #    default_session = {
-    #      command = "Hyprland";
-    #    };
-    #  };
-    #};
 
     pipewire = {
       enable = true;
@@ -150,11 +141,11 @@
     dconf.enable = true;
     noisetorch.enable = true;
 
-    #hyprland = {
-    #  enable = true;
-    #  enableNvidiaPatches = true;
-    #  xwayland.enable = true;
-    #};
+    hyprland = {
+      enable = true;
+      enableNvidiaPatches = true;
+      xwayland.enable = true;
+    };
   };
 
   systemd = {
@@ -187,10 +178,10 @@
   fonts.fontDir.enable = true;
 
   environment = {
-    #sessionVariables = {
-    #  WLR_NO_HARDWARE_CURSORS = "1";
-    #  NIXOS_OZONE_WL = "1";
-    #};
+    sessionVariables = {
+      WLR_NO_HARDWARE_CURSORS = "1";
+      NIXOS_OZONE_WL = "1";
+    };
     systemPackages = with pkgs; [
       vim
       wget
