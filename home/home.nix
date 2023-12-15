@@ -150,7 +150,7 @@
       krabby
       cmus
       polybar
-
+      xorg.xmessage
       figma-linux
 
       signal-desktop

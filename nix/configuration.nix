@@ -11,6 +11,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./symlinks.nix
   ];
 
   boot = {
