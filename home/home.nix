@@ -87,10 +87,10 @@
       name = "oomox-gruvbox-dark";
       package = pkgs.gruvbox-dark-icons-gtk;
     };
-    #cursorTheme = {
-    #  name = "Capitaine Cursors (Gruvbox) - White";
-    #  package = pkgs.capitaine-cursors-themed;
-    #};
+    cursorTheme = {
+      name = "Capitaine Cursors (Gruvbox) - White";
+      package = pkgs.capitaine-cursors-themed;
+    };
     theme = {
       name = "Gruvbox-Material-Dark";
     };
@@ -118,6 +118,7 @@
       obsidian
       pcmanfm
       rofi
+      #wofi
       kitty
       lsd
       starship
@@ -147,14 +148,17 @@
       fzf
       gimp
       trayer
-      krabby
       cmus
       polybar
-      xorg.xmessage
       figma-linux
 
       signal-desktop
       btop
+
+
+      # Wayland
+      #swww
+
 
       #inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.jetbrains.idea-community
 

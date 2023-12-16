@@ -94,13 +94,13 @@
     xserver = {
       enable = true;
       layout = "us";
-      autorun = true;
+      #autorun = true;
       displayManager = {
         #startx.enable = true;
-        defaultSession = "none+xmonad";
-        lightdm = {
+        #defaultSession = "none+xmonad";
+        gdm = {
           enable = true;
-          greeters.slick.enable = true;
+          #wayland = true;
         };
         sessionCommands = ''
           sh /home/allusive/.flake/setup/scripts/lightdm.sh
@@ -112,15 +112,6 @@
         enableContribAndExtras = true;
       };
     };
-
-    #greetd = {
-    #  enable = true;
-    #  settings = {
-    #    default_session = {
-    #      command = "Hyprland";
-    #    };
-    #  };
-    #};
 
     pipewire = {
       enable = true;
