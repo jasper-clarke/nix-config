@@ -112,8 +112,6 @@
 
     packages = with pkgs; [
       zsh
-      appimage-run
-      pywal
       tree
       obsidian
       pcmanfm
@@ -185,7 +183,5 @@
         postInstall = '''';
       }))
     ];
-
-
   };
 }
