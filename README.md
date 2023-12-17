@@ -1,8 +1,8 @@
 # NixOS
 
-## Install
+## Guide
 
-Boot Live USB
+### Boot Live USB
 
 ```
 sudo -i
@@ -16,7 +16,7 @@ enable_network 0
 quit
 ```
 
-nvme:
+### nvme:
 ```
 parted /dev/nvme0n1 -- mklabel gpt
 parted /dev/nvme0n1 -- mkpart primary 512MB -8GB
@@ -29,7 +29,7 @@ mkswap -L swap /dev/nvme0n1p2
 mkfs.fat -F 32 -n boot /dev/nvme0n1p3
 ```
 
-sda:
+### sda:
 ```
 parted /dev/sda -- mklabel gpt
 parted /dev/sda -- mkpart primary 512MB -8GB
@@ -42,7 +42,7 @@ mkswap -L swap /dev/sda2
 mkfs.fat -F 32 -n boot /dev/sda3
 ```
 
-Mounting:
+### Mounting:
 ```
 mount /dev/disk/by-label/nixos /mnt
 
@@ -55,19 +55,21 @@ mount /dev/disk/by-label/boot /mnt/boot
 or
 `swapon /dev/sda2`
 
+### Config:
+
 ```
 nixos-generate-config --root /mnt
 nix-env -iA nixos.git
-git clone https://github.com/allusive-dev/NixOS /mnt/etc/nixos/allusive
+git clone https://gitlab.com/Alllusive/dotfiles /mnt/etc/nixos/allusive
 ```
 
-Install:
+### Install:
 ```
 rm /mnt/etc/nixos/allusive/nix/hardware-configuration.nix
 cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/allusive/nix/hardware-configuration.nix
 nixos-install --flake /mnt/etc/nixos/allusive#nixos
 ```
 
-## Install
+## Setup
 
-Run the `install.sh` to finish everything else up!
+Check the `install` script to finish everything else up if needed

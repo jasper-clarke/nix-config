@@ -153,6 +153,8 @@
       signal-desktop
       btop
 
+      helvum
+
 
       # Wayland
       #swww
