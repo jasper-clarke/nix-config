@@ -153,13 +153,6 @@
       signal-desktop
       btop
 
-      helvum
-
-
-      # Wayland
-      #swww
-
-
       #inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.jetbrains.idea-community
 
       inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.audacity

@@ -74,7 +74,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((modm,               xK_space     ), spawn "rofi -lines 10 -padding 0 -show search -modi search:ddg-ff-search -i -p 'Search: '")
 
     -- clipboard toggle
-    , ((modm,               xK_v         ), spawn "copyq toggle")
+    , ((modm,               xK_v         ), spawn "sh ~/.flake/setup/scripts/copyq.sh")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c         ), spawn "sh ~/.flake/setup/scripts/kill.sh")
@@ -241,7 +241,7 @@ myStartupHook = do
   spawnOnce "compfy -b"
   spawnOnce "feh --bg-fill ~/.flake/setup/gruvbox-japan.png"
   spawnOnce "copyq"
-  spawnOnce "polybar"
+  spawnOnce "polybar &"
   spawnOnce "alarm-clock-applet --hidden"
   spawnOnce "element-desktop"
   spawnOnce "firefox 'https://wol.jw.org/en/wol/h/r1/lp-e'"
@@ -269,9 +269,9 @@ myConfig = def {
         workspaces         = [marshall s vw | vw <- ["\984479", "\60100", "\984180"], s <- [0, 1]],
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
-        logHook = myLogHook,
-        manageHook = myManageHook,
-        layoutHook = myLayout,
+        logHook            = myLogHook,
+        manageHook         = myManageHook,
+        layoutHook         = myLayout,
         handleEventHook    = myEventHook,
         startupHook        = myStartupHook
 }
