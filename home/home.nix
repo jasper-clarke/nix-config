@@ -116,7 +116,6 @@
       obsidian
       pcmanfm
       rofi
-      #wofi
       kitty
       lsd
       starship
