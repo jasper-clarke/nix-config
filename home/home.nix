@@ -81,6 +81,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+  };
+
   gtk = {
     enable = true;
     iconTheme = {
@@ -151,6 +156,8 @@
 
       signal-desktop
       btop
+
+      helvum
 
       #inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.jetbrains.idea-community
 

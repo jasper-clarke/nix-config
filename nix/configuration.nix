@@ -44,10 +44,6 @@
   };
 
   nix = {
-    # package = pkgs.nixFlakes;
-    # extraOptions = ''
-    #   experimental-features = nix-command flakes
-    # '';
     settings = {
       substituters = [ "https://ezkea.cachix.org" ];
       trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
@@ -76,7 +72,7 @@
     };
     nvidia = {
       modesetting.enable = true;
-      open = false;
+      open = true;
       nvidiaSettings = true;
     };
     pulseaudio.enable = lib.mkForce false;
@@ -94,13 +90,9 @@
     xserver = {
       enable = true;
       layout = "us";
-      #autorun = true;
       displayManager = {
-        #startx.enable = true;
-        #defaultSession = "none+xmonad";
         gdm = {
           enable = true;
-          #wayland = true;
         };
         sessionCommands = ''
           sh /home/allusive/.flake/setup/scripts/lightdm.sh
@@ -140,8 +132,6 @@
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
-    noisetorch.enable = true;
-
     #hyprland = {
     #  enable = true;
     #  enableNvidiaPatches = true;
@@ -166,7 +156,10 @@
     };
   };
 
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox = {
+    host.enable = true;
+    #guest.enable = true;
+  };
 
   users.users.${user} = {
     isNormalUser = true;
