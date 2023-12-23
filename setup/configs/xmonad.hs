@@ -240,7 +240,7 @@ myStartupHook = do
   spawnOnce "emacs --daemon"
   spawnOnce "compfy -b"
   spawnOnce "feh --bg-fill ~/.flake/setup/gruvbox-japan.png"
-  spawnOnce "copyq"
+  spawnOnce "copyq &"
   spawnOnce "polybar &"
   spawnOnce "alarm-clock-applet --hidden"
   spawnOnce "element-desktop"

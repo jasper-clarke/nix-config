@@ -157,6 +157,8 @@
       signal-desktop
       btop
 
+      bun
+
       helvum
 
       #inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.jetbrains.idea-community
