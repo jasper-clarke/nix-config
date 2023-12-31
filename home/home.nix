@@ -18,7 +18,7 @@
 
     git = {
       enable = true;
-      userName = "allusive-dev";
+      userName = "jasperc-dev";
       userEmail = "jasper@allusive.dev";
     };
 
@@ -157,11 +157,10 @@
       signal-desktop
       btop
 
+      temurin-jre-bin-17
       bun
 
       helvum
-
-      #inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.jetbrains.idea-community
 
       inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.audacity
 

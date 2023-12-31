@@ -53,6 +53,9 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
   };
 
   networking = {
@@ -72,7 +75,7 @@
     };
     nvidia = {
       modesetting.enable = true;
-      open = true;
+      open = false;
       nvidiaSettings = true;
     };
     pulseaudio.enable = lib.mkForce false;
@@ -189,7 +192,6 @@
       ripgrep
       sane-backends
       pavucontrol
-      cloudflared
 
       #(writers.writePython3Bin "ddg-ff-search" { flakeIgnore = ["E121" "E126" "E201" "E202" "E203" "E226" "E261" "E265" "E266" "E302" "E305" "E501" "E722" "W292"]; } ./scripts/rofi-web-search.py)
     ];
