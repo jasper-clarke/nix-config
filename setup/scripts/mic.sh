@@ -2,7 +2,7 @@ device=$(wpctl inspect @DEFAULT_SOURCE@)
 
 vol=$(wpctl get-volume @DEFAULT_SOURCE@)
 
-if [[ $device == *"Burr-Brown"* ]]; then
+if [[ $device == *"Audio/Source"* ]]; then
     if [[ $vol == *"MUTED"* ]]; then
         echo "MUTED"
     else

@@ -2,6 +2,6 @@
 
 device=$(wpctl inspect @DEFAULT_SOURCE@)
 
-if [[ $device == *"Burr-Brown"* ]]; then
+if [[ $device == *"Audio/Source"* ]]; then
     wpctl set-mute @DEFAULT_SOURCE@ toggle
 fi

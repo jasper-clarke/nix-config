@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    grub2-themes = {
+      url = "github:vinceliuice/grub2-themes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Spicetify
     #spicetify-nix = {
     #  url = "github:the-argus/spicetify-nix";
@@ -32,6 +37,7 @@
     self,
     nixpkgs,
     home-manager,
+    grub2-themes,
     #spicetify-nix,
     aagl,
     ...
@@ -49,7 +55,7 @@
     nixosConfigurations = (
       import ./nix {
         inherit (nixpkgs) lib;
-        inherit inputs user hostname system version home-manager aagl;
+        inherit inputs user hostname system version home-manager grub2-themes aagl;
       }
     );
   };

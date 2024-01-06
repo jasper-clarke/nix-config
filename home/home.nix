@@ -13,6 +13,44 @@
     ./prewritten-files.nix
   ];
 
+  xresources.extraConfig = ''
+   ! special
+   *.foreground:   #edeff0
+   *.background:   #0c0e0f
+
+   ! black
+   *.color0:       #232526
+   *.color8:       #2c2e2f
+
+   ! red
+   *.color1:       #df5b61
+   *.color9:       #e8646a
+
+   ! green
+   *.color2:       #78b892
+   *.color10:      #81c19b
+
+   ! yellow
+   *.color3:       #de8f78
+   *.color11:      #e79881
+
+   ! blue
+   *.color4:       #6791c9
+   *.color12:      #709ad2
+
+   ! magenta
+   *.color5:       #bc83e3
+   *.color13:      #c58cec
+
+   ! cyan
+   *.color6:       #67afc1
+   *.color14:      #70b8ca
+
+   ! white
+   *color7:        #e4e6e7
+   *color15:       #f2f4f5
+  '';
+
   programs = {
     home-manager.enable = true;
 
@@ -47,12 +85,6 @@
       };
     };
 
-    # obs-studio = {
-    #   enable = true;
-    #   plugins = with pkgs.obs-studio-plugins; [
-    #     obs-pipewire-audio-capture
-    #   ];
-    # };
   };
 
   fonts.fontconfig.enable = true;
@@ -93,11 +125,11 @@
       package = pkgs.gruvbox-dark-icons-gtk;
     };
     cursorTheme = {
-      name = "Capitaine Cursors (Gruvbox) - White";
-      package = pkgs.capitaine-cursors-themed;
+      name = "capitaine-cursors-white";
+      package = pkgs.capitaine-cursors;
     };
     theme = {
-      name = "Gruvbox-Material-Dark";
+      name = "Awesthetic-dark";
     };
   };
 
@@ -110,15 +142,16 @@
     pointerCursor = {
       gtk.enable = true;
       x11.enable = true;
-      size = 38;
-      name = "Capitaine Cursors (Gruvbox) - White";
-      package = pkgs.capitaine-cursors-themed;
+      size = 40;
+      name = "capitaine-cursors-white";
+      package = pkgs.capitaine-cursors;
     };
 
     packages = with pkgs; [
       zsh
       tree
       obsidian
+      killall
       pcmanfm
       rofi
       kitty
@@ -135,7 +168,6 @@
       colorpicker
       nitch
       prismlauncher
-      wmctrl
       betterlockscreen
       playerctl
       onlyoffice-bin
@@ -143,24 +175,23 @@
       #zulu8
       gnome.simple-scan
       motrix
-      alarm-clock-applet
       element-desktop
       xdotool
       headsetcontrol
       fzf
       gimp
-      trayer
-      cmus
-      polybar
       figma-linux
-
       signal-desktop
       btop
-
+      mpc-cli
       temurin-jre-bin-17
       bun
+      ponymix
+      spotdl
+      ymuse
+      appimage-run
+      psi-notify
 
-      helvum
 
       inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.audacity
 

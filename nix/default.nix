@@ -7,6 +7,7 @@
   hostname,
   version,
   aagl,
+  grub2-themes,
   ...
 }: {
   ${hostname} = lib.nixosSystem {
@@ -15,6 +16,7 @@
     modules = [
       ./configuration.nix
       home-manager.nixosModules.home-manager
+      grub2-themes.nixosModules.default
       {
        nix.settings = aagl.nixConfig;
        imports = [ aagl.nixosModules.default ];

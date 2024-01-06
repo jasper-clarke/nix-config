@@ -69,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((myAltMask,          xK_space     ), spawn "rofi -show drun -theme ~/.config/rofi/launcher.rasi")
 
     -- Toggle fullscreen for any window
-    , ((modm,               xK_F2        ), spawn "wmctrl -r :ACTIVE: -b toggle,fullscreen")
+    , ((modm,               xK_space     ), spawn "wmctrl -r :ACTIVE: -b toggle,fullscreen")
 
     --, ((modm,               xK_space     ), spawn "rofi -lines 10 -padding 0 -show search -modi search:ddg-ff-search -i -p 'Search: '")
 
@@ -87,6 +87,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Knob Turn Right
     , ((0,                  0x1008ffb1   ), spawn "wpctl set-volume @DEFAULT_SINK@ 5%+")
 
+    -- Keyboard F13
     , ((0,                  0x1008ff47   ), spawn "sh ~/.flake/setup/scripts/mute-toggle.sh")
 
     -- Knob Press
@@ -104,19 +105,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab       ), windows W.focusDown)
 
     -- Top mouse button runs multimedia play/pause
-    , ((0,                  0x1008ff14   ), spawn "playerctl play-pause"  )
+    , ((0,                  0x1008ff14   ), spawn "mpc toggle"  )
 
     -- Front mouse key switches to previous song
-    , ((myAltMask,          xK_bracketleft  ), spawn "playerctl previous")
+    , ((myAltMask,          xK_bracketleft  ), spawn "mpc previous")
 
     -- Back mouse key switches to next song
-    , ((myAltMask,          xK_bracketright ), spawn "playerctl next")
+    , ((myAltMask,          xK_bracketright ), spawn "mpc next")
 
     -- Push window back into tiling
     , ((modm,               xK_t         ), withFocused $ windows . W.sink)
 
     -- Take a screenshot
-    ,((modm .|. shiftMask, xK_s          ), spawn "flameshot gui")
+    , ((modm .|. shiftMask, xK_s          ), spawn "flameshot gui")
 
     -- Run the powermenu
     , ((modm .|. shiftMask, xK_q         ), spawn "sh ~/.config/rofi/powermenu.sh")
@@ -239,7 +240,7 @@ myStartupHook = do
   spawnOnce "nvidia-settings --load-config-only"
   spawnOnce "emacs --daemon"
   spawnOnce "compfy -b"
-  spawnOnce "feh --bg-fill ~/.flake/setup/gruvbox-japan.png"
+  spawnOnce "feh --bg-fill ~/.flake/wallpapers/northen-lights.jpg"
   spawnOnce "copyq &"
   spawnOnce "polybar &"
   spawnOnce "alarm-clock-applet --hidden"

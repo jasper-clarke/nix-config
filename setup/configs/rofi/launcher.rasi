@@ -19,7 +19,7 @@ configuration {
 @import "~/.config/rofi/colors.rasi"
 
 * {
-  font: "JetBrains Mono 10";
+  font: "Inter 10";
 }
 
 /*****----- Main Window -----*****/

@@ -28,17 +28,12 @@
         enable = true;
         efiSupport = true;
         device = "nodev";
-        # theme = pkgs.stdenv.mkDerivation {
-        #   pname = "distro-grub-themes";
-        #   version = "3.1";
-        #   src = pkgs.fetchFromGitHub {
-        #     owner = "AdisonCavani";
-        #     repo = "distro-grub-themes";
-        #     rev = "v3.1";
-        #     hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
-        #   };
-        #   installPhase = "cp -r customize/nixos $out";
-        # };
+      };
+      grub2-theme = {
+        enable = true;
+        theme = "vimix";
+        screen = "2k";
+        footer = true;
       };
     };
   };
@@ -89,7 +84,17 @@
   sound.enable = lib.mkForce false; # disable alsa
 
   services = {
-    teamviewer.enable = true;
+    mpd = {
+      enable = true;
+      musicDirectory = "/home/${user}/Music";
+      user = "${user}";
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "Pipewire Output"
+        }
+      '';
+    };
     xserver = {
       enable = true;
       layout = "us";
@@ -102,9 +107,25 @@
         '';
       };
       videoDrivers = ["nvidia"];
-      windowManager.xmonad = {
+      # windowManager.xmonad = {
+      #   enable = true;
+      #   enableContribAndExtras = true;
+      # };
+      windowManager.awesome = {
         enable = true;
-        enableContribAndExtras = true;
+        package = pkgs.awesome.overrideAttrs (old: {
+          version = "1f7ac8f9c7ab9fff7dd93ab4b29514ff3580efcf";
+          src = pkgs.fetchFromGitHub {
+            owner = "awesomeWM";
+            repo = "awesome";
+            rev = "1f7ac8f9c7ab9fff7dd93ab4b29514ff3580efcf";
+            hash = "sha256-D5CTo4FvGk2U3fkDHf/JL5f/O1779i92UcRpPn+lbpw=";
+          };
+          patches = [];
+          postPatch = ''
+            patchShebangs tests/examples/_postprocess.lua
+          '';
+        });
       };
     };
 
@@ -132,18 +153,20 @@
   };
 
   programs = {
+    noisetorch.enable = true;
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
-    #hyprland = {
-    #  enable = true;
-    #  enableNvidiaPatches = true;
-    #  xwayland.enable = true;
-    #};
   };
 
   systemd = {
-    services.NetworkManager-wait-online.enable = lib.mkForce false;
+
+    services = {
+      mpd.environment = {
+        XDG_RUNTIME_DIR = "/run/user/1000";
+      };
+      NetworkManager-wait-online.enable = lib.mkForce false;
+    };
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = ["graphical-session.target"];
@@ -168,21 +191,19 @@
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "vboxusers" "docker"];
     home = "/home/allusive";
-    description = "Allusive";
+    description = "Jasper C";
     shell = pkgs.zsh;
   };
 
   fonts.fontDir.enable = true;
 
   environment = {
-    #sessionVariables = {
-    #  WLR_NO_HARDWARE_CURSORS = "1";
-    #  NIXOS_OZONE_WL = "1";
-    #};
+    # sessionVariables = {
+    #   GI_TYPELIB_PATH = "/nix/store/7ah2yapjqvx33as3gqxqkgaica6x8mp7-pango-1.51.0/lib/girepository-1.0:/nix/store/h979i6ql0gzlzk7i0kj7l1nmaijqcn9s-gobject-introspection-wrapped-1.78.1/lib/girepository-1.0:/nix/store/7j1farc84m0pi620frxhrzjrvs8i9ci7-gobject-introspection-1.78.1/lib/girepository-1.0:/nix/store/9v7bs0i8r6x9sg6q64qyhqgzmj1nrbmw-gdk-pixbuf-2.42.10/lib/girepository-1.0:/nix/store/s95lcx7j16z47n43r1m7rik65wigv480-librsvg-2.57.0/lib/girepository-1.0:/nix/store/rnw7n0c8zxhzxzrn8d7kr1xmc95wxqlw-harfbuzz-7.3.0/lib/girepository-1.0:/home/allusive/.config/awesome/typelib";
+    # };
     systemPackages = with pkgs; [
       vim
       wget
-      git
       gvfs
       sassc
       pkg-config
@@ -191,7 +212,7 @@
       polkit_gnome
       ripgrep
       sane-backends
-      pavucontrol
+      mpdris2
 
       #(writers.writePython3Bin "ddg-ff-search" { flakeIgnore = ["E121" "E126" "E201" "E202" "E203" "E226" "E261" "E265" "E266" "E302" "E305" "E501" "E722" "W292"]; } ./scripts/rofi-web-search.py)
     ];

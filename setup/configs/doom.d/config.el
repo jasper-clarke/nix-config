@@ -25,7 +25,9 @@
 (assoc-delete-all "Open documentation" +doom-dashboard-menu-sections)
 
 
-(setq doom-theme 'gruvbox-dark-soft)
+(setq doom-theme 'xresources)
+
+;;(load-theme 'xresources t)
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 28 :weight normal))
 
