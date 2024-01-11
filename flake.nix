@@ -2,12 +2,10 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -38,25 +36,43 @@
     nixpkgs,
     home-manager,
     grub2-themes,
-    #spicetify-nix,
     aagl,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    version = "23.11";
+    version = "24.05";
     user = "allusive";
     hostname = "nixos";
     pkgs = import nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+      config = { allowUnfree = true; allowInsecure = true; };
     };
     lib = nixpkgs.lib;
   in {
-    nixosConfigurations = (
-      import ./nix {
-        inherit (nixpkgs) lib;
-        inherit inputs user hostname system version home-manager grub2-themes aagl;
-      }
-    );
+    nixosConfigurations = {
+      ${hostname} = lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit user hostname version inputs; };
+        modules = [
+          ./nix/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit user inputs system version pkgs; };
+            home-manager.users.${user} = {
+              imports = [
+                ./home/home.nix
+              ];
+            };
+          }
+          grub2-themes.nixosModules.default
+          {
+            nix.settings = aagl.nixConfig;
+            imports = [ aagl.nixosModules.default ];
+            programs.anime-game-launcher.enable = true;
+          }
+        ];
+      };
+    };
   };
 }

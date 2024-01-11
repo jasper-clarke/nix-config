@@ -11,6 +11,7 @@
 
   imports = [
     ./prewritten-files.nix
+    ./terminal.nix
   ];
 
   xresources.extraConfig = ''
@@ -56,8 +57,8 @@
 
     git = {
       enable = true;
-      userName = "jasperc-dev";
-      userEmail = "jasper@allusive.dev";
+      userName = "jasper-at-windswept";
+      userEmail = "jasper@windswept.digital";
     };
 
     firefox = {
@@ -111,8 +112,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   qt = {
     enable = true;
     platformTheme = "gtk";
@@ -150,7 +149,6 @@
     packages = with pkgs; [
       zsh
       tree
-      obsidian
       killall
       pcmanfm
       rofi
@@ -191,9 +189,13 @@
       ymuse
       appimage-run
       psi-notify
+      scribus
 
+      (blender.override {
+        cudaSupport = true;
+      })
 
-      inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.audacity
+      audacity
 
       # Font Stuff
       (nerdfonts.override {fonts = ["Iosevka"];})
@@ -201,7 +203,7 @@
       liberation_ttf
       freetype
       source-han-sans
-      inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.inter
+      inter
 
       # Customs
       (picom.overrideAttrs (oldAttrs: rec {

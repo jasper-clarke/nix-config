@@ -48,14 +48,13 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
   };
 
   networking = {
     hostName = "nixos";
-    networkmanager.enable = true;
+    networkmanager ={
+      enable = true;
+    };
   };
 
   virtualisation.docker.enable = true;
@@ -107,10 +106,6 @@
         '';
       };
       videoDrivers = ["nvidia"];
-      # windowManager.xmonad = {
-      #   enable = true;
-      #   enableContribAndExtras = true;
-      # };
       windowManager.awesome = {
         enable = true;
         package = pkgs.awesome.overrideAttrs (old: {

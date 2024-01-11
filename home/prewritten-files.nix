@@ -18,6 +18,9 @@
       ".ssh/config".text = ''
         Host gitlab.com
           IdentityFile ~/.ssh/gitlab
+
+        Host github.com
+          IdentityFile ~/.ssh/gitlab
       '';
 
 
