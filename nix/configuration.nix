@@ -54,7 +54,9 @@
     hostName = "nixos";
     networkmanager ={
       enable = true;
+      #dns = "none";
     };
+    #nameservers = [ "1.1.1.1" ];
   };
 
   virtualisation.docker.enable = true;
@@ -109,12 +111,12 @@
       windowManager.awesome = {
         enable = true;
         package = pkgs.awesome.overrideAttrs (old: {
-          version = "1f7ac8f9c7ab9fff7dd93ab4b29514ff3580efcf";
+          version = "75758b07f3c3c326d43ac682896dbcf18fac4bd7";
           src = pkgs.fetchFromGitHub {
             owner = "awesomeWM";
             repo = "awesome";
-            rev = "1f7ac8f9c7ab9fff7dd93ab4b29514ff3580efcf";
-            hash = "sha256-D5CTo4FvGk2U3fkDHf/JL5f/O1779i92UcRpPn+lbpw=";
+            rev = version;
+            hash = "sha256-pT9gCia+Cj3huTbDcXf/O6+EL6Bw4PlvL00IJ1gT+OY=";
           };
           patches = [];
           postPatch = ''
@@ -155,7 +157,6 @@
   };
 
   systemd = {
-
     services = {
       mpd.environment = {
         XDG_RUNTIME_DIR = "/run/user/1000";
@@ -179,7 +180,6 @@
 
   virtualisation.virtualbox = {
     host.enable = true;
-    #guest.enable = true;
   };
 
   users.users.${user} = {
@@ -193,18 +193,13 @@
   fonts.fontDir.enable = true;
 
   environment = {
-    # sessionVariables = {
-    #   GI_TYPELIB_PATH = "/nix/store/7ah2yapjqvx33as3gqxqkgaica6x8mp7-pango-1.51.0/lib/girepository-1.0:/nix/store/h979i6ql0gzlzk7i0kj7l1nmaijqcn9s-gobject-introspection-wrapped-1.78.1/lib/girepository-1.0:/nix/store/7j1farc84m0pi620frxhrzjrvs8i9ci7-gobject-introspection-1.78.1/lib/girepository-1.0:/nix/store/9v7bs0i8r6x9sg6q64qyhqgzmj1nrbmw-gdk-pixbuf-2.42.10/lib/girepository-1.0:/nix/store/s95lcx7j16z47n43r1m7rik65wigv480-librsvg-2.57.0/lib/girepository-1.0:/nix/store/rnw7n0c8zxhzxzrn8d7kr1xmc95wxqlw-harfbuzz-7.3.0/lib/girepository-1.0:/home/allusive/.config/awesome/typelib";
-    # };
     systemPackages = with pkgs; [
       vim
       wget
-      gvfs
       sassc
       pkg-config
       zip
       unzip
-      polkit_gnome
       ripgrep
       sane-backends
       mpdris2

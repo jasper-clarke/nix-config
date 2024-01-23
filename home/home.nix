@@ -178,24 +178,22 @@
       headsetcontrol
       fzf
       gimp
-      figma-linux
       signal-desktop
       btop
       mpc-cli
       temurin-jre-bin-17
-      bun
+      nodejs
+      nodePackages.pnpm
       ponymix
       spotdl
       ymuse
       appimage-run
       psi-notify
       scribus
+      zettlr
+      figma-linux
 
-      (blender.override {
-        cudaSupport = true;
-      })
-
-      audacity
+      jetbrains.webstorm
 
       # Font Stuff
       (nerdfonts.override {fonts = ["Iosevka"];})
@@ -206,14 +204,9 @@
       inter
 
       # Customs
-      (picom.overrideAttrs (oldAttrs: rec {
+      (picom-next.overrideAttrs (oldAttrs: rec {
         pname = "compfy";
         version = "1.7.2";
-        buildInputs = [
-          pcre2
-        ]
-        ++
-          oldAttrs.buildInputs;
         src = ../compfy;
         postInstall = '''';
       }))

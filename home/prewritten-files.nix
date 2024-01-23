@@ -23,7 +23,6 @@
           IdentityFile ~/.ssh/gitlab
       '';
 
-
     };
   };
 }

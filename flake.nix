@@ -25,10 +25,10 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
 
-    aagl = {
-     url = "github:ezKEa/aagl-gtk-on-nix";
-     inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # aagl = {
+    #  url = "github:ezKEa/aagl-gtk-on-nix";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
   };
   outputs = {
@@ -36,7 +36,6 @@
     nixpkgs,
     home-manager,
     grub2-themes,
-    aagl,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -66,11 +65,11 @@
             };
           }
           grub2-themes.nixosModules.default
-          {
-            nix.settings = aagl.nixConfig;
-            imports = [ aagl.nixosModules.default ];
-            programs.anime-game-launcher.enable = true;
-          }
+          # {
+          #   nix.settings = aagl.nixConfig;
+          #   imports = [ aagl.nixosModules.default ];
+          #   programs.anime-game-launcher.enable = true;
+          # }
         ];
       };
     };
