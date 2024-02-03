@@ -102,6 +102,7 @@
       displayManager = {
         gdm = {
           enable = true;
+          #wayland = true;
         };
         sessionCommands = ''
           sh /home/allusive/.flake/setup/scripts/lightdm.sh

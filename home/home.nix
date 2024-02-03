@@ -178,7 +178,6 @@
       headsetcontrol
       fzf
       gimp
-      signal-desktop
       btop
       mpc-cli
       temurin-jre-bin-17
@@ -192,6 +191,7 @@
       scribus
       zettlr
       figma-linux
+      helvum
 
       jetbrains.webstorm
 

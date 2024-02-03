@@ -21,6 +21,7 @@ alias nixos-update="sudo nix-channel --update | sudo nixos-rebuild switch --flak
 
 #krabby random --no-title
 nitch
+echo "Finished other maps up to the end of SWR"
 
 ZSH_THEME="robbyrussell"
 
