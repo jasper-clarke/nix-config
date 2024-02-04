@@ -4,6 +4,7 @@
   pkgs,
   user,
   version,
+  wayland,
   system,
   inputs,
   ...
@@ -14,43 +15,43 @@
     ./terminal.nix
   ];
 
-  xresources.extraConfig = ''
-   ! special
-   *.foreground:   #edeff0
-   *.background:   #0c0e0f
+  # xresources.extraConfig = ''
+  #  ! special
+  #  *.foreground:   #edeff0
+  #  *.background:   #0c0e0f
 
-   ! black
-   *.color0:       #232526
-   *.color8:       #2c2e2f
+  #  ! black
+  #  *.color0:       #232526
+  #  *.color8:       #2c2e2f
 
-   ! red
-   *.color1:       #df5b61
-   *.color9:       #e8646a
+  #  ! red
+  #  *.color1:       #df5b61
+  #  *.color9:       #e8646a
 
-   ! green
-   *.color2:       #78b892
-   *.color10:      #81c19b
+  #  ! green
+  #  *.color2:       #78b892
+  #  *.color10:      #81c19b
 
-   ! yellow
-   *.color3:       #de8f78
-   *.color11:      #e79881
+  #  ! yellow
+  #  *.color3:       #de8f78
+  #  *.color11:      #e79881
 
-   ! blue
-   *.color4:       #6791c9
-   *.color12:      #709ad2
+  #  ! blue
+  #  *.color4:       #6791c9
+  #  *.color12:      #709ad2
 
-   ! magenta
-   *.color5:       #bc83e3
-   *.color13:      #c58cec
+  #  ! magenta
+  #  *.color5:       #bc83e3
+  #  *.color13:      #c58cec
 
-   ! cyan
-   *.color6:       #67afc1
-   *.color14:      #70b8ca
+  #  ! cyan
+  #  *.color6:       #67afc1
+  #  *.color14:      #70b8ca
 
-   ! white
-   *color7:        #e4e6e7
-   *color15:       #f2f4f5
-  '';
+  #  ! white
+  #  *color7:        #e4e6e7
+  #  *color15:       #f2f4f5
+  # '';
 
   programs = {
     home-manager.enable = true;
@@ -95,12 +96,12 @@
       enable = true;
       defaultApplications = {
         "inode/directory" = ["pcmanfm.desktop"];
-        "text/plain" = ["emacsclient.desktop"];
+        "text/plain" = ["codium.desktop"];
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
         "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop"];
         "application/pdf" = ["onlyoffice-desktopeditors.desktop"];
         "application/zip" = ["xarchiver.desktop"];
-        "text/*" = ["emacsclient.desktop"];
+        "text/*" = ["codium.desktop"];
         "video/*" = ["mpv.desktop"];
         "x-scheme-handler/https" = ["firefox.desktop"];
         "x-scheme-handler/http" = ["firefox.desktop"];
@@ -120,15 +121,23 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "oomox-gruvbox-dark";
-      package = pkgs.gruvbox-dark-icons-gtk;
+      name = "Tela-circle-dracula";
+      package = pkgs.tela-circle-icon-theme.override {
+        colorVariants = [ "dracula" ];
+      };
     };
     cursorTheme = {
       name = "capitaine-cursors-white";
       package = pkgs.capitaine-cursors;
     };
     theme = {
-      name = "Awesthetic-dark";
+      name = "Catppuccin-Macchiato-Standard-Pink-Dark";
+      package = (pkgs.catppuccin-gtk.override {
+        accents = [ "pink" ];
+        size = "standard";
+        tweaks = [ "normal" ];
+        variant = "macchiato";
+      });
     };
   };
 
@@ -141,7 +150,7 @@
     pointerCursor = {
       gtk.enable = true;
       x11.enable = true;
-      size = 40;
+      size = 44;
       name = "capitaine-cursors-white";
       package = pkgs.capitaine-cursors;
     };
@@ -151,7 +160,6 @@
       tree
       killall
       pcmanfm
-      rofi
       kitty
       lsd
       starship
@@ -161,16 +169,14 @@
       mpv
       feh
       vscodium
-      emacs
       flameshot
       colorpicker
       nitch
       prismlauncher
-      betterlockscreen
+      # betterlockscreen
       playerctl
       onlyoffice-bin
       copyq
-      #zulu8
       gnome.simple-scan
       motrix
       element-desktop
@@ -192,6 +198,12 @@
       zettlr
       figma-linux
       helvum
+
+      rofi-wayland
+      hyprpicker
+      wev
+      swww
+      waybar
 
       jetbrains.webstorm
 

@@ -20,6 +20,7 @@
     #extraModprobeConfig = ''
     #  options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     #'';
+    # kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -51,7 +52,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "${hostname}";
     networkmanager ={
       enable = true;
       #dns = "none";
@@ -72,7 +73,8 @@
     nvidia = {
       modesetting.enable = true;
       open = false;
-      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+      nvidiaSettings = false;
     };
     pulseaudio.enable = lib.mkForce false;
   };
@@ -98,33 +100,33 @@
     };
     xserver = {
       enable = true;
-      layout = "us";
+      xkb.layout = "us";
       displayManager = {
         gdm = {
           enable = true;
-          #wayland = true;
+          wayland = true;
         };
-        sessionCommands = ''
-          sh /home/allusive/.flake/setup/scripts/lightdm.sh
-        '';
+        # sessionCommands = ''
+        #   sh /home/allusive/.flake/setup/scripts/lightdm.sh
+        # '';
       };
       videoDrivers = ["nvidia"];
-      windowManager.awesome = {
-        enable = true;
-        package = pkgs.awesome.overrideAttrs (old: {
-          version = "75758b07f3c3c326d43ac682896dbcf18fac4bd7";
-          src = pkgs.fetchFromGitHub {
-            owner = "awesomeWM";
-            repo = "awesome";
-            rev = version;
-            hash = "sha256-pT9gCia+Cj3huTbDcXf/O6+EL6Bw4PlvL00IJ1gT+OY=";
-          };
-          patches = [];
-          postPatch = ''
-            patchShebangs tests/examples/_postprocess.lua
-          '';
-        });
-      };
+      # windowManager.awesome = {
+      #   enable = true;
+      #   package = pkgs.awesome.overrideAttrs (old: {
+      #     version = "75758b07f3c3c326d43ac682896dbcf18fac4bd7";
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "awesomeWM";
+      #       repo = "awesome";
+      #       rev = version;
+      #       hash = "sha256-pT9gCia+Cj3huTbDcXf/O6+EL6Bw4PlvL00IJ1gT+OY=";
+      #     };
+      #     patches = [];
+      #     postPatch = ''
+      #       patchShebangs tests/examples/_postprocess.lua
+      #     '';
+      #   });
+      # };
     };
 
     pipewire = {
@@ -151,10 +153,14 @@
   };
 
   programs = {
-    noisetorch.enable = true;
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
+
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
   };
 
   systemd = {
@@ -213,7 +219,7 @@
       enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal
-        xdg-desktop-portal-gtk
+        xdg-desktop-portal-hyprland
       ];
       config.common.default = "*";
     };

@@ -42,6 +42,7 @@
     version = "24.05";
     user = "allusive";
     hostname = "nixos";
+    wayland = true;
     pkgs = import nixpkgs {
       inherit system;
       config = { allowUnfree = true; allowInsecure = true; };
@@ -51,13 +52,13 @@
     nixosConfigurations = {
       ${hostname} = lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit user hostname version inputs; };
+        specialArgs = { inherit user wayland hostname version inputs; };
         modules = [
           ./nix/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit user inputs system version pkgs; };
+            home-manager.extraSpecialArgs = { inherit user inputs system wayland version pkgs; };
             home-manager.users.${user} = {
               imports = [
                 ./home/home.nix
