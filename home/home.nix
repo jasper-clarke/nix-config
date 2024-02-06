@@ -4,7 +4,8 @@
   pkgs,
   user,
   version,
-  wayland,
+  hyprland,
+  split-monitor-workspaces,
   system,
   inputs,
   ...
@@ -86,7 +87,6 @@
         search.force = true;
       };
     };
-
   };
 
   fonts.fontconfig.enable = true;
@@ -141,6 +141,18 @@
     };
   };
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = hyprland.packages.${pkgs.system}.hyprland;
+    xwayland.enable = true;
+    # plugins = [
+    #   split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+    # ];
+    settings = {
+      source = "~/.config/hypr/main.conf";
+    };
+  };
+
   home = {
     username = "${user}";
     homeDirectory = "/home/${user}";
@@ -169,18 +181,16 @@
       mpv
       feh
       vscodium
-      flameshot
-      colorpicker
+      # flameshot
+      # colorpicker
       nitch
       prismlauncher
-      # betterlockscreen
       playerctl
       onlyoffice-bin
       copyq
       gnome.simple-scan
       motrix
-      element-desktop
-      xdotool
+      # xdotool
       headsetcontrol
       fzf
       gimp
@@ -190,15 +200,17 @@
       nodejs
       nodePackages.pnpm
       ponymix
-      spotdl
       ymuse
-      appimage-run
       psi-notify
       scribus
       zettlr
       figma-linux
       helvum
+      audacity
 
+      teams-for-linux
+
+      hyprshot
       rofi-wayland
       hyprpicker
       wev
@@ -216,12 +228,12 @@
       inter
 
       # Customs
-      (picom-next.overrideAttrs (oldAttrs: rec {
-        pname = "compfy";
-        version = "1.7.2";
-        src = ../compfy;
-        postInstall = '''';
-      }))
+      # (picom-next.overrideAttrs (oldAttrs: rec {
+      #   pname = "compfy";
+      #   version = "1.7.2";
+      #   src = ../compfy;
+      #   postInstall = '''';
+      # }))
     ];
   };
 }

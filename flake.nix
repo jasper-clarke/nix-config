@@ -19,6 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "github:hyprwm/Hyprland";
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Spicetify
     #spicetify-nix = {
     #  url = "github:the-argus/spicetify-nix";
@@ -36,6 +42,8 @@
     nixpkgs,
     home-manager,
     grub2-themes,
+    hyprland,
+    split-monitor-workspaces,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -52,13 +60,13 @@
     nixosConfigurations = {
       ${hostname} = lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit user wayland hostname version inputs; };
+        specialArgs = { inherit user hyprland hostname version inputs; };
         modules = [
           ./nix/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit user inputs system wayland version pkgs; };
+            home-manager.extraSpecialArgs = { inherit user inputs system hyprland split-monitor-workspaces version pkgs; };
             home-manager.users.${user} = {
               imports = [
                 ./home/home.nix

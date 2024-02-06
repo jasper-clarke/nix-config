@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   user,
+  hyprland,
   hostname,
   version,
   ...
@@ -11,16 +12,25 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./symlinks.nix
+    # ./symlinks.nix
   ];
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
-    #extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-    #extraModprobeConfig = ''
+    # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    # extraModprobeConfig = ''
     #  options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    #'';
-    # kernelPackages = pkgs.linuxPackages_latest;
+    # '';
+    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_1.override {
+      argsOverride = rec {
+        src = pkgs.fetchurl {
+            url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+            hash = "sha256-bNGUEDMME+xMGP0oqD0+QPwSoVKBX7fD4bB2QykJOlY=";
+        };
+        version = "6.1.75";
+        modDirVersion = "6.1.75";
+      };
+    });
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -55,9 +65,9 @@
     hostName = "${hostname}";
     networkmanager ={
       enable = true;
-      #dns = "none";
+      dns = "none";
     };
-    #nameservers = [ "1.1.1.1" ];
+    nameservers = [ "1.1.1.1" ];
   };
 
   virtualisation.docker.enable = true;
@@ -65,6 +75,10 @@
   time.timeZone = "Australia/Sydney";
 
   hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
     opengl = {
       enable = true;
       driSupport = true;
@@ -87,6 +101,19 @@
   sound.enable = lib.mkForce false; # disable alsa
 
   services = {
+    greetd = {
+      enable = true;
+      settings = {
+        initial_session = {
+          command = "Hyprland";
+          user = "${user}";
+        };
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome To NixOS' --asterisks --remember --remember-user-session --time -cmd Hyprland";
+          user = "greeter";
+        };
+      };
+    };
     mpd = {
       enable = true;
       musicDirectory = "/home/${user}/Music";
@@ -101,15 +128,6 @@
     xserver = {
       enable = true;
       xkb.layout = "us";
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-        # sessionCommands = ''
-        #   sh /home/allusive/.flake/setup/scripts/lightdm.sh
-        # '';
-      };
       videoDrivers = ["nvidia"];
       # windowManager.awesome = {
       #   enable = true;
@@ -128,6 +146,8 @@
       #   });
       # };
     };
+
+    blueman.enable = true;
 
     pipewire = {
       enable = true;
@@ -157,10 +177,11 @@
     direnv.enable = true;
     dconf.enable = true;
 
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
+    # hyprland = {
+    #   enable = true;
+    #   xwayland.enable = true;
+    #   package = hyprland.packages.${pkgs.system}.hyprland;
+    # };
   };
 
   systemd = {
@@ -185,8 +206,10 @@
     };
   };
 
-  virtualisation.virtualbox = {
-    host.enable = true;
+  virtualisation = {
+    virtualbox = {
+      host.enable = true;
+    };
   };
 
   users.users.${user} = {
@@ -210,6 +233,7 @@
       ripgrep
       sane-backends
       mpdris2
+      usbutils
 
       #(writers.writePython3Bin "ddg-ff-search" { flakeIgnore = ["E121" "E126" "E201" "E202" "E203" "E226" "E261" "E265" "E266" "E302" "E305" "E501" "E722" "W292"]; } ./scripts/rofi-web-search.py)
     ];
