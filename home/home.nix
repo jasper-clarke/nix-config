@@ -5,7 +5,7 @@
   user,
   version,
   hyprland,
-  split-monitor-workspaces,
+  hycov,
   system,
   inputs,
   ...
@@ -145,11 +145,11 @@
     enable = true;
     package = hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
-    # plugins = [
-    #   split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
-    # ];
+    plugins = [
+      hycov.packages.${pkgs.system}.hycov
+    ];
     settings = {
-      source = "~/.config/hypr/main.conf";
+      source = "~/.config/hypr/hypr.conf";
     };
   };
 
@@ -210,12 +210,15 @@
 
       teams-for-linux
 
-      hyprshot
+      swappy
+      grim
+      slurp
       rofi-wayland
       hyprpicker
       wev
       swww
       waybar
+      swaylock-effects
 
       jetbrains.webstorm
 

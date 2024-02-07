@@ -20,8 +20,14 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
+
+    # split-monitor-workspaces = {
+    #   url = "github:Duckonaut/split-monitor-workspaces";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+
+    hycov = {
+      url = "github:jasper-at-windswept/hycov";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -43,7 +49,7 @@
     home-manager,
     grub2-themes,
     hyprland,
-    split-monitor-workspaces,
+    hycov,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -66,7 +72,7 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit user inputs system hyprland split-monitor-workspaces version pkgs; };
+            home-manager.extraSpecialArgs = { inherit user inputs system hyprland hycov version pkgs; };
             home-manager.users.${user} = {
               imports = [
                 ./home/home.nix

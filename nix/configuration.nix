@@ -12,7 +12,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    # ./symlinks.nix
   ];
 
   boot = {
@@ -21,16 +20,17 @@
     # extraModprobeConfig = ''
     #  options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     # '';
-    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_1.override {
-      argsOverride = rec {
-        src = pkgs.fetchurl {
-            url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
-            hash = "sha256-bNGUEDMME+xMGP0oqD0+QPwSoVKBX7fD4bB2QykJOlY=";
-        };
-        version = "6.1.75";
-        modDirVersion = "6.1.75";
-      };
-    });
+    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_1.override {
+    #   argsOverride = rec {
+    #     src = pkgs.fetchurl {
+    #         url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+    #         hash = "sha256-bNGUEDMME+xMGP0oqD0+QPwSoVKBX7fD4bB2QykJOlY=";
+    #     };
+    #     version = "6.1.75";
+    #     modDirVersion = "6.1.75";
+    #   };
+    # });
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -96,6 +96,8 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
+    pam.services.swaylock = {};
+    # pam.services.waylock.text = lib.mkDefault(lib.mkAfter "auth include system-auth");
   };
 
   sound.enable = lib.mkForce false; # disable alsa
@@ -215,7 +217,7 @@
   users.users.${user} = {
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "vboxusers" "docker"];
-    home = "/home/allusive";
+    home = "/home/${user}";
     description = "Jasper C";
     shell = pkgs.zsh;
   };
@@ -223,6 +225,11 @@
   fonts.fontDir.enable = true;
 
   environment = {
+    # etc = {
+    #   "pam.d/waylock".text = ''
+    #     auth include system-auth
+    #   '';
+    # };
     systemPackages = with pkgs; [
       vim
       wget
