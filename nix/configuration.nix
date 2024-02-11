@@ -87,7 +87,7 @@
     nvidia = {
       modesetting.enable = true;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.production; # 535
       nvidiaSettings = false;
     };
     pulseaudio.enable = lib.mkForce false;
@@ -97,7 +97,6 @@
     rtkit.enable = true;
     polkit.enable = true;
     pam.services.swaylock = {};
-    # pam.services.waylock.text = lib.mkDefault(lib.mkAfter "auth include system-auth");
   };
 
   sound.enable = lib.mkForce false; # disable alsa
@@ -109,10 +108,6 @@
         initial_session = {
           command = "Hyprland";
           user = "${user}";
-        };
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome To NixOS' --asterisks --remember --remember-user-session --time -cmd Hyprland";
-          user = "greeter";
         };
       };
     };
@@ -243,11 +238,6 @@
       sane-backends
       mpdris2
       usbutils
-
-      ponymix
-      (writeShellScriptBin "audio-select" ../home/scripts/audio-select)
-
-      (writeShellScriptBin "lights" ../home/scripts/lights.sh)
     ];
   };
   xdg = {

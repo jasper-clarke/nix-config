@@ -173,8 +173,6 @@
       mpv
       feh
       vscodium
-      # flameshot
-      # colorpicker
       nitch
       prismlauncher
       playerctl
@@ -182,8 +180,6 @@
       copyq
       gnome.simple-scan
       motrix
-      # xdotool
-      headsetcontrol
       fzf
       gimp
       btop
@@ -191,28 +187,15 @@
       temurin-jre-bin-17
       nodejs
       nodePackages.pnpm
-      ymuse
       psi-notify
       scribus
       zettlr
       figma-linux
       helvum
       audacity
-      # (ncmpcpp.override {
-      #   visualizerSupport = true;
-      # })
       libnotify
 
       teams-for-linux
-
-      swappy
-      grim
-      slurp
-      rofi-wayland
-      hyprpicker
-      wev
-      swww
-      swayidle
 
       jetbrains.webstorm
 

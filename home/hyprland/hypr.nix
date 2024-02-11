@@ -26,8 +26,27 @@ in {
     };
   };
 
-  home.file = {
-    ".config/hypr/hypr.conf".source = ./hyprland.conf;
+  home = {
+    packages = with pkgs; [
+      hyprpicker
+      swayidle
+      swww
+      wev
+      slurp
+      grim
+      rofi-wayland
+      swappy
+
+      ponymix
+      (writeShellScriptBin "audio-select" ../scripts/audio-select)
+
+      headsetcontrol
+      (writeShellScriptBin "lights" ../scripts/lights.sh)
+    ];
+
+    file = {
+      ".config/hypr/hypr.conf".source = ./hyprland.conf;
+    };
   };
 
 }
