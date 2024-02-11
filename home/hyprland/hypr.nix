@@ -19,6 +19,10 @@ in {
     ];
     settings = {
       source = "~/.config/hypr/hypr.conf";
+
+      bind = [
+        "ALT, SPACE, exec, rofi -show drun -theme ${appsRasi}" 
+      ];
     };
   };
 
