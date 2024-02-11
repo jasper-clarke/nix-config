@@ -165,9 +165,12 @@
             "foreground": "#E64747",
             "leading_diamond": "\ue0b6",
             "style": "diamond",
-            "template": "{{ .UserName }} \u276f",
+            "template": "{{ .CurrentDate | date .Format }} \u276f",
             "trailing_diamond": "\ue0b4",
-            "type": "text"
+            "type": "time",
+            "properties": {
+                "time_format": "3:04PM"
+            }
           }
         ],
         "type": "prompt"
