@@ -19,45 +19,7 @@
     ./swaylock.nix
     ./ncmpcpp.nix
   ];
-
-  # xresources.extraConfig = ''
-  #  ! special
-  #  *.foreground:   #edeff0
-  #  *.background:   #0c0e0f
-
-  #  ! black
-  #  *.color0:       #232526
-  #  *.color8:       #2c2e2f
-
-  #  ! red
-  #  *.color1:       #df5b61
-  #  *.color9:       #e8646a
-
-  #  ! green
-  #  *.color2:       #78b892
-  #  *.color10:      #81c19b
-
-  #  ! yellow
-  #  *.color3:       #de8f78
-  #  *.color11:      #e79881
-
-  #  ! blue
-  #  *.color4:       #6791c9
-  #  *.color12:      #709ad2
-
-  #  ! magenta
-  #  *.color5:       #bc83e3
-  #  *.color13:      #c58cec
-
-  #  ! cyan
-  #  *.color6:       #67afc1
-  #  *.color14:      #70b8ca
-
-  #  ! white
-  #  *color7:        #e4e6e7
-  #  *color15:       #f2f4f5
-  # '';
-
+  
   programs = {
     home-manager.enable = true;
 
@@ -70,6 +32,7 @@
     firefox = {
       enable = true;
       profiles.allusive = {
+        isDefault = true;
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
           bitwarden
           darkreader
@@ -100,19 +63,19 @@
       enable = true;
       defaultApplications = {
         "inode/directory" = ["pcmanfm.desktop"];
+        "text/*" = ["codium.desktop"];
         "text/plain" = ["codium.desktop"];
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
         "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop"];
-        "application/pdf" = ["onlyoffice-desktopeditors.desktop"];
+        "application/pdf" = ["scribus.desktop"];
         "application/zip" = ["xarchiver.desktop"];
-        "text/*" = ["codium.desktop"];
         "video/*" = ["mpv.desktop"];
         "x-scheme-handler/https" = ["firefox.desktop"];
         "x-scheme-handler/http" = ["firefox.desktop"];
         "x-scheme-handler/mailto" = ["firefox.desktop"];
-        "image/*" = ["feh-custom.desktop"];
-        "image/png" = ["feh-custom.desktop"];
-        "image/jpeg" = ["feh-custom.desktop"];
+        "image/*" = ["firefox.desktop"];
+        "image/png" = ["firefox.desktop"];
+        "image/jpeg" = ["firefox.desktop"];
       };
     };
   };
