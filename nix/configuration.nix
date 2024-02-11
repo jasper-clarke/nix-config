@@ -245,9 +245,9 @@
       usbutils
 
       ponymix
-      (writers.writeBashBin "audio-select" ../home/scripts/audio-select)
+      (writeShellScriptBin "audio-select" ../home/scripts/audio-select)
 
-      (writers.writeBashBin "lights" ../home/scripts/lights.sh)
+      (writeShellScriptBin "lights" ../home/scripts/lights.sh)
     ];
   };
   xdg = {
