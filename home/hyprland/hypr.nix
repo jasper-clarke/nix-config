@@ -17,13 +17,13 @@ in {
     plugins = [
       hycov.packages.${pkgs.system}.hycov
     ];
-    # settings = {
-    #   source = "~/.config/hypr/main.conf";
-    # };
+    settings = {
+      source = "~/.config/hypr/hypr.conf";
+    };
   };
 
-  home.configFile = {
-    "hypr/hyprland.conf".source = ./hyprland.conf;
+  home.file = {
+    ".config/hypr/hypr.conf".source = ./hyprland.conf;
   };
 
 }
