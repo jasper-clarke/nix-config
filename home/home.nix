@@ -166,13 +166,11 @@
       pcmanfm
       kitty
       lsd
-      starship
       xarchiver
       calc
       steam
       mpv
       feh
-      vscodium
       nitch
       prismlauncher
       playerctl
@@ -184,9 +182,6 @@
       gimp
       btop
       mpc-cli
-      temurin-jre-bin-17
-      nodejs
-      nodePackages.pnpm
       psi-notify
       scribus
       zettlr
@@ -195,9 +190,13 @@
       audacity
       libnotify
 
+      # Development / Course
       teams-for-linux
-
       jetbrains.webstorm
+      temurin-jre-bin-17
+      nodejs
+      nodePackages.pnpm
+      vscodium
 
       # Font Stuff
       (nerdfonts.override {fonts = ["Iosevka"];})
