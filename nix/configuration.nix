@@ -124,6 +124,14 @@
         audio_output {
           type "pipewire"
           name "Pipewire Output"
+          buffer_time "10000"
+        }
+
+        audio_output {
+          type "fifo"
+          name "Visualizer"
+          path "/tmp/mpd.fifo"
+          format "44100:16:2"
         }
       '';
     };
@@ -178,12 +186,6 @@
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
-
-    # hyprland = {
-    #   enable = true;
-    #   xwayland.enable = true;
-    #   package = hyprland.packages.${pkgs.system}.hyprland;
-    # };
   };
 
   systemd = {
@@ -242,7 +244,10 @@
       mpdris2
       usbutils
 
-      #(writers.writePython3Bin "ddg-ff-search" { flakeIgnore = ["E121" "E126" "E201" "E202" "E203" "E226" "E261" "E265" "E266" "E302" "E305" "E501" "E722" "W292"]; } ./scripts/rofi-web-search.py)
+      ponymix
+      (writers.writeBashBin "audio-select" ../home/scripts/audio-select)
+
+      (writers.writeBashBin "lights" ../home/scripts/lights.sh)
     ];
   };
   xdg = {

@@ -14,6 +14,10 @@
   imports = [
     ./prewritten-files.nix
     ./terminal.nix
+    ./hyprland/hypr.nix
+    ./waybar.nix
+    ./swaylock.nix
+    ./ncmpcpp.nix
   ];
 
   # xresources.extraConfig = ''
@@ -141,18 +145,6 @@
     };
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = hyprland.packages.${pkgs.system}.hyprland;
-    xwayland.enable = true;
-    plugins = [
-      hycov.packages.${pkgs.system}.hycov
-    ];
-    settings = {
-      source = "~/.config/hypr/hypr.conf";
-    };
-  };
-
   home = {
     username = "${user}";
     homeDirectory = "/home/${user}";
@@ -199,7 +191,6 @@
       temurin-jre-bin-17
       nodejs
       nodePackages.pnpm
-      ponymix
       ymuse
       psi-notify
       scribus
@@ -207,6 +198,10 @@
       figma-linux
       helvum
       audacity
+      # (ncmpcpp.override {
+      #   visualizerSupport = true;
+      # })
+      libnotify
 
       teams-for-linux
 
@@ -217,8 +212,7 @@
       hyprpicker
       wev
       swww
-      waybar
-      swaylock-effects
+      swayidle
 
       jetbrains.webstorm
 

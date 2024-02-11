@@ -16,7 +16,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
-alias rebuild-switch="sudo nixos-rebuild switch --flake /home/allusive/.flake#nixos"
+alias rebuild-switch="rm -f ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/allusive/.flake#nixos"
 alias nixos-update="sudo nix-channel --update | sudo nixos-rebuild switch --flake /home/allusive/.flake#nixos"
 
 #krabby random --no-title
@@ -36,4 +36,4 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
 
-alias ls="lsd -a"
+#alias ls="lsd -a"
