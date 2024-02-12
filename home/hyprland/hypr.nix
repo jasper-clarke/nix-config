@@ -36,12 +36,13 @@ in {
       grim
       rofi-wayland
       swappy
+      sway-audio-idle-inhibit
 
       ponymix
-      (writeShellScriptBin "audio-select" ../scripts/audio-select)
+      (writers.writeBashBin "audio-select" ../scripts/audio-select)
 
       headsetcontrol
-      (writeShellScriptBin "lights" ../scripts/lights.sh)
+      (writers.writeBashBin "lights" ../scripts/lights.sh)
     ];
 
     file = {

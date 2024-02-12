@@ -16,10 +16,10 @@
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
-    # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-    # extraModprobeConfig = ''
-    #  options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    # '';
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    extraModprobeConfig = ''
+     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    '';
     kernelPackages = pkgs.linuxPackages_latest;
     # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_1.override {
     #   argsOverride = rec {
@@ -109,6 +109,10 @@
           command = "Hyprland";
           user = "${user}";
         };
+        default_session = {
+	  command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome' --asterisks --remember --remember-user-session --time -cmd Hyprland";
+	  user = "greeter";
+	};
       };
     };
     mpd = {
@@ -181,6 +185,7 @@
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
+    noisetorch.enable = true;
   };
 
   systemd = {

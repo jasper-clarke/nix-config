@@ -153,9 +153,13 @@
       audacity
       libnotify
 
+      obs-studio
+
       # Development / Course
+      thunderbird
       teams-for-linux
       jetbrains.webstorm
+      jetbrains.pycharm-professional
       temurin-jre-bin-17
       nodejs
       nodePackages.pnpm
