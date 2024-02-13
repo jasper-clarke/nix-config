@@ -43,6 +43,8 @@ in {
 
       headsetcontrol
       (writers.writeBashBin "lights" ../scripts/lights.sh)
+
+      (writers.writeBashBin "ws-switch" ../scripts/per-monitor-ws-switcher.sh)
     ];
 
     file = {

@@ -16,10 +16,10 @@
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
-    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-    extraModprobeConfig = ''
-     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    '';
+    # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    # extraModprobeConfig = ''
+    #  options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    # '';
     kernelPackages = pkgs.linuxPackages_latest;
     # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_1.override {
     #   argsOverride = rec {
@@ -123,16 +123,22 @@
         audio_output {
           type "pipewire"
           name "Pipewire Output"
-          buffer_time "10000"
-        }
-
-        audio_output {
-          type "fifo"
-          name "Visualizer"
-          path "/tmp/mpd.fifo"
-          format "44100:16:2"
         }
       '';
+      # extraConfig = ''
+      #   audio_output {
+      #     type "pipewire"
+      #     name "Pipewire Output"
+      #     buffer_time "10000"
+      #   }
+
+      #   audio_output {
+      #     type "fifo"
+      #     name "Visualizer"
+      #     path "/tmp/mpd.fifo"
+      #     format "44100:16:2"
+      #   }
+      # '';
     };
     xserver = {
       enable = true;

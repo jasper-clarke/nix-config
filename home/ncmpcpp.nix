@@ -22,7 +22,7 @@
       visualizer_look = "󰝤▐";
       visualizer_color = "magenta";
       visualizer_spectrum_smooth_look = "yes";
-      visualizer_spectrum_dft_size = 2;
+      # visualizer_spectrum_dft_size = 2;
 
       connected_message_on_startup = "no";
       cyclic_scrolling = "yes";

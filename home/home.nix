@@ -62,7 +62,7 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = ["pcmanfm.desktop"];
+        "inode/directory" = ["nautilus.desktop"];
         "text/*" = ["codium.desktop"];
         "text/plain" = ["codium.desktop"];
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
@@ -126,7 +126,11 @@
       zsh
       tree
       killall
-      pcmanfm
+      
+      # pcmanfm
+      gnome.nautilus
+      # xplorer
+
       kitty
       lsd
       xarchiver
@@ -153,7 +157,7 @@
       audacity
       libnotify
 
-      obs-studio
+      flameshot
 
       # Development / Course
       thunderbird
