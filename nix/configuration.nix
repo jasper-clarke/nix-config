@@ -191,7 +191,28 @@
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
-    noisetorch.enable = true;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        fuse3
+        openssl
+        curl
+        libxkbcommon #
+        libudev-zero #
+        libappindicator-gtk3
+        libdrm
+        libglvnd
+        libusb1
+        libuuid
+        libxml2
+        libinput #
+        mesa #
+        fontconfig #
+        freetype #
+      ];
+    };
   };
 
   systemd = {
@@ -233,11 +254,6 @@
   fonts.fontDir.enable = true;
 
   environment = {
-    # etc = {
-    #   "pam.d/waylock".text = ''
-    #     auth include system-auth
-    #   '';
-    # };
     systemPackages = with pkgs; [
       vim
       wget

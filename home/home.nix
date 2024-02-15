@@ -139,7 +139,8 @@
       mpv
       feh
       nitch
-      prismlauncher
+      # prismlauncher
+      # temurin-jre-bin-17
       playerctl
       onlyoffice-bin
       copyq
@@ -155,18 +156,17 @@
       figma-linux
       helvum
       audacity
-      libnotify
-
-      flameshot
 
       # Development / Course
-      thunderbird
       teams-for-linux
+
       jetbrains.webstorm
-      jetbrains.pycharm-professional
-      temurin-jre-bin-17
       nodejs
       nodePackages.pnpm
+
+      rustup
+      cargo-generate
+
       vscodium
 
       # Font Stuff
