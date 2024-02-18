@@ -24,22 +24,22 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    sessionVariables = {
-      LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${ with pkgs; lib.makeLibraryPath [
-        wayland
-        libxkbcommon
-        fontconfig
-      ] }";
-    };
+    # sessionVariables = {
+    #   LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${ with pkgs; lib.makeLibraryPath [
+    #     wayland
+    #     libxkbcommon
+    #     fontconfig
+    #   ] }";
+    # };
     shellAliases = {
       rebuild-switch = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/${user}/.flake#nixos";
+      rust = "cd ~/Projects/Rust && nohup rust-rover &";
     };
     initExtra = ''
 
       nitch
       echo "Finished other maps up to the end of SWR"
 
-      eval "$(oh-my-posh init zsh)"
     '';
     oh-my-zsh = {
       enable = true;

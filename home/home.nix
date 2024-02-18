@@ -85,6 +85,12 @@
     platformTheme = "gtk";
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   gtk = {
     enable = true;
     iconTheme = {
@@ -160,14 +166,14 @@
       # Development / Course
       teams-for-linux
 
-      jetbrains.webstorm
-      nodejs
-      nodePackages.pnpm
+      # jetbrains.webstorm
+      # nodejs
+      # nodePackages.pnpm
 
-      rustup
-      cargo-generate
-
+      jetbrains-toolbox
       vscodium
+
+      heimdall
 
       # Font Stuff
       (nerdfonts.override {fonts = ["Iosevka"];})

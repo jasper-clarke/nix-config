@@ -1,6 +1,6 @@
 first=1
 second=0
-ws_per_monitor=3
+ws_per_monitor=2
 
 monitor=$(hyprctl activeworkspace | grep -E "monitorID: " | sed -e 's/^[ \t]*//')
 if [[ $monitor == *"$first"* ]]; then

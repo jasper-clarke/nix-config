@@ -35,8 +35,21 @@
 
                 "hyprland/workspaces" = {
                     all-outputs = true;
+                    active-only = false;
                     on-click = "activate";
-                    format = "{name}";
+                    format = "{icon}";
+                    format-icons = {
+                        "1" = "";
+                        "2" = "";
+                        "3" = "";
+                        "4" = "";
+                        # "5" = "";
+                        # "6" = "";
+                        "OVERVIEW" = "OVERVIEW";
+                    };
+                    persistent-workspaces = {
+                        "DP-2" = [1 2 3 4];
+                    };
                 };
 
                 "mpd" = {
@@ -172,6 +185,25 @@
                 margin-left: 10px;
 
                 transition: all 0.3s ease;
+            }
+
+            #workspaces button.visible {
+                box-shadow: rgba(0, 0, 0, 0.288) 2 2 5 2px;
+                background-color: #f2cdcd;
+                background-size: 400% 400%;
+                transition: all 0.3s ease;
+                background: linear-gradient(
+                58deg,
+                #cba6f7,
+                #cba6f7,
+                #cba6f7,
+                #89b4fa,
+                #89b4fa,
+                #cba6f7,
+                #f38ba8
+                );
+                background-size: 300% 300%;
+                animation: colored-gradient 20s ease infinite;
             }
 
             #workspaces button.active {
