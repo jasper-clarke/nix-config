@@ -34,6 +34,8 @@
     shellAliases = {
       rebuild-switch = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/${user}/.flake#nixos";
       rust = "cd ~/Projects/Rust && nohup rust-rover &";
+      web = "cd ~/Projects/NodeProjects && nohup webstorm &";
+      brun = "bun --bun run dev";
     };
     initExtra = ''
 

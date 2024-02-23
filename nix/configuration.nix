@@ -65,12 +65,10 @@
     hostName = "${hostname}";
     networkmanager ={
       enable = true;
-      dns = "none";
+      # dns = "none";
     };
-    nameservers = [ "1.1.1.1" ];
+    # nameservers = [ "1.1.1.1" ];
   };
-
-  virtualisation.docker.enable = true;
 
   time.timeZone = "Australia/Sydney";
 
@@ -110,8 +108,8 @@
           user = "${user}";
         };
         default_session = {
-	  command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome' --asterisks --remember --remember-user-session --time -cmd Hyprland";
-	  user = "greeter";
+	        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome' --asterisks --remember --remember-user-session --time -cmd Hyprland";
+	        user = "greeter";
 	};
       };
     };
@@ -237,10 +235,14 @@
     };
   };
 
+  qt = {
+    enable = true;
+    style = "adwaita-dark";
+    platformTheme = "gtk2";
+  };
+
   virtualisation = {
-    virtualbox = {
-      host.enable = true;
-    };
+    virtualbox.host.enable = true;
   };
 
   users.users.${user} = {

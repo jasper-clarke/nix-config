@@ -54,6 +54,22 @@
         search.force = true;
       };
     };
+
+    neovim = {
+      enable = true;
+      plugins = with pkgs.vimPlugins; [
+        dashboard-nvim
+        nvim-cmp
+        LeaderF
+        nvim-tree-lua
+      ];
+      defaultEditor = true;
+    };
+
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
   };
 
   fonts.fontconfig.enable = true;
@@ -78,11 +94,6 @@
         "image/jpeg" = ["firefox.desktop"];
       };
     };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
   };
 
   dconf.settings = {
@@ -162,7 +173,7 @@
       figma-linux
       helvum
       audacity
-
+      
       # Development / Course
       teams-for-linux
 
@@ -172,8 +183,6 @@
 
       jetbrains-toolbox
       vscodium
-
-      heimdall
 
       # Font Stuff
       (nerdfonts.override {fonts = ["Iosevka"];})
