@@ -78,7 +78,7 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = ["nautilus.desktop"];
+        "inode/directory" = ["nautilus-autorun-software.desktop"];
         "text/*" = ["codium.desktop"];
         "text/plain" = ["codium.desktop"];
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
@@ -156,8 +156,8 @@
       mpv
       feh
       nitch
-      # prismlauncher
-      # temurin-jre-bin-17
+      prismlauncher
+      temurin-jre-bin-17
       playerctl
       onlyoffice-bin
       copyq
@@ -169,7 +169,10 @@
       mpc-cli
       psi-notify
       scribus
+
       zettlr
+      marktext
+      
       figma-linux
       helvum
       audacity

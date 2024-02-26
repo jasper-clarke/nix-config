@@ -19,6 +19,15 @@
     };
   };
 
+  # home = {
+  #   packages = [
+  #     pkgs.wezterm
+  #   ];
+  #   file = {
+  #     ".config/wezterm/wezterm.lua".source = ./wezterm.lua;
+  #   };
+  # };
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;

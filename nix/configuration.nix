@@ -65,9 +65,9 @@
     hostName = "${hostname}";
     networkmanager ={
       enable = true;
-      # dns = "none";
+      dns = "none";
     };
-    # nameservers = [ "1.1.1.1" ];
+    nameservers = [ "1.1.1.1" ];
   };
 
   time.timeZone = "Australia/Sydney";
@@ -190,27 +190,27 @@
     direnv.enable = true;
     dconf.enable = true;
 
-    # nix-ld = {
-    #   enable = true;
-    #   libraries = with pkgs; [
-    #     stdenv.cc.cc
-    #     fuse3
-    #     openssl
-    #     curl
-    #     libxkbcommon #
-    #     libudev-zero #
-    #     libappindicator-gtk3
-    #     libdrm
-    #     libglvnd
-    #     libusb1
-    #     libuuid
-    #     libxml2
-    #     libinput #
-    #     mesa #
-    #     fontconfig #
-    #     freetype #
-    #   ];
-    # };
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        fuse3
+        openssl
+        curl
+        libxkbcommon #
+        libudev-zero #
+        libappindicator-gtk3
+        libdrm
+        libglvnd
+        libusb1
+        libuuid
+        libxml2
+        libinput #
+        mesa #
+        fontconfig #
+        freetype #
+      ];
+    };
   };
 
   systemd = {
