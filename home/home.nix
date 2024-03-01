@@ -158,7 +158,6 @@
       nitch
       prismlauncher
       temurin-jre-bin-17
-      playerctl
       onlyoffice-bin
       copyq
       gnome.simple-scan
@@ -166,10 +165,11 @@
       fzf
       gimp
       btop
-      mpc-cli
       psi-notify
       scribus
 
+
+      lmms
       zettlr
       marktext
       

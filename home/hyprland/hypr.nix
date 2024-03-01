@@ -45,6 +45,10 @@ in {
       (writers.writeBashBin "lights" ../scripts/lights.sh)
 
       (writers.writeBashBin "ws-switch" ../scripts/per-monitor-ws-switcher.sh)
+
+      playerctl
+      mpc-cli
+      (writers.writeBashBin "toggle-players" ../scripts/playerctl.sh)
     ];
 
     file = {
