@@ -28,10 +28,16 @@
                 ];
 
                 modules-right = [
+                    "custom/work-cal"
                     "pulseaudio"
                     "tray"
                     "clock"
                 ];
+
+                "custom/work-cal" = {
+                    format = "󰸗";
+                    on-click = "onlyoffice-desktopeditors ~/Desktop/IT\ Programming\ Course\ III/TAFE\ Course\ Task\ Schedule.docx";
+                };
 
                 "hyprland/workspaces" = {
                     all-outputs = true;
@@ -43,9 +49,6 @@
                         "2" = "";
                         "3" = "";
                         "4" = "";
-                        # "5" = "";
-                        # "6" = "";
-                        "OVERVIEW" = "OVERVIEW";
                     };
                     persistent-workspaces = {
                         "DP-2" = [1 2 3 4];
@@ -55,7 +58,7 @@
                 "mpd" = {
                     format = "{title}";
                     format-disconnected = "Disconnected ";
-                    format-stopped = "- Not Playing -";
+                    format-stopped = " ";
                     interval = 10;
                     tooltip-format = "MPD (connected)";
                     tooltip-format-disconnected = "MPD (disconnected)";
@@ -110,7 +113,7 @@
             #disk,
             #network,
             #battery,
-            #custom-spotify,
+            #custom-work-cal,
             #pulseaudio,
             #window,
             #tray {
@@ -138,7 +141,7 @@
                 margin-right: 2px;
                 margin-left: 2px;
                 transition: all 0.3s ease;
-                font-weight: 900;
+                font-weight: 700;
             }
 
             #window {

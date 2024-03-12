@@ -20,8 +20,8 @@ in {
   # configure spicetify :)
   programs.spicetify = {
     enable = true;
-    theme = spicePkgs.themes.Ziro;
-    colorScheme = "blue-dark";
+    theme = spicePkgs.themes.Dribbblish;
+    colorScheme = "catppuccin-macchiato";
 
     enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplay

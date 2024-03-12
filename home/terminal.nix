@@ -8,7 +8,7 @@
   programs.kitty = {
     enable = true;
     #font.package = pkgs.roboto;
-    font.name = "Inter";
+    font.name = "JetBrains Mono";
     font.size = 14;
     theme = "Catppuccin-Mocha";
     shellIntegration.enableZshIntegration = true;
@@ -49,7 +49,6 @@
     initExtra = ''
 
       nitch
-      echo "Finished other maps up to the end of SWR"
 
     '';
     oh-my-zsh = {

@@ -5,7 +5,6 @@
   user,
   version,
   hyprland,
-  hycov,
   system,
   inputs,
   ...
@@ -18,6 +17,7 @@
     ./waybar.nix
     ./swaylock.nix
     ./ncmpcpp.nix
+    # ./spicetify.nix
   ];
   
   programs = {
@@ -55,16 +55,16 @@
       };
     };
 
-    neovim = {
-      enable = true;
-      plugins = with pkgs.vimPlugins; [
-        dashboard-nvim
-        nvim-cmp
-        LeaderF
-        nvim-tree-lua
-      ];
-      defaultEditor = true;
-    };
+    # neovim = {
+    #   enable = true;
+    #   plugins = with pkgs.vimPlugins; [
+    #     dashboard-nvim
+    #     nvim-cmp
+    #     LeaderF
+    #     nvim-tree-lua
+    #   ];
+    #   defaultEditor = true;
+    # };
 
   };
 
@@ -140,50 +140,43 @@
     };
 
     packages = with pkgs; [
+
+      # CLI
       zsh
       tree
       killall
-      
-      # pcmanfm
-      gnome.nautilus
-      # xplorer
-
-      kitty
       lsd
-      xarchiver
       calc
-      steam
+      nitch
+      fzf
+      btop
+
+      # GUI Utils
+      gnome.nautilus
+      xarchiver
       mpv
       feh
-      nitch
-      prismlauncher
-      temurin-jre-bin-17
       onlyoffice-bin
       copyq
       gnome.simple-scan
       motrix
-      fzf
       gimp
-      btop
-      psi-notify
       scribus
-
-
-      lmms
-      zettlr
       marktext
-      
-      figma-linux
       helvum
       audacity
-      
+
+      # Apps
+      steam
+      prismlauncher
+      figma-linux
+      vial
+
+      # Libraries
+      temurin-jre-bin-17
+
       # Development / Course
       teams-for-linux
-
-      # jetbrains.webstorm
-      # nodejs
-      # nodePackages.pnpm
-
       jetbrains-toolbox
       vscodium
 

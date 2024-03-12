@@ -12,6 +12,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./nvidia.nix
   ];
 
   boot = {
@@ -77,17 +78,6 @@
       enable = true;
       powerOnBoot = true;
     };
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
-    nvidia = {
-      modesetting.enable = true;
-      open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.production; # 535
-      nvidiaSettings = false;
-    };
     pulseaudio.enable = lib.mkForce false;
   };
 
@@ -110,7 +100,7 @@
         default_session = {
 	        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome' --asterisks --remember --remember-user-session --time -cmd Hyprland";
 	        user = "greeter";
-	};
+	      };
       };
     };
     mpd = {
@@ -141,7 +131,6 @@
     xserver = {
       enable = true;
       xkb.layout = "us";
-      videoDrivers = ["nvidia"];
       # windowManager.awesome = {
       #   enable = true;
       #   package = pkgs.awesome.overrideAttrs (old: {
@@ -171,7 +160,9 @@
     };
 
     udev.extraRules = ''
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess"  ACTION=="add" RUN+="${lib.getExe pkgs.headsetcontrol} -l 0"
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess" ACTION=="add" RUN+="${pkgs.headsetcontrol}/bin/headsetcontrol -l 0"
+
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
     '';
 
     printing = {
@@ -190,27 +181,27 @@
     direnv.enable = true;
     dconf.enable = true;
 
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-        stdenv.cc.cc
-        fuse3
-        openssl
-        curl
-        libxkbcommon #
-        libudev-zero #
-        libappindicator-gtk3
-        libdrm
-        libglvnd
-        libusb1
-        libuuid
-        libxml2
-        libinput #
-        mesa #
-        fontconfig #
-        freetype #
-      ];
-    };
+    # nix-ld = {
+    #   enable = true;
+    #   libraries = with pkgs; [
+    #     stdenv.cc.cc
+    #     fuse3
+    #     openssl
+    #     curl
+    #     libxkbcommon #
+    #     libudev-zero #
+    #     libappindicator-gtk3
+    #     libdrm
+    #     libglvnd
+    #     libusb1
+    #     libuuid
+    #     libxml2
+    #     libinput #
+    #     mesa #
+    #     fontconfig #
+    #     freetype #
+    #   ];
+    # };
   };
 
   systemd = {
