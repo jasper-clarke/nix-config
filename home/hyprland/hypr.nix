@@ -14,12 +14,15 @@ in {
     package = hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
     settings = {
-      source = "~/.config/hypr/hypr.conf";
-
       bind = [
-        "ALT, SPACE, exec, rofi -show drun -theme ${appsRasi}" 
+        "SUPER, D, exec, rofi -show drun -theme ${appsRasi}"
+        # "ALT, SPACE, exec, rofi -show drun -theme ${appsRasi}"
       ];
     };
+    extraConfig = ''
+      source = ~/.config/hypr/hypr.conf
+      source = ~/.config/hypr/keys.conf
+    '';
   };
 
   home = {
@@ -49,6 +52,7 @@ in {
 
     file = {
       ".config/hypr/hypr.conf".source = ./hyprland.conf;
+      ".config/hypr/keys.conf".source = ./corne-keys.conf;
     };
   };
 

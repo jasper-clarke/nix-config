@@ -28,15 +28,16 @@
                 ];
 
                 modules-right = [
-                    "custom/work-cal"
+                    "custom/keeb-batt"
                     "pulseaudio"
                     "tray"
                     "clock"
                 ];
 
-                "custom/work-cal" = {
-                    format = "󰸗";
-                    on-click = "onlyoffice-desktopeditors ~/Desktop/IT\ Programming\ Course\ III/TAFE\ Course\ Task\ Schedule.docx";
+                "custom/keeb-batt" = {
+                    format = "{}";
+                    exec = "bluetoothctl info | grep 'Battery Percentage:' | sed -e 's/^[ \t]*//' | awk '{print $4}'";
+                    interval = 600;
                 };
 
                 "hyprland/workspaces" = {
@@ -113,7 +114,7 @@
             #disk,
             #network,
             #battery,
-            #custom-work-cal,
+            #custom-keeb-batt,
             #pulseaudio,
             #window,
             #tray {
