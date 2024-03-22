@@ -107,26 +107,26 @@
       enable = true;
       musicDirectory = "/home/${user}/Music";
       user = "${user}";
-      extraConfig = ''
-        audio_output {
-          type "pipewire"
-          name "Pipewire Output"
-        }
-      '';
       # extraConfig = ''
       #   audio_output {
       #     type "pipewire"
       #     name "Pipewire Output"
-      #     buffer_time "10000"
-      #   }
-
-      #   audio_output {
-      #     type "fifo"
-      #     name "Visualizer"
-      #     path "/tmp/mpd.fifo"
-      #     format "44100:16:2"
       #   }
       # '';
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "Pipewire Output"
+          buffer_time "100000"
+        }
+
+        audio_output {
+          type "fifo"
+          name "Visualizer"
+          path "/tmp/mpd.fifo"
+          format "44100:16:2"
+        }
+      '';
     };
     xserver = {
       enable = true;
@@ -161,8 +161,6 @@
 
     udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess" ACTION=="add" RUN+="${pkgs.headsetcontrol}/bin/headsetcontrol -l 0"
-
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
     '';
 
     printing = {
@@ -196,6 +194,7 @@
         libusb1
         libuuid
         libxml2
+        libva
         libinput #
         mesa #
         fontconfig #

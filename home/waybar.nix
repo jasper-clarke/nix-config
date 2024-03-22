@@ -28,7 +28,6 @@
                 ];
 
                 modules-right = [
-                    "custom/keeb-batt"
                     "pulseaudio"
                     "tray"
                     "clock"
@@ -66,7 +65,7 @@
                 };
 
                 "tray" = {
-                    icon-size = 12;
+                    icon-size = 14;
                     tooltip = false;
                     spacing = 10;
                 };
@@ -93,6 +92,7 @@
                     tooltip = false;
                     format-muted = "  N/A";
                     scroll-step = 5;
+                    on-click = "audio-select sink";
                 };
             };
         };

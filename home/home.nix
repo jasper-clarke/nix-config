@@ -161,7 +161,7 @@
       gnome.simple-scan
       motrix
       gimp
-      scribus
+      # scribus
       marktext
       helvum
       audacity
@@ -170,7 +170,6 @@
       steam
       prismlauncher
       figma-linux
-      vial
 
       # Libraries
       temurin-jre-bin-17

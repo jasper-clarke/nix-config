@@ -9,8 +9,13 @@ if [[ $(playerctl -l) == *"firefox"* ]]; then
         fi
     else
         if [[ $(mpc status) == *"[playing]"* || $(mpc status) == *"[paused]"* ]]; then
-            mpc toggle
-            echo "Firefox > MPD"
+            if [[ $(hyprctl activewindow | grep -E "initialClass: ") == *"firefox"* ]]; then
+                playerctl --player=firefox play-pause
+                echo "Firefox > MPD > Firefox"
+            else
+                mpc toggle
+                echo "Firefox > MPD"
+            fi
         else
             playerctl --player=firefox play-pause
             echo "Firefox > Firefox"
