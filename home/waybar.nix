@@ -9,7 +9,6 @@
         settings = {
             mainBar = {
                 layer = "top";
-                output = [ "DP-2" ];
                 position = "top";
                 mod = "dock";
                 exclusive = true;

@@ -78,12 +78,12 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = ["nautilus-autorun-software.desktop"];
+        "inode/directory" = ["org.gnome.Nautilus.desktop"];
         "text/*" = ["codium.desktop"];
         "text/plain" = ["codium.desktop"];
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
         "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop"];
-        "application/pdf" = ["scribus.desktop"];
+        "application/pdf" = ["firefox.desktop"];
         "application/zip" = ["xarchiver.desktop"];
         "video/*" = ["mpv.desktop"];
         "x-scheme-handler/https" = ["firefox.desktop"];
@@ -178,6 +178,7 @@
       teams-for-linux
       jetbrains-toolbox
       vscodium
+      lapce
 
       # Font Stuff
       (nerdfonts.override {fonts = ["Iosevka"];})

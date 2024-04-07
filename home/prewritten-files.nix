@@ -18,11 +18,11 @@
         })
       '';
 
-      ".config/wireplumber/main.lua.d/51-alsa-speakers.lua".text = ''
+      ".config/wireplumber/main.lua.d/99-alsa-speakers.lua".text = ''
         rule = {
           matches = {
             {
-              { "node.nick", "matches", "Pebble V3" },
+              { "api.alsa.card.name", "=", "Pebble V3" },
             }
           },
           apply_properties = {

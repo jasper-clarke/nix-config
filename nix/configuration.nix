@@ -66,9 +66,9 @@
     hostName = "${hostname}";
     networkmanager ={
       enable = true;
-      dns = "none";
+      # dns = "none";
     };
-    nameservers = [ "1.1.1.1" ];
+    # nameservers = [ "1.1.1.1" ];
   };
 
   time.timeZone = "Australia/Sydney";
@@ -262,8 +262,9 @@
   xdg = {
     portal = {
       enable = true;
+      # wlr.enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal
+        xdg-desktop-portal-gtk
         xdg-desktop-portal-hyprland
       ];
       config.common.default = "*";

@@ -31,8 +31,9 @@ in {
       swayidle
       swww
       wev
-      slurp
-      grim
+      # slurp
+      # grim
+      grimblast
       rofi-wayland
       swappy
       sway-audio-idle-inhibit
