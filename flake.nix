@@ -21,10 +21,10 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
-    # hycov = {
-    #   url = "github:jasper-at-windswept/hycov";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    hyprgrass = {
+        url = "github:horriblename/hyprgrass";
+        inputs.hyprland.follows = "hyprland"; # IMPORTANT
+    };
 
     # Spicetify
     # spicetify-nix = {
@@ -44,6 +44,7 @@
     home-manager,
     grub2-themes,
     hyprland,
+    hyprgrass,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -66,7 +67,7 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit user inputs system hyprland version pkgs; };
+            home-manager.extraSpecialArgs = { inherit user inputs system hyprland hyprgrass version pkgs; };
             home-manager.users.${user} = {
               imports = [
                 ./home/home.nix

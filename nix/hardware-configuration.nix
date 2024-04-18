@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/run/media/allusive/SSD" = {
+    device = "/dev/disk/by-uuid/362b83e2-5bfa-48c6-8896-4a8c2a5be165";
+    fsType = "ext4";
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

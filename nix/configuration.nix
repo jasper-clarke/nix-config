@@ -55,6 +55,7 @@
       # substituters = [ "https://ezkea.cachix.org" ];
       # trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
       experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
     };
   };
 
@@ -66,9 +67,9 @@
     hostName = "${hostname}";
     networkmanager ={
       enable = true;
-      # dns = "none";
+      dns = "none";
     };
-    # nameservers = [ "1.1.1.1" ];
+    nameservers = [ "1.1.1.1" ];
   };
 
   time.timeZone = "Australia/Sydney";
@@ -90,6 +91,12 @@
   sound.enable = lib.mkForce false; # disable alsa
 
   services = {
+
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
+
     greetd = {
       enable = true;
       settings = {
@@ -175,6 +182,12 @@
   };
 
   programs = {
+    weylus = {
+      enable = true;
+      openFirewall = true;
+      users = [ "allusive" ];
+    };
+    
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
@@ -223,6 +236,19 @@
         TimeoutStopSec = 10;
       };
     };
+    user.services.headsetlights = {
+      description = "headsetlights";
+      wantedBy = ["multi-user.target"];
+      wants = ["multi-user.target"];
+      after = ["multi-user.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.headsetcontrol}/bin/headsetcontrol -l 0";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
   };
 
   qt = {
@@ -233,6 +259,8 @@
 
   virtualisation = {
     virtualbox.host.enable = true;
+    docker.enable = true;
+    docker.enableNvidia = true;
   };
 
   users.users.${user} = {

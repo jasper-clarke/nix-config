@@ -3,6 +3,7 @@
   lib,
   pkgs,
   hyprland,
+  hyprgrass,
   ...
 }: 
 let
@@ -13,9 +14,13 @@ in {
     enable = true;
     package = hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
+    plugins = [
+      # hyprgrass.packages.${pkgs.system}.default
+    ];
     settings = {
       bind = [
         "SUPER, D, exec, rofi -show drun -theme ${appsRasi}"
+        " , tap:3, exec, rofi -show drun -theme ${appsRasi}"
         # "ALT, SPACE, exec, rofi -show drun -theme ${appsRasi}"
       ];
     };

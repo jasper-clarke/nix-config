@@ -19,14 +19,10 @@
     };
   };
 
-  # home = {
-  #   packages = [
-  #     pkgs.wezterm
-  #   ];
-  #   file = {
-  #     ".config/wezterm/wezterm.lua".source = ./wezterm.lua;
-  #   };
-  # };
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.zsh = {
     enable = true;
@@ -42,9 +38,10 @@
     # };
     shellAliases = {
       rebuild-switch = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/${user}/.flake#nixos";
-      rust = "cd ~/Projects/Rust && nohup rust-rover &";
-      web = "cd ~/Projects/NodeProjects && nohup webstorm &";
+      rust = "cd /run/media/allusive/SSD/Projects/Rust && nohup rust-rover &";
+      web = "cd /run/media/allusive/SSD/Projects/NodeProjects && nohup webstorm &";
       brun = "bun --bun run dev";
+      cd = "z";
     };
     initExtra = ''
 

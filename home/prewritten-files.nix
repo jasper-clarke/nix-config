@@ -22,7 +22,7 @@
         rule = {
           matches = {
             {
-              { "api.alsa.card.name", "=", "Pebble V3" },
+              { "alsa.card_name", "=", "Pebble V3" },
             }
           },
           apply_properties = {
@@ -41,6 +41,12 @@
         Host github.com
           IdentityFile ~/.ssh/gitlab
       '';
+
+      ".config/nvim" = {
+        source = ./nvchad;
+        recursive = true;
+        force = true;
+      };
 
     };
   };
