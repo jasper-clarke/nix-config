@@ -43,7 +43,7 @@
       '';
 
       ".config/nvim" = {
-        source = ./nvchad;
+        source = ./neovim;
         recursive = true;
         force = true;
       };

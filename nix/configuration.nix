@@ -259,6 +259,7 @@
 
   virtualisation = {
     virtualbox.host.enable = true;
+    # virtualbox.host.enableExtensionPack = true;
     docker.enable = true;
     docker.enableNvidia = true;
   };

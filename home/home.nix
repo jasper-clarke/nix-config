@@ -172,6 +172,7 @@
       steam
       prismlauncher
       figma-linux
+      quickemu
 
       # Libraries
       temurin-jre-bin-17
