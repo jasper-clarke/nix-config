@@ -10,7 +10,7 @@
     #font.package = pkgs.roboto;
     font.name = "JetBrains Mono";
     font.size = 14;
-    theme = "Catppuccin-Mocha";
+    theme = "Tokyo Night";
     shellIntegration.enableZshIntegration = true;
     settings = {
       confirm_os_window_close = 0;
@@ -37,7 +37,7 @@
     #   ] }";
     # };
     shellAliases = {
-      rebuild-switch = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/${user}/.flake#nixos";
+      # rebuild-switch = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/${user}/.flake#nixos";
       rust = "cd /run/media/allusive/SSD/Projects/Rust && nohup rust-rover &";
       web = "cd /run/media/allusive/SSD/Projects/NodeProjects && nohup webstorm &";
       brun = "bun --bun run dev";
@@ -53,9 +53,20 @@
     };
   };
 
-  programs.oh-my-posh = {
+  programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile ./bubbles.omp.json));
   };
+
+  home.file.".config/starship.toml" = {
+    source = ./tokyonight.toml;
+    force = true;
+  };
+
+  # programs.oh-my-posh = {
+  #  enable = true;
+  #  enableZshIntegration = true;
+  #  useTheme = "sonicboom_dark";
+  #  settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile ./bubbles.omp.json));
+  # };
 }

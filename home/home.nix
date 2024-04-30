@@ -63,6 +63,13 @@
       };
     };
 
+    #thunderbird = {
+    #  enable = true;
+    #  profiles.jasper = {
+    #    isDefault = true;
+    #  };
+    #};
+
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -152,6 +159,8 @@
       nitch
       fzf
       btop
+      protonmail-bridge
+      nix-output-monitor
 
       # GUI Utils
       gnome.nautilus
@@ -160,26 +169,24 @@
       feh
       onlyoffice-bin
       copyq
-      gnome.simple-scan
+      # gnome.simple-scan
       motrix
       gimp
       # scribus
       marktext
-      helvum
       audacity
 
       # Apps
       steam
-      prismlauncher
-      figma-linux
-      quickemu
+      # figma-linux
+      # prismlauncher
 
       # Libraries
-      temurin-jre-bin-17
+      # temurin-jre-bin-17
 
       # Development / Course
       teams-for-linux
-      jetbrains-toolbox
+      # jetbrains-toolbox
       vscodium
 
       # Font Stuff

@@ -126,34 +126,11 @@
           name "Pipewire Output"
           buffer_time "100000"
         }
-
-        audio_output {
-          type "fifo"
-          name "Visualizer"
-          path "/tmp/mpd.fifo"
-          format "44100:16:2"
-        }
       '';
     };
     xserver = {
       enable = true;
       xkb.layout = "us";
-      # windowManager.awesome = {
-      #   enable = true;
-      #   package = pkgs.awesome.overrideAttrs (old: {
-      #     version = "75758b07f3c3c326d43ac682896dbcf18fac4bd7";
-      #     src = pkgs.fetchFromGitHub {
-      #       owner = "awesomeWM";
-      #       repo = "awesome";
-      #       rev = version;
-      #       hash = "sha256-pT9gCia+Cj3huTbDcXf/O6+EL6Bw4PlvL00IJ1gT+OY=";
-      #     };
-      #     patches = [];
-      #     postPatch = ''
-      #       patchShebangs tests/examples/_postprocess.lua
-      #     '';
-      #   });
-      # };
     };
 
     blueman.enable = true;
@@ -191,6 +168,11 @@
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
+    
+    nh = {
+      enable = true;
+      flake = "/home/${user}/.flake";
+    };
 
     nix-ld = {
       enable = true;
@@ -238,9 +220,9 @@
     };
     user.services.headsetlights = {
       description = "headsetlights";
-      wantedBy = ["multi-user.target"];
-      wants = ["multi-user.target"];
-      after = ["multi-user.target"];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.headsetcontrol}/bin/headsetcontrol -l 0";

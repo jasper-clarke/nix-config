@@ -43,7 +43,7 @@
       '';
 
       ".config/nvim" = {
-        source = ./neovim;
+        source = ./nvim-config;
         recursive = true;
         force = true;
       };

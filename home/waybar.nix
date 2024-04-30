@@ -10,6 +10,7 @@
             mainBar = {
                 layer = "top";
                 position = "top";
+                output = [ "DP-1" ];
                 mod = "dock";
                 exclusive = true;
                 passtrough = false;
@@ -48,9 +49,11 @@
                         "2" = "";
                         "3" = "";
                         "4" = "";
+                        "5" = "";
+                        "6" = "";
                     };
                     persistent-workspaces = {
-                        "DP-2" = [1 2 3 4];
+                        "*" = 1;
                     };
                 };
 
