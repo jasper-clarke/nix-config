@@ -9,7 +9,7 @@
     enable = true;
     #font.package = pkgs.roboto;
     font.name = "JetBrains Mono";
-    font.size = 14;
+    font.size = 15;
     theme = "Tokyo Night";
     shellIntegration.enableZshIntegration = true;
     settings = {
@@ -40,7 +40,6 @@
       # rebuild-switch = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/${user}/.flake#nixos";
       rust = "cd /run/media/allusive/SSD/Projects/Rust && nohup rust-rover &";
       web = "cd /run/media/allusive/SSD/Projects/NodeProjects && nohup webstorm &";
-      brun = "bun --bun run dev";
       cd = "z";
     };
     initExtra = ''

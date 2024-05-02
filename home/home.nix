@@ -63,12 +63,23 @@
       };
     };
 
-    #thunderbird = {
-    #  enable = true;
-    #  profiles.jasper = {
-    #    isDefault = true;
-    #  };
-    #};
+    nnn = {
+      enable = true;
+      package = pkgs.nnn.override ({ withNerdIcons = true; });
+      bookmarks = {
+        s = "/run/media/allusive/SSD";
+        f = "~/.flake";
+        d = "~/Downloads";
+      };
+      plugins = {
+        src = (pkgs.fetchFromGitHub {
+                owner = "jarun";
+                repo = "nnn";
+                rev = "v4.9";
+                sha256 = "sha256-g19uI36HyzTF2YUQKFP4DE2ZBsArGryVHhX79Y0XzhU=";
+              }) + "/plugins";
+      };
+    };
 
     neovim = {
       enable = true;
@@ -87,9 +98,12 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = ["org.gnome.Nautilus.desktop"];
-        "text/*" = ["codium.desktop"];
-        "text/plain" = ["codium.desktop"];
+        "inode/directory" = ["nnn.desktop"];
+        "text/*" = ["neovim.desktop"];
+        "text/javascript" = ["neovim.desktop"];
+        "text/css" = ["neovim.desktop"];
+        "application/yaml" = ["neovim.desktop"];
+        "application/json" = ["neovim.desktop"];
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
         "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop"];
         "application/pdf" = ["firefox.desktop"];
@@ -161,9 +175,10 @@
       btop
       protonmail-bridge
       nix-output-monitor
+      wl-clipboard
 
       # GUI Utils
-      gnome.nautilus
+      # gnome.nautilus
       xarchiver
       mpv
       feh
