@@ -133,7 +133,7 @@
       xkb.layout = "us";
     };
 
-    blueman.enable = true;
+    # blueman.enable = true;
 
     pipewire = {
       enable = true;

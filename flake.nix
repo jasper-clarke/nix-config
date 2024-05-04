@@ -54,7 +54,7 @@
     wayland = true;
     pkgs = import nixpkgs {
       inherit system;
-      config = { allowUnfree = true; allowInsecure = true; };
+      config = { allowUnfree = true; };
     };
     lib = nixpkgs.lib;
   in {

@@ -2,7 +2,7 @@ return {
   "akinsho/toggleterm.nvim",
   config = true,
   cmd = "ToggleTerm",
-  keys = { { "<c-/>", "<cmd>ToggleTerm<cr>", desc = "Toggle horizontal terminal" } },
+  keys = { { "<c-/>", "<cmd>ToggleTerm dir=" .. LazyVim.root.cwd() .. "<cr>", desc = "Toggle horizontal terminal" } },
   opts = {
     open_mapping = [[<c-/>]],
     direction = "horizontal",

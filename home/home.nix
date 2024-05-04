@@ -165,7 +165,6 @@
     packages = with pkgs; [
 
       # CLI
-      zsh
       tree
       killall
       lsd
@@ -173,9 +172,10 @@
       nitch
       fzf
       btop
-      protonmail-bridge
+      bluetuith
       nix-output-monitor
       wl-clipboard
+      trash-cli
 
       # GUI Utils
       # gnome.nautilus

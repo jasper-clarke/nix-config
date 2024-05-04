@@ -41,6 +41,7 @@
       rust = "cd /run/media/allusive/SSD/Projects/Rust && nohup rust-rover &";
       web = "cd /run/media/allusive/SSD/Projects/NodeProjects && nohup webstorm &";
       cd = "z";
+      rm = "trash-put";
     };
     initExtra = ''
 
