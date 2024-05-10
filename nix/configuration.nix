@@ -13,7 +13,13 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
+    inputs.sops-nix.nixosModules.sops
   ];
+
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
@@ -64,6 +70,15 @@
   };
 
   networking = {
+    firewall = {
+      enable = false;
+      # allowedTCPPortRanges = [
+      #   { from = 8000; to = 8010; }
+      # ];
+      # allowedUDPPortRanges = [
+      #   { from = 8000; to = 8010; }
+      # ];
+    };
     hostName = "${hostname}";
     networkmanager ={
       enable = true;
@@ -154,7 +169,10 @@
     avahi.enable = true;
 
     dbus.enable = true;
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      allowSFTP = true;
+    };
     gvfs.enable = true;
   };
 

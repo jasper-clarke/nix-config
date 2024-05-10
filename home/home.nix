@@ -38,7 +38,6 @@
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
           bitwarden
           darkreader
-          firefox-color
           ublock-origin
           violentmonkey
           tridactyl
@@ -102,19 +101,20 @@
         "text/*" = ["neovim.desktop"];
         "text/javascript" = ["neovim.desktop"];
         "text/css" = ["neovim.desktop"];
+        "application/x-desktop" = ["neovim.desktop"];
         "application/yaml" = ["neovim.desktop"];
         "application/json" = ["neovim.desktop"];
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop"];
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop"];
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice.desktop"];
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice.desktop"];
         "application/pdf" = ["firefox.desktop"];
         "application/zip" = ["xarchiver.desktop"];
         "video/*" = ["mpv.desktop"];
         "x-scheme-handler/https" = ["firefox.desktop"];
         "x-scheme-handler/http" = ["firefox.desktop"];
         "x-scheme-handler/mailto" = ["firefox.desktop"];
-        "image/*" = ["firefox.desktop"];
-        "image/png" = ["firefox.desktop"];
-        "image/jpeg" = ["firefox.desktop"];
+        "image/*" = ["feh.desktop"];
+        "image/png" = ["feh.desktop"];
+        "image/jpeg" = ["feh.desktop"];
       };
     };
   };
@@ -176,6 +176,7 @@
       nix-output-monitor
       wl-clipboard
       trash-cli
+      sops
 
       # GUI Utils
       # gnome.nautilus

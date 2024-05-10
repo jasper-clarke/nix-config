@@ -30,11 +30,7 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     # sessionVariables = {
-    #   LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${ with pkgs; lib.makeLibraryPath [
-    #     wayland
-    #     libxkbcommon
-    #     fontconfig
-    #   ] }";
+    #   NNN_TRASH = "1";
     # };
     shellAliases = {
       # rebuild-switch = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/${user}/.flake#nixos";
