@@ -21,6 +21,8 @@
 
   sops.age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
 
+  sops.secrets.git_sshkey = {};
+
   boot = {
     supportedFilesystems = [ "ntfs" ];
     # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
@@ -71,20 +73,18 @@
 
   networking = {
     firewall = {
-      enable = false;
-      # allowedTCPPortRanges = [
-      #   { from = 8000; to = 8010; }
-      # ];
-      # allowedUDPPortRanges = [
-      #   { from = 8000; to = 8010; }
-      # ];
+      enable = true;
+      allowedTCPPortRanges = [
+        { from = 8000; to = 8090; }
+      ];
+      allowedUDPPortRanges = [
+        { from = 8000; to = 8090; }
+      ];
     };
     hostName = "${hostname}";
     networkmanager ={
       enable = true;
-      dns = "none";
     };
-    nameservers = [ "1.1.1.1" ];
   };
 
   time.timeZone = "Australia/Sydney";
@@ -180,7 +180,7 @@
     weylus = {
       enable = true;
       openFirewall = true;
-      users = [ "allusive" ];
+      users = [ "${user}" ];
     };
     
     zsh.enable = true;
@@ -207,6 +207,7 @@
         libusb1
         libuuid
         libxml2
+        xorg.libX11
         libva
         libinput #
         mesa #
@@ -243,7 +244,7 @@
       after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.headsetcontrol}/bin/headsetcontrol -l 0";
+        ExecStart = "/etc/profiles/per-user/allusive/bin/lights";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;

@@ -4,11 +4,22 @@
   pkgs,
   hyprland,
   hyprgrass,
+  user,
   ...
 }: 
 let
   appsRasi = ./apps.rasi;
 in {
+
+  programs.wpaperd = {
+    enable = true;
+    settings = {
+      any = {
+        path = "/home/${user}/.flake/wallpapers/space.png";
+        mode = "center";
+      };
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -34,10 +45,7 @@ in {
     packages = with pkgs; [
       hyprpicker
       swayidle
-      swww
       wev
-      # slurp
-      # grim
       grimblast
       rofi-wayland
       swappy

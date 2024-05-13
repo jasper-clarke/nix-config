@@ -27,7 +27,7 @@
     git = {
       enable = true;
       userName = "jasper-at-windswept";
-      userEmail = "jasper@windswept.digital";
+      userEmail = "jasper@windswept.digital"; 
     };
 
     firefox = {
