@@ -13,6 +13,9 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
+    ../modules/steam.nix
+    ../modules/audio.nix
+    ../modules/utilities.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -21,25 +24,11 @@
 
   sops.age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
 
-  sops.secrets.git_sshkey = {};
+  # sops.secrets.git_sshkey = {};
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
-    # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-    # extraModprobeConfig = ''
-    #  options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    # '';
     kernelPackages = pkgs.linuxPackages_latest;
-    # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_1.override {
-    #   argsOverride = rec {
-    #     src = pkgs.fetchurl {
-    #         url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
-    #         hash = "sha256-bNGUEDMME+xMGP0oqD0+QPwSoVKBX7fD4bB2QykJOlY=";
-    #     };
-    #     version = "6.1.75";
-    #     modDirVersion = "6.1.75";
-    #   };
-    # });
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -60,8 +49,6 @@
 
   nix = {
     settings = {
-      # substituters = [ "https://ezkea.cachix.org" ];
-      # trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
     };
@@ -94,16 +81,12 @@
       enable = true;
       powerOnBoot = true;
     };
-    pulseaudio.enable = lib.mkForce false;
   };
 
   security = {
-    rtkit.enable = true;
     polkit.enable = true;
     pam.services.swaylock = {};
   };
-
-  sound.enable = lib.mkForce false; # disable alsa
 
   services = {
 
@@ -125,24 +108,7 @@
 	      };
       };
     };
-    mpd = {
-      enable = true;
-      musicDirectory = "/home/${user}/Music";
-      user = "${user}";
-      # extraConfig = ''
-      #   audio_output {
-      #     type "pipewire"
-      #     name "Pipewire Output"
-      #   }
-      # '';
-      extraConfig = ''
-        audio_output {
-          type "pipewire"
-          name "Pipewire Output"
-          buffer_time "100000"
-        }
-      '';
-    };
+
     xserver = {
       enable = true;
       xkb.layout = "us";
@@ -150,23 +116,9 @@
 
     # blueman.enable = true;
 
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      jack.enable = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
-    };
-
     udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess" ACTION=="add" RUN+="${pkgs.headsetcontrol}/bin/headsetcontrol -l 0"
     '';
-
-    printing = {
-      enable = true;
-      drivers = [ pkgs.cnijfilter2 ];
-    };
-    avahi.enable = true;
 
     dbus.enable = true;
     openssh = {
@@ -182,7 +134,7 @@
       openFirewall = true;
       users = [ "${user}" ];
     };
-    
+
     zsh.enable = true;
     direnv.enable = true;
     dconf.enable = true;
@@ -219,9 +171,9 @@
 
   systemd = {
     services = {
-      mpd.environment = {
-        XDG_RUNTIME_DIR = "/run/user/1000";
-      };
+      # mpd.environment = {
+      #   XDG_RUNTIME_DIR = "/run/user/1000";
+      # };
       NetworkManager-wait-online.enable = lib.mkForce false;
     };
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -260,7 +212,6 @@
 
   virtualisation = {
     virtualbox.host.enable = true;
-    # virtualbox.host.enableExtensionPack = true;
     docker.enable = true;
     docker.enableNvidia = true;
   };
@@ -284,8 +235,6 @@
       zip
       unzip
       ripgrep
-      sane-backends
-      mpdris2
       usbutils
     ];
   };

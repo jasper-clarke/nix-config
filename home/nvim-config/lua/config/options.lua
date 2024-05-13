@@ -4,7 +4,7 @@
 local opt = vim.opt
 
 vim.filetype.add({
-  pattern = { [".*/hyprland/.*%.conf"] = "hyprlang" },
+  pattern = { [".*/hyprwm/.*%.conf"] = "hyprlang" },
 })
 
 opt.relativenumber = false
