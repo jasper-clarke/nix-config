@@ -19,10 +19,34 @@ in {
     enable = true;
     settings = {
       any = {
-        path = "/home/${user}/.flake/wallpapers/space.png";
+        path = ../../../wallpapers/space.png;
+        mode = "center";
+      };
+      "DP-1" = {
+        path = ../../../wallpapers/space-resolved.png;
         mode = "center";
       };
     };
+  };
+
+  services.mako = {
+    enable = true;
+    anchor = "top-right";
+    font = "Inter Bold 12";
+    backgroundColor = "#1A1B26";
+    textColor = "#c0caf5";
+    width = 350;
+    margin = "0,20,20";
+    padding = "10";
+    borderSize = 2;
+    borderColor = "#414868";
+    borderRadius = 10;
+    defaultTimeout = 10000;
+    groupBy = "summary";
+    output = "DP-1";
+    maxVisible = 2;
+    format = "<b>%s</b>\\n%b";
+    layer = "overlay";
   };
 
   wayland.windowManager.hyprland = {

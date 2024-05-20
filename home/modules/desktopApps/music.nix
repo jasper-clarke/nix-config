@@ -24,7 +24,10 @@
         '';
         #buffer_time "100000"
       };
-      mpdris2.enable = true;
+      mpdris2 = {
+        enable = true;
+        notifications = true;
+      };
     };
 
     programs.ncmpcpp = {

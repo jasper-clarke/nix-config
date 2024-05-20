@@ -23,6 +23,11 @@
   music = true;
 
   programs.home-manager.enable = true;
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -115,6 +120,8 @@
       gimp
       marktext
       audacity
+
+      prismlauncher
 
       # Development / Course
       teams-for-linux

@@ -98,23 +98,16 @@
     greetd = {
       enable = true;
       settings = {
-        initial_session = {
-          command = "Hyprland";
-          user = "${user}";
-        };
         default_session = {
-	        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --greeting 'Welcome' --asterisks --remember --remember-user-session --time -cmd Hyprland";
-	        user = "greeter";
+      	  command = "Hyprland";
+          user = "${user}";
 	      };
       };
     };
 
     xserver = {
-      enable = true;
-      xkb.layout = "us";
+      enable = false;
     };
-
-    # blueman.enable = true;
 
     udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess" ACTION=="add" RUN+="${pkgs.headsetcontrol}/bin/headsetcontrol -l 0"
@@ -136,7 +129,6 @@
     };
 
     zsh.enable = true;
-    direnv.enable = true;
     dconf.enable = true;
     
     nh = {

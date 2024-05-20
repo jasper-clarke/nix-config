@@ -38,6 +38,8 @@
           "apz.allow_zooming" = false;
           "apz.allow_double_tap_zooming" = false;
 
+          "security.fileuri.strict_origin_policy" = false;
+
           "font.name.serif.x-western" = "JetBrains Mono";
         };
         search.default = "DuckDuckGo";
