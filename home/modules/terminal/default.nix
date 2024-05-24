@@ -18,7 +18,8 @@
   config = {
     programs.kitty = {
       enable = config.kitty;
-      font.name = "JetBrains Mono";
+      font.name = "Fira Code";
+      font.package = pkgs.fira-code;
       font.size = 15;
       theme = "Tokyo Night";
       shellIntegration.enableZshIntegration = true;

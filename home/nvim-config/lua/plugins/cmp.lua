@@ -7,6 +7,7 @@ return {
           completion = {
             border = "rounded",
             scrollbar = false,
+            winhighlight = "FloatBorder:CmpBorder",
           },
           documentation = {
             border = "rounded",
