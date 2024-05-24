@@ -1,6 +1,10 @@
-{ inputs, pkgs, lib, config, ... }:
-
 {
+  inputs,
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options = {
     kitty = lib.mkOption {
       default = false;
@@ -30,7 +34,7 @@
     programs.git = {
       enable = true;
       userName = "jasper-at-windswept";
-      userEmail = "jasper@windswept.digital"; 
+      userEmail = "jasper@windswept.digital";
     };
 
     programs.zoxide = {
@@ -64,7 +68,7 @@
 
     programs.nnn = {
       enable = true;
-      package = pkgs.nnn.override ({ withNerdIcons = true; });
+      package = pkgs.nnn.override {withNerdIcons = true;};
       bookmarks = {
         s = "/run/media/allusive/SSD";
         f = "~/.flake";
@@ -74,12 +78,14 @@
         mappings = {
           p = "preview-tui";
         };
-        src = (pkgs.fetchFromGitHub {
-                owner = "jarun";
-                repo = "nnn";
-                rev = "v4.9";
-                sha256 = "sha256-g19uI36HyzTF2YUQKFP4DE2ZBsArGryVHhX79Y0XzhU=";
-              }) + "/plugins";
+        src =
+          (pkgs.fetchFromGitHub {
+            owner = "jarun";
+            repo = "nnn";
+            rev = "v4.9";
+            sha256 = "sha256-g19uI36HyzTF2YUQKFP4DE2ZBsArGryVHhX79Y0XzhU=";
+          })
+          + "/plugins";
       };
     };
 
@@ -97,7 +103,6 @@
       defaultEditor = true;
     };
 
-
     home.file.".config/starship.toml" = {
       source = ./tokyonight.toml;
       force = true;
@@ -113,9 +118,9 @@
       ffmpegthumbnailer
       trash-cli
       lazygit
+      alejandra
       (nerdfonts.override {fonts = ["Iosevka"];})
       jetbrains-mono
     ];
-
   };
 }

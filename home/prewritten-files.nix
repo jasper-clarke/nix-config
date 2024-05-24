@@ -1,12 +1,11 @@
-{ 
-  config, 
-  lib, 
-  pkgs, 
-  ... 
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: {
   home = {
     file = {
-
       ".config/wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''
         table.insert (default_access.rules,{
             matches = {
@@ -108,7 +107,6 @@
         Categories=System;FileTools;FileManager;ConsoleOnly
         Keywords=File;Manager;Management;Explorer;Launcher
       '';
-
     };
   };
 }

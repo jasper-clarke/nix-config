@@ -10,7 +10,6 @@
   inputs,
   ...
 }: {
-
   imports = [
     ./prewritten-files.nix
     ./modules/terminal
@@ -72,7 +71,7 @@
     iconTheme = {
       name = "Tela-circle-dracula";
       package = pkgs.tela-circle-icon-theme.override {
-        colorVariants = [ "dracula" ];
+        colorVariants = ["dracula"];
       };
     };
     cursorTheme = {
@@ -81,12 +80,12 @@
     };
     theme = {
       name = "Catppuccin-Macchiato-Standard-Pink-Dark";
-      package = (pkgs.catppuccin-gtk.override {
-        accents = [ "pink" ];
+      package = pkgs.catppuccin-gtk.override {
+        accents = ["pink"];
         size = "standard";
-        tweaks = [ "normal" ];
+        tweaks = ["normal"];
         variant = "macchiato";
-      });
+      };
     };
   };
 
@@ -105,7 +104,6 @@
     };
 
     packages = with pkgs; [
-
       bluetuith
       wl-clipboard
       sops
@@ -132,7 +130,6 @@
       freetype
       source-han-sans
       inter
-
     ];
   };
 }

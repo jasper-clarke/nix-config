@@ -5,11 +5,9 @@
   inputs,
   user,
   ...
-}: 
-let
+}: let
   appsRasi = ./apps.rasi;
 in {
-
   imports = [
     ./waybar.nix
     ./swaylock.nix
@@ -83,7 +81,6 @@ in {
       (writers.writeBashBin "lights" ./scripts/lights.sh)
 
       (writers.writeBashBin "ws-switch" ./scripts/per-monitor-ws-switcher.sh)
-
     ];
 
     file = {
@@ -91,5 +88,4 @@ in {
       ".config/hypr/keys.conf".source = ./corne-keys.conf;
     };
   };
-
 }

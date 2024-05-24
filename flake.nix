@@ -41,7 +41,6 @@
     #  url = "github:ezKEa/aagl-gtk-on-nix";
     #  inputs.nixpkgs.follows = "nixpkgs";
     # };
-
   };
   outputs = {
     self,
@@ -59,20 +58,21 @@
     wayland = true;
     pkgs = import nixpkgs {
       inherit system;
-      config = { allowUnfree = true; };
+      config = {allowUnfree = true;};
     };
     lib = nixpkgs.lib;
   in {
     nixosConfigurations = {
       ${hostname} = lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit user hyprland hostname version inputs; };
+        specialArgs = {inherit user hyprland hostname version inputs;};
         modules = [
           ./nix/configuration.nix
-          home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit user inputs system hyprland hyprgrass version pkgs; };
+            home-manager.extraSpecialArgs = {inherit user inputs system hyprland hyprgrass version pkgs;};
             home-manager.users.${user} = {
               imports = [
                 ./home/home.nix

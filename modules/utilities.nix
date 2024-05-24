@@ -1,6 +1,9 @@
-{ pkgs, lib, config, ... }:
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options = {
     printing = lib.mkOption {
       default = false;
@@ -15,7 +18,7 @@
     services = {
       printing = {
         enable = config.printing;
-        drivers = [ pkgs.cnijfilter2 ];
+        drivers = [pkgs.cnijfilter2];
       };
       avahi.enable = config.printing;
     };

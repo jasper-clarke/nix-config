@@ -8,8 +8,7 @@
   hostname,
   version,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
@@ -27,7 +26,7 @@
   # sops.secrets.git_sshkey = {};
 
   boot = {
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = ["ntfs"];
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       efi = {
@@ -49,7 +48,7 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
     };
   };
@@ -62,14 +61,20 @@
     firewall = {
       enable = true;
       allowedTCPPortRanges = [
-        { from = 8000; to = 8090; }
+        {
+          from = 8000;
+          to = 8090;
+        }
       ];
       allowedUDPPortRanges = [
-        { from = 8000; to = 8090; }
+        {
+          from = 8000;
+          to = 8090;
+        }
       ];
     };
     hostName = "${hostname}";
-    networkmanager ={
+    networkmanager = {
       enable = true;
     };
   };
@@ -89,7 +94,6 @@
   };
 
   services = {
-
     ollama = {
       enable = true;
       acceleration = "cuda";
@@ -99,9 +103,9 @@
       enable = true;
       settings = {
         default_session = {
-      	  command = "Hyprland";
+          command = "Hyprland";
           user = "${user}";
-	      };
+        };
       };
     };
 
@@ -125,12 +129,12 @@
     weylus = {
       enable = true;
       openFirewall = true;
-      users = [ "${user}" ];
+      users = ["${user}"];
     };
 
     zsh.enable = true;
     dconf.enable = true;
-    
+
     nh = {
       enable = true;
       flake = "/home/${user}/.flake";
@@ -232,7 +236,6 @@
   xdg = {
     portal = {
       enable = true;
-      # wlr.enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         xdg-desktop-portal-hyprland

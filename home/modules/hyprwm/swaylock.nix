@@ -1,10 +1,9 @@
-{ 
+{
   config,
   pkgs,
   lib,
   ...
-}: { 
-
+}: {
   home.packages = with pkgs; [
     sway-audio-idle-inhibit
     swayidle
@@ -46,8 +45,8 @@
       line-clear-color = "1f1d2e";
       line-wrong-color = "1f1d2e";
       bs-hl-color = "31748f";
-      datestr  = "%a, %B %e";
-      timestr  = "%I:%M %p";
+      datestr = "%a, %B %e";
+      timestr = "%I:%M %p";
     };
   };
 }

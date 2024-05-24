@@ -1,6 +1,10 @@
-{ pkgs, lib, config, user, ...}:
-
 {
+  pkgs,
+  lib,
+  config,
+  user,
+  ...
+}: {
   programs = {
     steam = {
       enable = true;

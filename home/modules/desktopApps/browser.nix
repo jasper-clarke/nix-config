@@ -1,6 +1,11 @@
-{ pkgs, lib, config, user, inputs, ... }:
-
 {
+  pkgs,
+  lib,
+  config,
+  user,
+  inputs,
+  ...
+}: {
   options = {
     browser = lib.mkOption {
       default = false;
@@ -12,10 +17,9 @@
   };
 
   config = lib.mkIf config.browser {
-    
     programs.firefox = {
       enable = true;
-      nativeMessagingHosts = [ pkgs.tridactyl-native ];
+      nativeMessagingHosts = [pkgs.tridactyl-native];
       profiles.${user} = {
         isDefault = true;
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [

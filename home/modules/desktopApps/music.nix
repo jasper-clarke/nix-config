@@ -1,6 +1,10 @@
-{ pkgs, lib, config, user, ... }:
-
 {
+  pkgs,
+  lib,
+  config,
+  user,
+  ...
+}: {
   options = {
     music = lib.mkOption {
       default = false;
@@ -32,9 +36,9 @@
 
     programs.ncmpcpp = {
       enable = true;
-      package = (pkgs.ncmpcpp.override {
+      package = pkgs.ncmpcpp.override {
         visualizerSupport = true;
-      });
+      };
       mpdMusicDir = "/home/${user}/Music";
       settings = {
         mpd_crossfade_time = 2;
@@ -104,6 +108,5 @@
       mpc-cli
       (writers.writeBashBin "toggle-players" ../hyprwm/scripts/playerctl.sh)
     ];
-
   };
 }
