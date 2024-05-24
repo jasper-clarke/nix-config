@@ -22,6 +22,8 @@
         confirm_os_window_close = 0;
         enable_audio_bell = false;
         window_padding_width = 15;
+        allow_remote_control = true;
+        listen_on = "unix:/tmp/kitty";
       };
     };
 
@@ -69,6 +71,9 @@
         d = "~/Downloads";
       };
       plugins = {
+        mappings = {
+          p = "preview-tui";
+        };
         src = (pkgs.fetchFromGitHub {
                 owner = "jarun";
                 repo = "nnn";
@@ -104,7 +109,10 @@
       nitch
       fzf
       nix-output-monitor
+      imagemagick
+      ffmpegthumbnailer
       trash-cli
+      lazygit
       (nerdfonts.override {fonts = ["Iosevka"];})
       jetbrains-mono
     ];

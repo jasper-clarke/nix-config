@@ -109,9 +109,9 @@
       enable = false;
     };
 
-    udev.extraRules = ''
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess" ACTION=="add" RUN+="${pkgs.headsetcontrol}/bin/headsetcontrol -l 0"
-    '';
+    # udev.extraRules = ''
+    #   KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess" ACTION=="add" RUN+="${pkgs.headsetcontrol}/bin/headsetcontrol -l 0"
+    # '';
 
     dbus.enable = true;
     openssh = {
@@ -205,7 +205,6 @@
   virtualisation = {
     virtualbox.host.enable = true;
     docker.enable = true;
-    docker.enableNvidia = true;
   };
 
   users.users.${user} = {

@@ -23,7 +23,7 @@ in {
         mode = "center";
       };
       "DP-1" = {
-        path = ../../../wallpapers/space-resolved.png;
+        path = ../../../wallpapers/space-resolved-scriptures.png;
         mode = "center";
       };
     };

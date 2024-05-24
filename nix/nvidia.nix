@@ -3,6 +3,9 @@
 {
   services.xserver.videoDrivers = ["nvidia"];
 
+  # environment.systemPackages = with pkgs; [
+  # ];
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
