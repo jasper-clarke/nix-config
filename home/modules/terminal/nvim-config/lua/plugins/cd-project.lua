@@ -16,7 +16,6 @@ return {
       hooks = {
         {
           callback = function(dir)
-            vim.cmd("bdelete")
             vim.notify("Opening: " .. dir)
             vim.cmd("Neotree dir=" .. dir)
           end,
