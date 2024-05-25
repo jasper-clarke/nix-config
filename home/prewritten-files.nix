@@ -44,12 +44,6 @@
           IdentityFile ~/.ssh/private
       '';
 
-      ".config/nvim" = {
-        source = ./nvim-config;
-        recursive = true;
-        force = true;
-      };
-
       ".local/share/applications/feh.desktop".text = ''
         [Desktop Entry]
         Name=Feh (Scaled)

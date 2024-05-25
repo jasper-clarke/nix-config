@@ -18,8 +18,8 @@
   config = {
     programs.kitty = {
       enable = config.kitty;
-      font.name = "Fira Code";
-      font.package = pkgs.fira-code;
+      font.name = "JetBrains Mono";
+      # font.package = pkgs.fira-code;
       font.size = 15;
       theme = "Tokyo Night";
       shellIntegration.enableZshIntegration = true;
@@ -104,9 +104,23 @@
       defaultEditor = true;
     };
 
-    home.file.".config/starship.toml" = {
-      source = ./tokyonight.toml;
-      force = true;
+    home.file = {
+      ".config/starship.toml" = {
+        source = ./tokyonight.toml;
+        force = true;
+      };
+
+      ".config/nvim" = {
+        source = ./nvim-config;
+        recursive = true;
+        force = true;
+      };
+
+      ".local/share/nvim/lazy/LazyVim" = {
+        source = ./lazyvim;
+        recursive = true;
+        force = true;
+      };
     };
 
     home.packages = with pkgs; [
