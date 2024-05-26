@@ -18,6 +18,7 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = false;
+    # package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
   hardware.nvidia.package = let
     rcu_patch = pkgs.fetchpatch {

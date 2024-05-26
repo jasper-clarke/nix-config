@@ -27,7 +27,8 @@
 
   boot = {
     supportedFilesystems = ["ntfs"];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_8;
+    # kernelParams = ["nvidia_drm.fbdev=1"];
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -132,6 +133,12 @@
       users = ["${user}"];
     };
 
+    hyprland = {
+      enable = true;
+      package = hyprland.packages.${pkgs.system}.hyprland;
+      portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    };
+
     zsh.enable = true;
     dconf.enable = true;
 
@@ -207,7 +214,7 @@
   };
 
   virtualisation = {
-    virtualbox.host.enable = true;
+    # virtualbox.host.enable = true;
     docker.enable = true;
   };
 
@@ -236,9 +243,9 @@
   xdg = {
     portal = {
       enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-hyprland
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
       ];
       config.common.default = "*";
     };
