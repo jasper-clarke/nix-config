@@ -19,6 +19,7 @@ hc keyunbind --all
 # if you have a super key you will be much happier with Mod set to Mod4
 #Mod=Mod1    # Use alt as the main modifier
 Mod=Mod4 # Use the super key as the main modifier
+Alt=Mod1
 
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
@@ -27,6 +28,11 @@ hc keybind $Mod-e spawn kitty
 hc keybind $Mod-f spawn kitty nvim
 hc keybind $Mod-g spawn kitty nnn
 hc keybind $Mod-d spawn rofi -show drun -theme ~/.config/rofi/launcher.rasi
+hc keybind $Mod-v spawn copyq toggle
+hc keybind $Alt-space spawn toggle-players
+hc keybind $Alt-h spawn mpc prev
+hc keybind $Alt-l spawn mpc next
+
 # hc keybind $Mod-m spawn betterlockscreen -l
 # basic movement in tiling and floating mode
 # focusing clients
@@ -54,10 +60,6 @@ hc keybind $Mod-Control-h resize left +$resizestep
 hc keybind $Mod-Control-j resize down +$resizestep
 hc keybind $Mod-Control-k resize up +$resizestep
 hc keybind $Mod-Control-l resize right +$resizestep
-hc keybind $Mod-Control-Left resize left +$resizestep
-hc keybind $Mod-Control-Down resize down +$resizestep
-hc keybind $Mod-Control-Up resize up +$resizestep
-hc keybind $Mod-Control-Right resize right +$resizestep
 
 # tags
 tag_names=({1..9})
