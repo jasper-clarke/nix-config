@@ -14,6 +14,7 @@
     ./prewritten-files.nix
     ./modules/terminal
     ./modules/hyprwm
+    ./modules/herbstluft
     ./modules/desktopApps
   ];
 
@@ -125,6 +126,38 @@
       teams-for-linux
       vscodium
 
+      # (picom.overrideAttrs
+      #   (oldAttrs: rec {
+      #     version = "c282bb59f2fb09def989a22cfb2036d27d3979a5";
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "yshui";
+      #       repo = "picom";
+      #       rev = version;
+      #       hash = "sha256-sUVGlWmQrzvgbc7WNbX9H0T38uQF64rQSx7f4DtnBDY=";
+      #     };
+      #   }))
+      #
+      wmctrl
+      polybar
+      calc
+
+      (picom.overrideAttrs (oldAttrs: rec {
+        pname = "compfy";
+        version = "1.7.2";
+        buildInputs =
+          [
+            pcre2
+          ]
+          ++ oldAttrs.buildInputs;
+        src = pkgs.fetchFromGitHub {
+          owner = "allusive-dev";
+          repo = "compfy";
+          rev = version;
+          hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
+        };
+        postInstall = '''';
+      }))
+      #
       # Font Stuff
       liberation_ttf
       freetype

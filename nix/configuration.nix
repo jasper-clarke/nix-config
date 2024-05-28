@@ -100,18 +100,70 @@
       acceleration = "cuda";
     };
 
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "Hyprland";
-          user = "${user}";
-        };
-      };
-    };
+    # greetd = {
+    #   enable = true;
+    #   settings = {
+    #     default_session = {
+    #       command = "Hyprland";
+    #       user = "${user}";
+    #     };
+    #   };
+    # };
 
     xserver = {
-      enable = false;
+      enable = true;
+      layout = "us";
+      xautolock = {
+        enable = true;
+        time = 15;
+        locker = "${pkgs.betterlockscreen}/bin/betterlockscreen -l";
+      };
+      displayManager = {
+        session = [
+          {
+            manage = "desktop";
+            name = "herbstluft";
+            start = ''
+              ${pkgs.herbstluftwm}/bin/herbstluftwm --locked &
+              waitPID=$!
+            '';
+          }
+        ];
+        defaultSession = "herbstluft";
+        # gdm = {
+        #   enable = true;
+        # };
+        sessionCommands = ''
+          xrandr --output DP-2 --mode 2560x1440 --rate 144.00 --primary --output DP-0 --mode 1920x1080 --rate 144.00 --below DP-2 --output HDMI-1 --mode 1920x1080 --rate 75.00 --left-of DP-2 --rotate left
+        '';
+      };
+
+      windowManager.herbstluftwm = {
+        enable = true;
+      };
+
+      # windowManager.xmonad = {
+      #   enable = true;
+      #   enableContribAndExtras = true;
+      #   config = builtins.readFile ../xmonad/xmonad.hs;
+      # };
+
+      # windowManager.awesome = {
+      #   enable = true;
+      #   package = pkgs.awesome.overrideAttrs (oldAttrs: rec {
+      #     version = "8b1f8958b46b3e75618bc822d512bb4d449a89aa";
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "awesomewm";
+      #       repo = "awesome";
+      #       rev = version;
+      #       hash = "sha256-ZGZ53IWfQfNU8q/hKexFpb/2mJyqtK5M9t9HrXoEJCg=";
+      #     };
+      #     patches = [];
+      #     postPatch = ''
+      #       patchShebangs tests/examples/_postprocess.lua
+      #     '';
+      #   });
+      # };
     };
 
     # udev.extraRules = ''
@@ -121,23 +173,23 @@
     dbus.enable = true;
     openssh = {
       enable = true;
-      allowSFTP = true;
+      # allowSFTP = true;
     };
     gvfs.enable = true;
   };
 
   programs = {
-    weylus = {
-      enable = true;
-      openFirewall = true;
-      users = ["${user}"];
-    };
+    # weylus = {
+    #   enable = true;
+    #   openFirewall = true;
+    #   users = ["${user}"];
+    # };
 
-    hyprland = {
-      enable = true;
-      package = hyprland.packages.${pkgs.system}.hyprland;
-      portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-    };
+    # hyprland = {
+    #   enable = true;
+    #   package = hyprland.packages.${pkgs.system}.hyprland;
+    #   portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    # };
 
     zsh.enable = true;
     dconf.enable = true;
@@ -150,33 +202,64 @@
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
-        stdenv.cc.cc
-        fuse3
-        openssl
+        alsa-lib
+        at-spi2-atk
+        at-spi2-core
+        atk
+        cairo
+        cups
         curl
-        libxkbcommon #
-        libudev-zero #
+        dbus
+        expat
+        fontconfig
+        freetype
+        fuse3
+        gdk-pixbuf
+        glib
+        gtk3
+        icu
+        wayland
+        libGL
         libappindicator-gtk3
         libdrm
         libglvnd
+        libnotify
+        libpulseaudio
+        libunwind
         libusb1
         libuuid
+        libxkbcommon
         libxml2
+        mesa
+        nspr
+        nss
+        openssl
+        pango
+        pipewire
+        stdenv.cc.cc
+        systemd
+        vulkan-loader
         xorg.libX11
-        libva
-        libinput #
-        mesa #
-        fontconfig #
-        freetype #
+        xorg.libXScrnSaver
+        xorg.libXcomposite
+        xorg.libXcursor
+        xorg.libXdamage
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXi
+        xorg.libXrandr
+        xorg.libXrender
+        xorg.libXtst
+        xorg.libxcb
+        xorg.libxkbfile
+        xorg.libxshmfence
+        zlib
       ];
     };
   };
 
   systemd = {
     services = {
-      # mpd.environment = {
-      #   XDG_RUNTIME_DIR = "/run/user/1000";
-      # };
       NetworkManager-wait-online.enable = lib.mkForce false;
     };
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -192,19 +275,19 @@
         TimeoutStopSec = 10;
       };
     };
-    user.services.headsetlights = {
-      description = "headsetlights";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "/etc/profiles/per-user/allusive/bin/lights";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
+    # user.services.headsetlights = {
+    #   description = "headsetlights";
+    #   wantedBy = ["graphical-session.target"];
+    #   wants = ["graphical-session.target"];
+    #   after = ["graphical-session.target"];
+    #   serviceConfig = {
+    #     Type = "simple";
+    #     ExecStart = "/etc/profiles/per-user/allusive/bin/lights";
+    #     Restart = "on-failure";
+    #     RestartSec = 1;
+    #     TimeoutStopSec = 10;
+    #   };
+    # };
   };
 
   qt = {

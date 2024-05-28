@@ -27,8 +27,6 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<tab>", "<cmd>bnext<cr>", { desc = "Cycle Buffers" })
 map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
 

@@ -9,13 +9,13 @@ return {
     branch = "v3.x",
     cmd = "Neotree",
     keys = {
-      {
-        "<leader>e",
-        function()
-          require("neo-tree.command").execute({ action = "focus" })
-        end,
-        desc = "Toggle NeoTree Focus",
-      },
+      -- {
+      --   "<leader>e",
+      --   function()
+      --     require("neo-tree.command").execute({ action = "focus" })
+      --   end,
+      --   desc = "Toggle NeoTree Focus",
+      -- },
       {
         "<C-n>",
         function()
@@ -134,7 +134,7 @@ return {
       vim.keymap.set("n", "<C-g>", function()
         require("Comment.api").toggle.linewise.current()
       end, { desc = "comment toggle" })
-      
+
       vim.keymap.set(
         "v",
         "<C-g>",
@@ -484,8 +484,8 @@ return {
     keys = {
       { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
       { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      -- { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      -- { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
       { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
       { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
