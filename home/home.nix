@@ -106,7 +106,7 @@
 
     packages = with pkgs; [
       bluetuith
-      wl-clipboard
+      # wl-clipboard
       sops
 
       # GUI Utils
@@ -140,6 +140,9 @@
       wmctrl
       polybar
       calc
+      xclip
+      nitrogen
+      flameshot
 
       (picom.overrideAttrs (oldAttrs: rec {
         pname = "compfy";
@@ -157,7 +160,7 @@
         };
         postInstall = '''';
       }))
-      #
+
       # Font Stuff
       liberation_ttf
       freetype

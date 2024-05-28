@@ -44,10 +44,9 @@ return {
     },
     config = function(_, opts)
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-      if vim.fn.executable("rust-analyzer") == 0 then
-        -- LazyVim.error("**rust-analyzer** not found in PATH, please install it.", { title = "rustaceanvim" })
-        vim.cmd("echo 'Not in rust flake'")
-      end
+      -- if vim.fn.executable("rust-analyzer") == 0 then
+      --   -- LazyVim.error("**rust-analyzer** not found in PATH, please install it.", { title = "rustaceanvim" })
+      -- end
     end,
   },
 

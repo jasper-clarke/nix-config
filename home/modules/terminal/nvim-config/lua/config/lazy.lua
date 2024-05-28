@@ -31,6 +31,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
   },
   checker = { enabled = true },
+  -- install = { colorscheme = { "monokai-pro" } },
   performance = {
     rtp = {
       disabled_plugins = {

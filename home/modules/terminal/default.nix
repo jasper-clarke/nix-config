@@ -22,6 +22,7 @@
       # font.package = pkgs.fira-code;
       font.size = 15;
       theme = "Tokyo Night";
+      # theme = "Monokai Pro (Filter Ristretto)";
       shellIntegration.enableZshIntegration = true;
       settings = {
         confirm_os_window_close = 0;

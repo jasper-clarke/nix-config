@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+nitrogen --restore &
+compfy -b &
+polybar &
+
 # this is a simple config for herbstluftwm
 
 hc() {
@@ -7,10 +11,6 @@ hc() {
 }
 
 hc emit_hook reload
-
-# xsetroot -solid '#561562'
-
-feh --bg-fill .flake/wallpapers/space.png &
 
 # remove all existing keybindings
 hc keyunbind --all
@@ -23,11 +23,11 @@ Mod=Mod4 # Use the super key as the main modifier
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-q close
-hc keybind $Mod-e spawn "kitty"
-hc keybind $Mod-f spawn "kitty nvim"
-hc keybind $Mod-g spawn "kitty nnn"
-hc keybind $Mod-d spawn "rofi -show drun -theme ~/.config/rofi/launcher.rasi"
-hc keybind $Mod-m spawn "betterlockscreen -l"
+hc keybind $Mod-e spawn kitty
+hc keybind $Mod-f spawn kitty nvim
+hc keybind $Mod-g spawn kitty nnn
+hc keybind $Mod-d spawn rofi -show drun -theme ~/.config/rofi/launcher.rasi
+# hc keybind $Mod-m spawn betterlockscreen -l
 # basic movement in tiling and floating mode
 # focusing clients
 hc keybind $Mod-h focus left
@@ -107,38 +107,41 @@ hc keybind $Mod-Shift-Tab cycle_all -1
 hc keybind $Mod-c cycle
 hc keybind $Mod-i jumpto urgent
 
+# layout
+
+hc load 1 "(clients horizontal:1)"
+hc load 2 "(clients horizontal:1)"
+hc load 4 "(clients horizontal:1)"
+hc load 5 "(clients horizontal:1)"
+hc load 7 "(clients horizontal:1)"
+hc load 8 "(clients horizontal:1)"
+
+hc attr monitors.1.pad_up 40
+
 # theme
+hc attr theme.background_color '#00000000'
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
-hc set frame_border_active_color '#222222cc'
-hc set frame_border_normal_color '#101010cc'
-hc set frame_bg_normal_color '#565656aa'
-hc set frame_bg_active_color '#345F0Caa'
-hc set frame_border_width 1
+# hc set frame_border_active_color '#222222cc'
+# hc set frame_border_normal_color '#101010cc'
+# hc set frame_bg_normal_color '#565656aa'
+# hc set frame_bg_active_color '#345F0Caa'
+hc set frame_border_width 0
 hc set show_frame_decorations 'focused_if_multiple'
 hc set frame_bg_transparent on
-hc set frame_transparent_width 5
-hc set frame_gap 4
+hc set frame_transparent_width 0
+hc set frame_gap 0
 
-hc attr theme.title_height 15
-hc attr theme.title_when always
-hc attr theme.title_font 'Dejavu Sans:pixelsize=12' # example using Xft
-# hc attr theme.title_font '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
-hc attr theme.title_depth 3 # space below the title's baseline
-hc attr theme.active.color '#345F0Cef'
-hc attr theme.title_color '#ffffff'
-hc attr theme.normal.color '#323232dd'
-hc attr theme.urgent.color '#7811A1dd'
-hc attr theme.tab_color '#1F1F1Fdd'
-hc attr theme.active.tab_color '#2B4F0Add'
-hc attr theme.active.tab_outer_color '#6C8257dd'
-hc attr theme.active.tab_title_color '#ababab'
-hc attr theme.normal.title_color '#898989'
-hc attr theme.inner_width 1
+hc attr theme.title_when never
+
+hc attr theme.active.color '#9d7cd3ee'
+hc attr theme.normal.color '#414767aa'
+
+hc attr theme.inner_width 0
 hc attr theme.inner_color black
-hc attr theme.border_width 3
-hc attr theme.floating.border_width 4
-hc attr theme.floating.outer_width 1
+hc attr theme.border_width 2
+hc attr theme.floating.border_width 0
+hc attr theme.floating.outer_width 0
 hc attr theme.floating.outer_color black
 hc attr theme.active.inner_color '#789161'
 hc attr theme.urgent.inner_color '#9A65B0'
@@ -148,14 +151,14 @@ for state in active urgent normal; do
 	hc substitute C theme.${state}.inner_color \
 		attr theme.${state}.outer_color C
 done
-hc attr theme.tiling.outer_width 1
-hc attr theme.background_color '#141414'
+hc attr theme.tiling.outer_width 0
 
 hc set window_gap 35
 hc set frame_padding 0
 hc set smart_window_surroundings off
-hc set smart_frame_surroundings on
+hc set smart_frame_surroundings off
 hc set mouse_recenter_gap 0
+hc set focus_follows_mouse true
 
 # rules
 hc unrule -F
@@ -175,15 +178,4 @@ hc set tree_style '╾│ ├└╼─┐'
 # unlock, just to be sure
 hc unlock
 
-# do multi monitor setup here, e.g.:
-# hc set_monitors 1280x1024+0+0 1280x1024+1280+0
-# or simply:
 hc detect_monitors
-
-# find the panel
-# panel=~/.config/herbstluftwm/panel.sh
-# [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-# for monitor in $(hc list_monitors | cut -d: -f1); do
-# 	# start it on each monitor
-# 	"$panel" "$monitor" &
-# done
