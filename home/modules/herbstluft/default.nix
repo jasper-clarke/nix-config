@@ -16,26 +16,42 @@
       force = true;
     };
 
+    ".config/compfy.conf" = {
+      source = ./compfy.conf;
+      force = true;
+    };
+
+    ".config/rofi/launcher.rasi" = {
+      source = ./everforest-launcher.rasi;
+      force = true;
+    };
+
     ".config/nitrogen/bg-saved.cfg".text = ''
       [xin_0]
-      file=${../../../wallpapers/space.png}
+      file=${../../../wallpapers/pine-forest-mountains.jpg}
       mode=5
       bgcolor=#000000
 
       [xin_1]
-      file=${../../../wallpapers/space-resolved-scriptures.png}
+      file=${../../../wallpapers/pine-forest-mountains.jpg}
       mode=5
       bgcolor=#000000
 
       [xin_2]
-      file=${../../../wallpapers/space.png}
+      file=${../../../wallpapers/pine-forest-mountains.jpg}
       mode=5
       bgcolor=#000000
     '';
-
-    ".config/polybar/config.ini" = {
-      source = ./polybar.ini;
-      force = true;
-    };
   };
+
+  services.polybar = {
+    enable = true;
+    package = pkgs.polybarFull;
+    config = ./polybar.ini;
+    script = "";
+  };
+
+  home.packages = with pkgs; [
+    (writers.writeBashBin "herb-ws-switch" ./ws-switch.sh)
+  ];
 }

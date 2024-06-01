@@ -297,7 +297,7 @@
   };
 
   virtualisation = {
-    # virtualbox.host.enable = true;
+    virtualbox.host.enable = true;
     docker.enable = true;
   };
 
@@ -312,6 +312,11 @@
   fonts.fontDir.enable = true;
 
   environment = {
+    sessionVariables = {
+      NNN_TRASH = 1;
+      NNN_FIFO = "/tmp/nnn.fifo";
+    };
+
     systemPackages = with pkgs; [
       vim
       wget

@@ -12,8 +12,9 @@
 }: {
   imports = [
     ./prewritten-files.nix
+    ./spicetify.nix
     ./modules/terminal
-    ./modules/hyprwm
+    # ./modules/hyprwm
     ./modules/herbstluft
     ./modules/desktopApps
   ];
@@ -109,7 +110,14 @@
       # wl-clipboard
       sops
 
+      ponymix
+      (writers.writeBashBin "audio-select" ./audio-select)
+
+      headsetcontrol
+      # (writers.writeBashBin "lights" ./scripts/lights.sh)
+
       # GUI Utils
+      rofi
       xarchiver
       mpv
       feh
@@ -138,11 +146,11 @@
       #   }))
       #
       wmctrl
-      polybar
       calc
       xclip
       nitrogen
       flameshot
+      betterlockscreen
 
       (picom.overrideAttrs (oldAttrs: rec {
         pname = "compfy";

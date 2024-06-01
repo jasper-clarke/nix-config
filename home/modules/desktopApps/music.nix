@@ -106,6 +106,7 @@
     home.packages = with pkgs; [
       playerctl
       mpc-cli
+      libmpdclient
       (writers.writeBashBin "toggle-players" ../hyprwm/scripts/playerctl.sh)
     ];
   };

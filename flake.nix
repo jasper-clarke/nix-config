@@ -32,10 +32,10 @@
     };
 
     # Spicetify
-    # spicetify-nix = {
-    #  url = "github:the-argus/spicetify-nix";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    spicetify-nix = {
+      url = "github:the-argus/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # aagl = {
     #  url = "github:ezKEa/aagl-gtk-on-nix";

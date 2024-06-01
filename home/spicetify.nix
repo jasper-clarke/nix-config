@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
   spicetify-nix = inputs.spicetify-nix;
 in {
   # allow spotify to be installed if you don't have unfree enabled already
@@ -20,8 +20,8 @@ in {
   # configure spicetify :)
   programs.spicetify = {
     enable = true;
-    theme = spicePkgs.themes.Dribbblish;
-    colorScheme = "catppuccin-macchiato";
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
 
     enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplay
@@ -29,4 +29,8 @@ in {
       adblock
     ];
   };
+
+  home.packages = [
+    pkgs.spotify-tray
+  ];
 }

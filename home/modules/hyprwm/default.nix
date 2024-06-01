@@ -74,12 +74,6 @@ in {
       rofi-wayland
       swappy
 
-      ponymix
-      (writers.writeBashBin "audio-select" ./scripts/audio-select)
-
-      headsetcontrol
-      (writers.writeBashBin "lights" ./scripts/lights.sh)
-
       (writers.writeBashBin "ws-switch" ./scripts/per-monitor-ws-switcher.sh)
     ];
 

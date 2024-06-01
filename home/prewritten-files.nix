@@ -44,11 +44,11 @@
           IdentityFile ~/.ssh/private
       '';
 
-      ".config/awesome" = {
-        source = ../awesome;
-        recursive = true;
-        force = true;
-      };
+      # ".config/awesome" = {
+      #   source = ../awesome;
+      #   recursive = true;
+      #   force = true;
+      # };
 
       ".local/share/applications/feh.desktop".text = ''
         [Desktop Entry]
