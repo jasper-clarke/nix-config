@@ -4,7 +4,7 @@
   pkgs,
   inputs,
   user,
-  hyprland,
+  # hyprland,
   hostname,
   version,
   ...
@@ -91,7 +91,7 @@
 
   security = {
     polkit.enable = true;
-    pam.services.swaylock = {};
+    # pam.services.swaylock = {};
   };
 
   services = {
@@ -134,7 +134,7 @@
         #   enable = true;
         # };
         sessionCommands = ''
-          xrandr --output DP-2 --mode 2560x1440 --rate 144.00 --primary --output DP-0 --mode 1920x1080 --rate 144.00 --below DP-2 --output HDMI-1 --mode 1920x1080 --rate 75.00 --left-of DP-2 --rotate left
+          xrandr --output DP-2 --mode 2560x1440 --rate 144.00 --primary --output DP-0 --mode 1920x1080 --rate 75.00 --right-of DP-2 --rotate left --output HDMI-1 --mode 1920x1080 --rate 120.00 --left-of DP-2 --rotate right
         '';
       };
 
@@ -299,6 +299,7 @@
   virtualisation = {
     virtualbox.host.enable = true;
     docker.enable = true;
+    docker.enableNvidia = true;
   };
 
   users.users.${user} = {
@@ -333,7 +334,7 @@
       enable = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+        # hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
       ];
       config.common.default = "*";
     };

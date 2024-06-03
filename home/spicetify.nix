@@ -20,8 +20,8 @@ in {
   # configure spicetify :)
   programs.spicetify = {
     enable = true;
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
+    theme = spicePkgs.themes.Sleek;
+    colorScheme = "BladeRunner";
 
     enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplay

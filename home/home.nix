@@ -4,8 +4,6 @@
   pkgs,
   user,
   version,
-  hyprland,
-  hyprgrass,
   system,
   inputs,
   ...

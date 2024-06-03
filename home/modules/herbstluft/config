@@ -24,8 +24,8 @@ hc keybind $Mod-g spawn kitty nnn
 hc keybind $Mod-d spawn rofi -show drun -theme ~/.config/rofi/launcher.rasi -kb-mode-next "Tab" -kb-element-next ""
 hc keybind $Mod-v spawn copyq toggle
 hc keybind $Alt-space spawn toggle-players
-hc keybind $Alt-h spawn mpc prev
-hc keybind $Alt-l spawn mpc next
+hc keybind $Alt-h spawn playerctl --player=spotify previous
+hc keybind $Alt-l spawn playerctl --player=spotify next
 hc keybind $Mod-m spawn betterlockscreen -l
 
 # basic movement in tiling and floating mode
@@ -96,9 +96,9 @@ hc keybind $Mod-space \
 
 # mouse
 hc mouseunbind --all
-hc mousebind $Mod-Button1 move
-hc mousebind $Mod-Button2 zoom
-hc mousebind $Mod-Button3 resize
+# hc mousebind $Mod-Button1 move
+# hc mousebind $Mod-Button2 zoom
+# hc mousebind $Mod-Button3 resize
 
 # focus
 hc keybind $Mod-BackSpace cycle_monitor
@@ -110,11 +110,8 @@ hc keybind $Mod-i jumpto urgent
 # layout
 
 hc load 1 "(clients horizontal:1)"
-hc load 2 "(clients horizontal:1)"
 hc load 4 "(clients horizontal:1)"
-hc load 5 "(clients horizontal:1)"
 hc load 7 "(clients horizontal:1)"
-hc load 8 "(clients horizontal:1)"
 
 # theme
 hc attr theme.background_color '#00000000'

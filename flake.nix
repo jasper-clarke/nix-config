@@ -19,12 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-
-    hyprgrass = {
-      url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland"; # IMPORTANT
-    };
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    #
+    # hyprgrass = {
+    #   url = "github:horriblename/hyprgrass";
+    #   inputs.hyprland.follows = "hyprland"; # IMPORTANT
+    # };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -47,12 +47,10 @@
     nixpkgs,
     home-manager,
     grub2-themes,
-    hyprland,
-    hyprgrass,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    version = "24.05";
+    version = "24.11";
     user = "allusive";
     hostname = "nixos";
     wayland = true;
@@ -65,14 +63,14 @@
     nixosConfigurations = {
       ${hostname} = lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit user hyprland hostname version inputs;};
+        specialArgs = {inherit user hostname version inputs;};
         modules = [
           ./nix/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit user inputs system hyprland hyprgrass version pkgs;};
+            home-manager.extraSpecialArgs = {inherit user inputs system version pkgs;};
             home-manager.users.${user} = {
               imports = [
                 ./home/home.nix

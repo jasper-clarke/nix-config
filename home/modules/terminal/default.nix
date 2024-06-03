@@ -4,7 +4,20 @@
   lib,
   config,
   ...
-}: {
+}: 
+
+let
+  tmux_everforest = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux_everforest";
+    version = "1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "jasper-at-windswept";
+      repo = "tmux-everforest";
+      rev = "cd602216a1e0112085c9b584b0e11e7d21409bfa";
+      hash = "sha256-oQZLjiuA5KRWo7/s80SfNG6nOCsWViCEzm77/S4vp1w=";
+    };
+  };
+in {
   options = {
     kitty = lib.mkOption {
       default = false;
@@ -143,6 +156,24 @@
     programs.neovim = {
       enable = true;
       defaultEditor = true;
+    };
+
+    programs.tmux = {
+      enable = true;
+      prefix = "C-d";
+      plugins = with pkgs; [
+        {
+          plugin = tmux_everforest;
+          extraConfig = "set -g status-position top";
+        }
+        {
+          plugin = tmuxPlugins.vim-tmux-navigator;
+        }
+      ];
+      extraConfig = ''
+        unbind r
+        bind r source-file ~/.config/tmux/tmux.conf
+      '';
     };
 
     home.file = {
