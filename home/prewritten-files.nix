@@ -44,6 +44,18 @@
           IdentityFile ~/.ssh/private
       '';
 
+      # ".local/share/fonts/SF-Mono" = {
+      #   source = ../fonts/SF-Mono;
+      #   recursive = true;
+      #   # force = true;
+      # };
+
+      ".local/share/fonts/SF-Pro" = {
+        source = ../fonts/SF-Pro;
+        recursive = true;
+        # force = true;
+      };
+
       # ".config/awesome" = {
       #   source = ../awesome;
       #   recursive = true;

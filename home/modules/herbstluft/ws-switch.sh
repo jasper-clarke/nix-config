@@ -20,6 +20,7 @@ if [[ $monitor == *"$first"* ]]; then
 	fi
 	if [[ $2 == "move" ]]; then
 		herbstclient move $calc
+		herbstclient use $calc
 	else
 		herbstclient use $calc
 	fi
@@ -33,6 +34,7 @@ elif [[ $monitor == *"$second"* ]]; then
 	fi
 	if [[ $2 == "move" ]]; then
 		herbstclient move $calc
+		herbstclient use $calc
 	else
 		herbstclient use $calc
 	fi
@@ -46,6 +48,7 @@ elif [[ $monitor == *"$third"* ]]; then
 	fi
 	if [[ $2 == "move" ]]; then
 		herbstclient move $calc
+		herbstclient use $calc
 	else
 		herbstclient use $calc
 	fi

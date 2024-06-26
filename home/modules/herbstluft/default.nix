@@ -21,6 +21,11 @@
       force = true;
     };
 
+    ".config/picom.conf" = {
+      source = ./picom.conf;
+      force = true;
+    };
+
     ".config/rofi/launcher.rasi" = {
       source = ./everforest-launcher.rasi;
       force = true;
@@ -28,7 +33,7 @@
 
     ".config/nitrogen/bg-saved.cfg".text = ''
       [xin_0]
-      file=${../../../wallpapers/pine-forest-mountains.jpg}
+      file=${../../../wallpapers/pine-forest-mountains-resolution.png}
       mode=5
       bgcolor=#000000
 
@@ -47,7 +52,7 @@
   services.polybar = {
     enable = true;
     package = pkgs.polybarFull;
-    config = ./polybar.ini;
+    config = ./polybar-mac.ini;
     script = "";
   };
 

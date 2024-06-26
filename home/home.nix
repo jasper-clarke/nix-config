@@ -69,10 +69,8 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Tela-circle-dracula";
-      package = pkgs.tela-circle-icon-theme.override {
-        colorVariants = ["dracula"];
-      };
+      name = "WhiteSur-dark";
+      package = pkgs.whitesur-icon-theme;
     };
     cursorTheme = {
       name = "capitaine-cursors-white";
@@ -132,23 +130,26 @@
       teams-for-linux
       vscodium
 
-      # (picom.overrideAttrs
+      # (
+      #   picom.overrideAttrs
       #   (oldAttrs: rec {
-      #     version = "c282bb59f2fb09def989a22cfb2036d27d3979a5";
+      #     version = "270bcc45ac0d940fec4c7eb79aced7ab08ea9459";
       #     src = pkgs.fetchFromGitHub {
       #       owner = "yshui";
       #       repo = "picom";
       #       rev = version;
-      #       hash = "sha256-sUVGlWmQrzvgbc7WNbX9H0T38uQF64rQSx7f4DtnBDY=";
+      #       hash = "sha256-ZUFgEjK3lZ+g1kyXnLOxITkY+WQ5YZVk/5bvpKHaYsk=";
       #     };
-      #   }))
-      #
+      #   })
+      # )
+
       wmctrl
       calc
       xclip
       nitrogen
       flameshot
       betterlockscreen
+      ddcutil
 
       (picom.overrideAttrs (oldAttrs: rec {
         pname = "compfy";

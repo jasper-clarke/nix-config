@@ -25,10 +25,17 @@
 
   # sops.secrets.git_sshkey = {};
 
+  hardware.i2c.enable = true;
+
   boot = {
     supportedFilesystems = ["ntfs"];
+    kernelModules = ["i2c-dev"];
     kernelPackages = pkgs.linuxPackages_6_8;
-    # kernelParams = ["nvidia_drm.fbdev=1"];
+    extraModprobeConfig = ''
+      options kvm_intel nested=1
+      options kvm_intel emulate_invalid_guest_state=0
+      options kvm ignore_msrs=1
+    '';
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -40,7 +47,7 @@
       };
       grub2-theme = {
         enable = true;
-        theme = "vimix";
+        theme = "whitesur";
         screen = "2k";
         footer = true;
       };
@@ -116,7 +123,9 @@
       xautolock = {
         enable = true;
         time = 15;
-        locker = "${pkgs.betterlockscreen}/bin/betterlockscreen -l";
+        locker = ''
+          ${pkgs.betterlockscreen}/bin/betterlockscreen -l
+        '';
       };
       displayManager = {
         session = [
@@ -130,9 +139,6 @@
           }
         ];
         defaultSession = "herbstluft";
-        # gdm = {
-        #   enable = true;
-        # };
         sessionCommands = ''
           xrandr --output DP-2 --mode 2560x1440 --rate 144.00 --primary --output DP-0 --mode 1920x1080 --rate 75.00 --right-of DP-2 --rotate left --output HDMI-1 --mode 1920x1080 --rate 120.00 --left-of DP-2 --rotate right
         '';
@@ -259,8 +265,28 @@
   };
 
   systemd = {
+    timers = {
+      "display-brightness" = {
+        wantedBy = ["timers.target"];
+        timerConfig = {
+          OnCalendar = "*-*-* 17:30:00";
+          Persistent = true;
+        };
+      };
+    };
     services = {
       NetworkManager-wait-online.enable = lib.mkForce false;
+      "display-brightness" = {
+        script = ''
+          ${pkgs.ddcutil}/bin/ddcutil --model VG258 setvcp 10 20
+          ${pkgs.ddcutil}/bin/ddcutil --model VX2758-SERIES setvcp 10 50
+          ${pkgs.ddcutil}/bin/ddcutil --model 'DELL S2421HS' setvcp 10 30
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+        };
+      };
     };
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
@@ -299,12 +325,12 @@
   virtualisation = {
     virtualbox.host.enable = true;
     docker.enable = true;
-    docker.enableNvidia = true;
+    libvirtd.enable = true;
   };
 
   users.users.${user} = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "vboxusers" "docker"];
+    extraGroups = ["wheel" "networkmanager" "vboxusers" "docker" "libvirtd"];
     home = "/home/${user}";
     description = "Jasper C";
     shell = pkgs.zsh;
@@ -316,6 +342,7 @@
     sessionVariables = {
       NNN_TRASH = 1;
       NNN_FIFO = "/tmp/nnn.fifo";
+      __GL_SYNC_DISPLAY_DEVICE = "DP-2";
     };
 
     systemPackages = with pkgs; [

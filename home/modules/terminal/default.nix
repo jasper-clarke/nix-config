@@ -4,9 +4,7 @@
   lib,
   config,
   ...
-}: 
-
-let
+}: let
   tmux_everforest = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tmux_everforest";
     version = "1.0";
@@ -44,7 +42,7 @@ in {
         repaint_delay = 7;
         sync_to_monitor = true;
         enable_audio_bell = false;
-        background_opacity = "0.94";
+        background_opacity = "0.93";
         window_padding_width = 15;
         allow_remote_control = true;
         listen_on = "unix:/tmp/kitty";
@@ -105,6 +103,7 @@ in {
       shellAliases = {
         cd = "z";
         rm = "trash-put";
+        service-logs = "sudo journalctl -xefu";
       };
       initExtra = ''
 
@@ -121,26 +120,44 @@ in {
       enableZshIntegration = true;
     };
 
-    programs.nnn = {
+    # programs.nnn = {
+    #   enable = true;
+    #   package = pkgs.nnn.override {withNerdIcons = true;};
+    #   bookmarks = {
+    #     s = "/run/media/allusive/SSD";
+    #     f = "~/.flake";
+    #     d = "~/Downloads";
+    #   };
+    #   plugins = {
+    #     mappings = {
+    #       p = "preview-tui";
+    #     };
+    #     src =
+    #       (pkgs.fetchFromGitHub {
+    #         owner = "jarun";
+    #         repo = "nnn";
+    #         rev = "v4.9";
+    #         sha256 = "sha256-g19uI36HyzTF2YUQKFP4DE2ZBsArGryVHhX79Y0XzhU=";
+    #       })
+    #       + "/plugins";
+    #   };
+    # };
+
+    programs.yazi = {
       enable = true;
-      package = pkgs.nnn.override {withNerdIcons = true;};
-      bookmarks = {
-        s = "/run/media/allusive/SSD";
-        f = "~/.flake";
-        d = "~/Downloads";
-      };
+      enableZshIntegration = true;
       plugins = {
-        mappings = {
-          p = "preview-tui";
-        };
-        src =
-          (pkgs.fetchFromGitHub {
-            owner = "jarun";
-            repo = "nnn";
-            rev = "v4.9";
-            sha256 = "sha256-g19uI36HyzTF2YUQKFP4DE2ZBsArGryVHhX79Y0XzhU=";
-          })
-          + "/plugins";
+        "full-border.yazi" = ./yazi_full-border;
+        "smart-enter.yazi" = ./yazi_smart-enter;
+      };
+      initLua = ./yazi_init.lua;
+      keymap = {
+        manager.prepend_keymap = [
+          {
+            exec = "plugin --sync smart-enter";
+            on = ["<Enter>"];
+          }
+        ];
       };
     };
 
@@ -156,6 +173,12 @@ in {
     programs.neovim = {
       enable = true;
       defaultEditor = true;
+      extraLuaPackages = with pkgs; [
+        luajitPackages.magick
+      ];
+      extraPackages = with pkgs; [
+        imagemagick
+      ];
     };
 
     programs.tmux = {
@@ -186,7 +209,6 @@ in {
       #   source = ./wez-everforest.toml;
       #   force = true;
       # };
-
     };
 
     home.packages = with pkgs; [
@@ -195,7 +217,6 @@ in {
       nitch
       fzf
       nix-output-monitor
-      imagemagick
       ffmpegthumbnailer
       trash-cli
       lazygit

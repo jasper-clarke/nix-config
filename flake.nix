@@ -53,7 +53,6 @@
     version = "24.11";
     user = "allusive";
     hostname = "nixos";
-    wayland = true;
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
