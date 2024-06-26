@@ -105,20 +105,43 @@ in {
         rm = "trash-put";
         service-logs = "sudo journalctl -xefu";
       };
-      initExtra = ''
-
-        nitch
-
+      plugins = [
+        {
+          name = "powerlevel10k";
+          src = pkgs.zsh-powerlevel10k;
+          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        }
+      ];
+      initExtraFirst = ''
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
       '';
-      oh-my-zsh = {
-        enable = true;
-      };
+      initExtra = ''
+        source ~/.p10k.zsh
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+        # Completion styling
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+        zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
+        zstyle ':completion:*' menu no
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+        zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+      '';
+      # oh-my-zsh = {
+      # enable = true;
+      # };
     };
 
-    programs.starship = {
+    programs.fzf = {
       enable = true;
       enableZshIntegration = true;
+      tmux.enableShellIntegration = true;
     };
+
+    # programs.starship = {
+    #   enable = true;
+    #   enableZshIntegration = true;
+    # };
 
     # programs.nnn = {
     #   enable = true;
@@ -173,17 +196,12 @@ in {
     programs.neovim = {
       enable = true;
       defaultEditor = true;
-      extraLuaPackages = with pkgs; [
-        luajitPackages.magick
-      ];
-      extraPackages = with pkgs; [
-        imagemagick
-      ];
     };
 
     programs.tmux = {
       enable = true;
-      prefix = "C-d";
+      prefix = "C-Space";
+      keyMode = "vi";
       plugins = with pkgs; [
         {
           plugin = tmux_everforest;
@@ -196,12 +214,23 @@ in {
       extraConfig = ''
         unbind r
         bind r source-file ~/.config/tmux/tmux.conf
+        bind-key \| split-window -h
+        bind-key - split-window
+        bind-key -n C-h select-pane -L
+        bind-key -n C-j select-pane -D
+        bind-key -n C-k select-pane -U
+        bind-key -n C-l select-pane -R
       '';
     };
 
     home.file = {
-      ".config/starship.toml" = {
-        source = ./everforest.toml;
+      # ".config/starship.toml" = {
+      #   source = ./everforest.toml;
+      #   force = true;
+      # };
+
+      ".p10k.zsh" = {
+        source = ./p10k.zsh;
         force = true;
       };
 

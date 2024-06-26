@@ -20,7 +20,7 @@ hc keybind $Mod-Shift-r reload
 hc keybind $Mod-q close_or_remove
 hc keybind $Mod-e spawn kitty
 hc keybind $Mod-f spawn kitty nvim
-hc keybind $Mod-g spawn kitty nnn
+hc keybind $Mod-g spawn kitty yazi
 hc keybind $Mod-space spawn rofi -show drun -theme ~/.config/rofi/launcher.rasi -kb-mode-next "Tab" -kb-element-next ""
 hc keybind $Mod-v spawn copyq toggle
 hc keybind $Alt-space spawn toggle-players
