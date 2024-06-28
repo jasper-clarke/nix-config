@@ -5,14 +5,14 @@
   config,
   ...
 }: let
-  tmux_everforest = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux_everforest";
+  tmux-which-key = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "plugin.sh";
     version = "1.0";
     src = pkgs.fetchFromGitHub {
-      owner = "jasper-at-windswept";
-      repo = "tmux-everforest";
-      rev = "cd602216a1e0112085c9b584b0e11e7d21409bfa";
-      hash = "sha256-oQZLjiuA5KRWo7/s80SfNG6nOCsWViCEzm77/S4vp1w=";
+      owner = "alexwforsythe";
+      repo = "tmux-which-key";
+      rev = "b4cd9d28da4d0a418d2af5f426a0d4b4e544ae10";
+      hash = "sha256-ADUgh0sSs1N2AsLC7+LzZ8UPGnmMqvythy97lK4fYgw=";
     };
   };
 in {
@@ -30,7 +30,6 @@ in {
     programs.kitty = {
       enable = config.kitty;
       font.name = "JetBrains Mono";
-      # font.package = pkgs.fira-code;
       font.size = 15;
       # theme = "Tokyo Night";
       theme = "Everforest Dark Hard";
@@ -39,13 +38,12 @@ in {
       shellIntegration.enableZshIntegration = true;
       settings = {
         confirm_os_window_close = 0;
-        repaint_delay = 7;
         sync_to_monitor = true;
         enable_audio_bell = false;
         background_opacity = "0.93";
         window_padding_width = 15;
-        allow_remote_control = true;
-        listen_on = "unix:/tmp/kitty";
+        # allow_remote_control = true;
+        # listen_on = "unix:/tmp/kitty";
       };
     };
 
@@ -97,7 +95,10 @@ in {
 
     programs.zsh = {
       enable = true;
-      autosuggestion.enable = true;
+      autosuggestion = {
+        enable = true;
+        highlight = "fg=8";
+      };
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
@@ -105,64 +106,44 @@ in {
         rm = "trash-put";
         service-logs = "sudo journalctl -xefu";
       };
-      plugins = [
-        {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        }
-      ];
-      initExtraFirst = ''
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-      '';
-      initExtra = ''
-        source ~/.p10k.zsh
-        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-        # Completion styling
-        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-        zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
-        zstyle ':completion:*' menu no
-        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-        zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-      '';
-      # oh-my-zsh = {
-      # enable = true;
-      # };
+      # plugins = [
+      #   {
+      #     name = "powerlevel10k";
+      #     src = pkgs.zsh-powerlevel10k;
+      #     file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      #   }
+      # ];
+      # initExtraFirst = ''
+      #   if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+      #     source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      #   fi
+      # '';
+      # initExtra = ''
+      #   source ~/.p10k.zsh
+      # '';
+    };
+
+    programs.oh-my-posh = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = builtins.fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile ./p10k.omp.toml));
     };
 
     programs.fzf = {
       enable = true;
-      enableZshIntegration = true;
-      tmux.enableShellIntegration = true;
+      # enableZshIntegration = true;
     };
 
-    # programs.starship = {
+    # programs.zellij = {
     #   enable = true;
     #   enableZshIntegration = true;
-    # };
-
-    # programs.nnn = {
-    #   enable = true;
-    #   package = pkgs.nnn.override {withNerdIcons = true;};
-    #   bookmarks = {
-    #     s = "/run/media/allusive/SSD";
-    #     f = "~/.flake";
-    #     d = "~/Downloads";
-    #   };
-    #   plugins = {
-    #     mappings = {
-    #       p = "preview-tui";
+    #   settings = {
+    #     theme = "everforest-dark";
+    #     default_shell = "zsh";
+    #     ui.pane_frames = {
+    #       rounded_corners = true;
+    #       hide_session_name = true;
     #     };
-    #     src =
-    #       (pkgs.fetchFromGitHub {
-    #         owner = "jarun";
-    #         repo = "nnn";
-    #         rev = "v4.9";
-    #         sha256 = "sha256-g19uI36HyzTF2YUQKFP4DE2ZBsArGryVHhX79Y0XzhU=";
-    #       })
-    #       + "/plugins";
     #   };
     # };
 
@@ -187,7 +168,7 @@ in {
     programs.btop = {
       enable = true;
       settings = {
-        color_theme = "tokyo-night";
+        color_theme = "matcha-dark-sea";
         theme_background = false;
         vim_keys = true;
       };
@@ -198,41 +179,29 @@ in {
       defaultEditor = true;
     };
 
-    programs.tmux = {
-      enable = true;
-      prefix = "C-Space";
-      keyMode = "vi";
-      plugins = with pkgs; [
-        {
-          plugin = tmux_everforest;
-          extraConfig = "set -g status-position top";
-        }
-        {
-          plugin = tmuxPlugins.vim-tmux-navigator;
-        }
-      ];
-      extraConfig = ''
-        unbind r
-        bind r source-file ~/.config/tmux/tmux.conf
-        bind-key \| split-window -h
-        bind-key - split-window
-        bind-key -n C-h select-pane -L
-        bind-key -n C-j select-pane -D
-        bind-key -n C-k select-pane -U
-        bind-key -n C-l select-pane -R
-      '';
-    };
+    # programs.tmux = {
+    #   enable = true;
+    #   prefix = "C-Space";
+    #   keyMode = "vi";
+    #   plugins = with pkgs; [
+    #     {
+    #       plugin = tmuxPlugins.vim-tmux-navigator;
+    #     }
+    #     {
+    #       plugin = tmuxPlugins.tmux-fzf;
+    #     }
+    #     # {
+    #     #   plugin = tmux-which-key;
+    #     # }
+    #   ];
+    #   extraConfig = builtins.readFile ./tmux.conf;
+    # };
 
     home.file = {
-      # ".config/starship.toml" = {
-      #   source = ./everforest.toml;
+      # ".p10k.zsh" = {
+      #   source = ./p10k.zsh;
       #   force = true;
       # };
-
-      ".p10k.zsh" = {
-        source = ./p10k.zsh;
-        force = true;
-      };
 
       # ".config/wezterm/colors/everforest.toml" = {
       #   source = ./wez-everforest.toml;

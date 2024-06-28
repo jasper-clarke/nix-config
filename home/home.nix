@@ -38,7 +38,7 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = ["nnn.desktop"];
+        "inode/directory" = ["yazi.desktop"];
         "text/*" = ["neovim.desktop"];
         "text/javascript" = ["neovim.desktop"];
         "text/css" = ["neovim.desktop"];
