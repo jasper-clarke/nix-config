@@ -10,7 +10,7 @@
 }: {
   imports = [
     ./prewritten-files.nix
-    ./spicetify.nix
+    # ./spicetify.nix
     ./modules/terminal
     # ./modules/hyprwm
     ./modules/herbstluft
@@ -76,14 +76,18 @@
       name = "capitaine-cursors-white";
       package = pkgs.capitaine-cursors;
     };
+    # theme = {
+    #   name = "Catppuccin-Macchiato-Standard-Pink-Dark";
+    #   package = pkgs.catppuccin-gtk.override {
+    #     accents = ["pink"];
+    #     size = "standard";
+    #     tweaks = ["normal"];
+    #     variant = "macchiato";
+    #   };
+    # };
     theme = {
-      name = "Catppuccin-Macchiato-Standard-Pink-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["pink"];
-        size = "standard";
-        tweaks = ["normal"];
-        variant = "macchiato";
-      };
+      name = "Everforest-Dark-BL-MB";
+      package = pkgs.everforest-gtk-theme;
     };
   };
 

@@ -6,31 +6,32 @@
 }: {
   home = {
     file = {
-      ".config/wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''
-        table.insert (default_access.rules,{
-            matches = {
-                {
-                    { "application.process.binary", "=", "electron" }
-                }
-            },
-            default_permissions = "rx",
-        })
-      '';
+      # ".config/wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''
+      #   table.insert (default_access.rules,{
+      #       matches = {
+      #           {
+      #               { "application.process.binary", "=", "electron" }
+      #           }
+      #       },
+      #       default_permissions = "rx",
+      #   })
+      # '';
 
-      ".config/wireplumber/main.lua.d/99-alsa-speakers.lua".text = ''
-        rule = {
-          matches = {
-            {
-              { "alsa.card_name", "=", "Pebble V3" },
+      ".config/wireplumber/wireplumber.conf.d/pebble-v3.conf".text = ''
+        monitor.alsa.rules = [
+          {
+            matches = [
+              {
+                node.name = "~alsa_output.usb-ACTIONS_Pebble_V3-00.*"
+              }
+            ]
+            actions = {
+              update-props = {
+                audio.position = ["FR", "FL"]
+              }
             }
-          },
-          apply_properties = {
-            ["audio.channels"]         = 2,
-            ["audio.position"]         = "FR,FL",
-          },
-        }
-
-        table.insert(alsa_monitor.rules, rule)
+          }
+        ]
       '';
 
       ".ssh/config".text = ''

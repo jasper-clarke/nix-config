@@ -151,14 +151,14 @@ in {
       enable = true;
       enableZshIntegration = true;
       plugins = {
-        "full-border.yazi" = ./yazi_full-border;
-        "smart-enter.yazi" = ./yazi_smart-enter;
+        "full-border" = ./yazi_full-border;
+        "smart-enter" = ./yazi_smart-enter;
       };
       initLua = ./yazi_init.lua;
       keymap = {
         manager.prepend_keymap = [
           {
-            exec = "plugin --sync smart-enter";
+            run = "plugin --sync smart-enter";
             on = ["<Enter>"];
           }
         ];

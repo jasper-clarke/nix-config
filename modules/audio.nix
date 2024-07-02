@@ -11,15 +11,23 @@
       jack.enable = true;
       pulse.enable = true;
       wireplumber.enable = true;
-      # extraConfig.pipewire."99-rates" = {
-      #   context.properties = {
-      #     default.clock.rate = 192000;
-      #     defautlt.allowed-rates = [192000];
-      #     default.clock.quantum = 32;
-      #     default.clock.min-quantum = 32;
-      #     default.clock.max-quantum = 32;
-      #   };
-      # };
+      # wireplumber.configPackages = [
+      #   (pkgs.writeTextDir "share/wireplumber/main.lua.d/99-pebble-switch.lua" ''
+      #     alsa_monitor.rules = {
+      #       {
+      #         matches = {
+      #           {
+      #             { "node.name", "matches", "*Pebble_V3*" },
+      #           }
+      #         },
+      #         apply_properties = {
+      #           ["audio.channels"]         = "2",
+      #           ["audio.position"]         = "FR,FL",
+      #         },
+      #       }
+      #     }
+      #   '')
+      # ];
     };
   };
 
