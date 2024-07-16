@@ -90,11 +90,11 @@
       #   # force = true;
       # };
 
-      ".local/share/fonts/SF-Pro" = {
-        source = ../fonts/SF-Pro;
-        recursive = true;
-        # force = true;
-      };
+      # ".local/share/fonts/SF-Pro" = {
+      #   source = ../fonts/SF-Pro;
+      #   recursive = true;
+      #   # force = true;
+      # };
 
       # ".config/awesome" = {
       #   source = ../awesome;
