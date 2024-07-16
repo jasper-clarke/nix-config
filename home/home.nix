@@ -10,7 +10,7 @@
 }: {
   imports = [
     ./prewritten-files.nix
-    # ./spicetify.nix
+    ./spicetify.nix
     ./modules/terminal
     # ./modules/hyprwm
     ./modules/herbstluft
@@ -38,7 +38,7 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = ["yazi.desktop"];
+        "inode/directory" = ["yazi-custom.desktop"];
         "text/*" = ["neovim.desktop"];
         "text/javascript" = ["neovim.desktop"];
         "text/css" = ["neovim.desktop"];
@@ -72,10 +72,6 @@
       name = "WhiteSur-dark";
       package = pkgs.whitesur-icon-theme;
     };
-    cursorTheme = {
-      name = "capitaine-cursors-white";
-      package = pkgs.capitaine-cursors;
-    };
     # theme = {
     #   name = "Catppuccin-Macchiato-Standard-Pink-Dark";
     #   package = pkgs.catppuccin-gtk.override {
@@ -86,7 +82,7 @@
     #   };
     # };
     theme = {
-      name = "Everforest-Dark-BL-MB";
+      name = "Everforest-Dark-BL";
       package = pkgs.everforest-gtk-theme;
     };
   };
@@ -122,16 +118,14 @@
       mpv
       feh
       onlyoffice-bin
+      libreoffice-qt6-fresh
       copyq
       motrix
       gimp
       marktext
       audacity
 
-      prismlauncher
-
       # Development / Course
-      teams-for-linux
       vscodium
 
       # (
@@ -154,6 +148,7 @@
       flameshot
       betterlockscreen
       ddcutil
+      dotnet-sdk_8
 
       (picom.overrideAttrs (oldAttrs: rec {
         pname = "compfy";

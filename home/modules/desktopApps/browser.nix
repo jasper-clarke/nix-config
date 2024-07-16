@@ -26,7 +26,6 @@
           bitwarden
           darkreader
           ublock-origin
-          violentmonkey
           tridactyl
         ];
         settings = {
@@ -36,12 +35,6 @@
           "media.getusermedia.noise_enabled" = false;
           "media.getusermedia.hpf_enabled" = false;
           "browser.tabs.tabmanager.enabled" = false;
-          "browser.gesture.pinch.in" = false;
-          "browser.gesture.pinch.out" = false;
-          # "gestures.enable_single_finger_input" = false;
-          "apz.allow_zooming" = false;
-          "apz.allow_double_tap_zooming" = false;
-
           "security.fileuri.strict_origin_policy" = false;
 
           "font.name.serif.x-western" = "JetBrains Mono";

@@ -26,6 +26,10 @@
       force = true;
     };
 
+    # ".config/kitty/Everblush.conf" = {
+    #   source = ./kitty-everblush.conf;
+    # };
+
     ".config/rofi/launcher.rasi" = {
       source = ./everforest-launcher.rasi;
       force = true;
@@ -33,17 +37,17 @@
 
     ".config/nitrogen/bg-saved.cfg".text = ''
       [xin_0]
-      file=${../../../wallpapers/pine-forest-mountains-resolution.png}
+      file=${../../../wallpapers/nixos-everblush.png}
       mode=5
       bgcolor=#000000
 
       [xin_1]
-      file=${../../../wallpapers/pine-forest-mountains.jpg}
+      file=${../../../wallpapers/nixos-everblush-right.png}
       mode=5
       bgcolor=#000000
 
       [xin_2]
-      file=${../../../wallpapers/pine-forest-mountains.jpg}
+      file=${../../../wallpapers/nixos-everblush-left.png}
       mode=5
       bgcolor=#000000
     '';

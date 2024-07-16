@@ -18,6 +18,37 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
+  stylix = {
+    enable = false;
+    image = ../wallpapers/cherry-blossom.jpg;
+    polarity = "dark";
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 44;
+    };
+    fonts = {
+      monospace = {
+        name = "JetBrains Mono";
+        package = pkgs.jetbrains-mono;
+      };
+      sansSerif = {
+        name = "Inter";
+        package = pkgs.inter;
+      };
+      sizes = {
+        terminal = 15;
+      };
+    };
+    opacity = {
+      terminal = 0.9;
+    };
+    targets = {
+      nixvim.enable = lib.mkForce false;
+    };
+    homeManagerIntegration.followSystem = true;
+  };
+
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
@@ -45,12 +76,12 @@
         efiSupport = true;
         device = "nodev";
       };
-      grub2-theme = {
-        enable = true;
-        theme = "whitesur";
-        screen = "2k";
-        footer = true;
-      };
+      # grub2-theme = {
+      # enable = true;
+      # theme = "whitesur";
+      # screen = "2k";
+      # footer = true;
+      # };
     };
   };
 
@@ -179,7 +210,7 @@
     dbus.enable = true;
     openssh = {
       enable = true;
-      # allowSFTP = true;
+      allowSFTP = true;
     };
     gvfs.enable = true;
   };
@@ -318,7 +349,6 @@
 
   qt = {
     enable = true;
-    style = "adwaita-dark";
     platformTheme = "gtk2";
   };
 
@@ -354,6 +384,7 @@
       unzip
       ripgrep
       usbutils
+      devenv
     ];
   };
   xdg = {

@@ -19,8 +19,10 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-q close_or_remove
 hc keybind $Mod-e spawn kitty
-hc keybind $Mod-f spawn kitty nvim
-hc keybind $Mod-g spawn kitty yazi
+hc keybind $Mod-f spawn kitty --session nodenvim.conf
+hc keybind $Mod-g spawn kitty --session gleamnvim.conf
+hc keybind $Mod-p spawn kitty --session phpnvim.conf
+hc keybind $Mod-d spawn kitty yazi
 hc keybind $Mod-space spawn rofi -show drun -theme ~/.config/rofi/launcher.rasi -kb-mode-next "Tab" -kb-element-next ""
 hc keybind $Mod-v spawn copyq toggle
 hc keybind $Alt-space spawn toggle-players
@@ -92,7 +94,7 @@ hc keybind $Mod-Shift-f fullscreen toggle
 hc keybind $Mod-Shift-d set_attr clients.focus.decorated toggle
 hc keybind $Mod-Shift-m set_attr clients.focus.minimized true
 hc keybind $Mod-Control-m jumpto last-minimized
-hc keybind $Mod-p pseudotile toggle
+# hc keybind $Mod-p pseudotile toggle
 # The following cycles through the available layouts within a frame, but skips
 # layouts, if the layout change wouldn't affect the actual window positions.
 # I.e. if there are two windows within a frame, the grid layout is skipped.
@@ -132,7 +134,7 @@ hc attr theme.floating.reset 1
 hc set show_frame_decorations none
 hc attr theme.title_when never
 
-hc attr theme.active.color '#7FBBB3ee'
+hc attr theme.active.color '#8ccf7eee'
 hc attr theme.normal.color '#232A2Eff'
 
 hc attr theme.inner_width 0
@@ -188,6 +190,7 @@ nvidia-settings -l &
 run "picom" -b
 run "copyq"
 run "polybar"
+run "flameshot"
 firefox https://wol.jw.org/en/wol/h/r1/lp-e &
 xset -dpms
 xset s off

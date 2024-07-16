@@ -37,6 +37,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix = {
+      url = "github:danth/stylix";
+    };
+
     # aagl = {
     #  url = "github:ezKEa/aagl-gtk-on-nix";
     #  inputs.nixpkgs.follows = "nixpkgs";
@@ -65,6 +69,7 @@
         specialArgs = {inherit user hostname version inputs;};
         modules = [
           ./nix/configuration.nix
+          inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -76,7 +81,7 @@
               ];
             };
           }
-          grub2-themes.nixosModules.default
+          # grub2-themes.nixosModules.default
           # {
           #   nix.settings = aagl.nixConfig;
           #   imports = [ aagl.nixosModules.default ];

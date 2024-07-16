@@ -22,16 +22,49 @@
           {
             matches = [
               {
-                node.name = "~alsa_output.usb-ACTIONS_Pebble_V3-00.*"
+                node.name = "~alsa_output.usb-ACTIONS_Pebble_V3-00.*",
               }
             ]
             actions = {
               update-props = {
-                audio.position = ["FR", "FL"]
+                audio.position = ["FR", "FL"],
               }
             }
           }
         ]
+      '';
+
+      ".config/kitty/nodenvim.conf".text = ''
+        layout tall:bias=25;full_size=1;mirrored=true
+
+        cd ~/Projects/NodeProjects
+
+        launch --type=tab nix-shell --command zsh
+        launch --type=tab nix-shell --command zsh --run "nvim --listen /tmp/nvimsocket"
+        launch --type=tab nix-shell --command zsh
+        resize_window shorter 12
+      '';
+
+      ".config/kitty/gleamnvim.conf".text = ''
+        layout tall:bias=25;full_size=1;mirrored=true
+
+        cd ~/Projects/Gleam
+
+        launch --type=tab nix-shell --command zsh
+        launch --type=tab nix-shell --command zsh --run "nvim --listen /tmp/nvimsocket"
+        launch --type=tab nix-shell --command zsh
+        resize_window shorter 12
+      '';
+
+      ".config/kitty/phpnvim.conf".text = ''
+        layout tall:bias=25;full_size=1;mirrored=true
+
+        cd ~/Projects/PHP
+
+        launch --type=tab nix-shell --command zsh
+        launch --type=tab nix-shell --command zsh --run "nvim --listen /tmp/nvimsocket"
+        launch --type=tab nix-shell --command zsh
+        resize_window shorter 12
       '';
 
       ".ssh/config".text = ''
@@ -44,6 +77,12 @@
         Host 192.168.100.133
           IdentityFile ~/.ssh/private
       '';
+
+      # ".config/phpactor/phpactor.json".text = ''
+      #   {
+      #       "language_server_phpstan.enabled": true
+      #   }
+      # '';
 
       # ".local/share/fonts/SF-Mono" = {
       #   source = ../fonts/SF-Mono;
@@ -108,18 +147,18 @@
         MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
       '';
 
-      # ".local/share/applications/nnn.desktop".text = ''
-      #   [Desktop Entry]
-      #   Type=Application
-      #   Name=nnn
-      #   Comment=Terminal file manager
-      #   Exec=kitty -e nnn %F
-      #   Terminal=false
-      #   Icon=nnn
-      #   MimeType=inode/directory
-      #   Categories=System;FileTools;FileManager;ConsoleOnly
-      #   Keywords=File;Manager;Management;Explorer;Launcher
-      # '';
+      ".local/share/applications/yazi-custom.desktop".text = ''
+        [Desktop Entry]
+        Type=Application
+        Name=yazi
+        Comment=Terminal file manager
+        Exec=kitty -e yazi %F
+        Terminal=false
+        Icon=nnn
+        MimeType=inode/directory
+        Categories=System;FileTools;FileManager;ConsoleOnly
+        Keywords=File;Manager;Management;Explorer;Launcher
+      '';
     };
   };
 }

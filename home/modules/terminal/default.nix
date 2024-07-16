@@ -3,6 +3,7 @@
   pkgs,
   lib,
   config,
+  user,
   ...
 }: let
   tmux-which-key = pkgs.tmuxPlugins.mkTmuxPlugin {
@@ -30,12 +31,19 @@ in {
     programs.kitty = {
       enable = config.kitty;
       font.name = "JetBrains Mono";
-      font.size = 15;
+      font.size = 17;
+      # theme = "Everforest Dark Hard";
       # theme = "Tokyo Night";
-      theme = "Everforest Dark Hard";
       # theme = "Gruvbox Material Dark Medium";
       # theme = "Monokai Pro (Filter Ristretto)";
+      extraConfig = ''
+        include ${../herbstluft/kitty-everblush.conf}
+      '';
       shellIntegration.enableZshIntegration = true;
+      keybindings = {
+        "ctrl+space" = "previous_window";
+        "ctrl+enter" = "toggle_layout stack";
+      };
       settings = {
         confirm_os_window_close = 0;
         sync_to_monitor = true;
@@ -105,27 +113,32 @@ in {
         cd = "z";
         rm = "trash-put";
         service-logs = "sudo journalctl -xefu";
+        # nvim = "nvim --listen /tmp/nvimsocket";
       };
-      # plugins = [
-      #   {
-      #     name = "powerlevel10k";
-      #     src = pkgs.zsh-powerlevel10k;
-      #     file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      #   }
-      # ];
+      plugins = [
+        {
+          name = "zsh-defer";
+          src = pkgs.zsh-defer;
+          file = "share/zsh-defer/zsh-defer.plugin.zsh";
+        }
+      ];
+      initExtraFirst = ''
+        PS1=""
+
+      '';
       # initExtraFirst = ''
       #   if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
       #     source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
       #   fi
       # '';
-      # initExtra = ''
-      #   source ~/.p10k.zsh
-      # '';
+      initExtra = ''
+        zsh-defer eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config /home/${user}/.config/oh-my-posh/config.json)"
+      '';
     };
 
     programs.oh-my-posh = {
       enable = true;
-      enableZshIntegration = true;
+      enableZshIntegration = false;
       settings = builtins.fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile ./p10k.omp.toml));
     };
 
@@ -168,7 +181,7 @@ in {
     programs.btop = {
       enable = true;
       settings = {
-        color_theme = "matcha-dark-sea";
+        # color_theme = "matcha-dark-sea";
         theme_background = false;
         vim_keys = true;
       };
@@ -179,23 +192,17 @@ in {
       defaultEditor = true;
     };
 
-    # programs.tmux = {
-    #   enable = true;
-    #   prefix = "C-Space";
-    #   keyMode = "vi";
-    #   plugins = with pkgs; [
-    #     {
-    #       plugin = tmuxPlugins.vim-tmux-navigator;
-    #     }
-    #     {
-    #       plugin = tmuxPlugins.tmux-fzf;
-    #     }
-    #     # {
-    #     #   plugin = tmux-which-key;
-    #     # }
-    #   ];
-    #   extraConfig = builtins.readFile ./tmux.conf;
-    # };
+    programs.tmux = {
+      enable = true;
+      prefix = "C-b";
+      tmuxinator.enable = true;
+      plugins = with pkgs; [
+        {
+          plugin = tmuxPlugins.vim-tmux-navigator;
+        }
+      ];
+      extraConfig = builtins.readFile ./tmux.conf;
+    };
 
     home.file = {
       # ".p10k.zsh" = {
@@ -213,13 +220,13 @@ in {
       tree
       killall
       nitch
-      fzf
       nix-output-monitor
       ffmpegthumbnailer
       trash-cli
       lazygit
       alejandra
-      stylua
+
+      neovim-remote
       (nerdfonts.override {fonts = ["Iosevka"];})
       jetbrains-mono
     ];
