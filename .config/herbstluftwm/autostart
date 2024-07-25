@@ -149,7 +149,7 @@ for state in active urgent normal; do
 done
 hc attr theme.tiling.outer_width 0
 
-hc set window_gap 25
+hc set window_gap 40
 hc set frame_padding 0
 hc set smart_window_surroundings off
 hc set smart_frame_surroundings off
@@ -177,7 +177,7 @@ hc unlock
 
 hc detect_monitors
 
-hc attr monitors.0.pad_up 40
+# hc attr monitors.0.pad_up 40
 
 run() {
 	if ! pgrep -f "$1"; then
