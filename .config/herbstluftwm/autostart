@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 hc() {
 	herbstclient "$@"
@@ -19,19 +19,16 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-q close_or_remove
 hc keybind $Mod-e spawn kitty
-hc keybind $Mod-f spawn kitty --session nodenvim.conf
-hc keybind $Mod-g spawn kitty --session gleamnvim.conf
-hc keybind $Mod-p spawn kitty --session phpnvim.conf
-hc keybind $Mod-d spawn kitty yazi
-hc keybind $Mod-space spawn rofi -show drun -theme ~/.config/rofi/launcher.rasi -kb-mode-next "Tab" -kb-element-next ""
+hc keybind $Mod-Control-space spawn sh $HOME/.local/bin/toggle-header-bar
+hc keybind $Mod-space spawn rofi -show drun -theme ~/.config/rofi/launcher.rasi
 hc keybind $Mod-v spawn copyq toggle
-hc keybind $Alt-space spawn toggle-players
-# hc keybind $Alt-h spawn playerctl --player=spotify previous
-# hc keybind $Alt-l spawn playerctl --player=spotify next
-hc keybind $Alt-h spawn mpc prev
-hc keybind $Alt-l spawn mpc next
 hc keybind $Mod-m spawn betterlockscreen -l
 hc keybind $Mod-s spawn flameshot gui
+# hc keybind $Alt-h spawn playerctl --player=spotify previous
+# hc keybind $Alt-l spawn playerctl --player=spotify next
+hc keybind $Alt-space spawn toggle-players
+hc keybind $Alt-h spawn mpc prev
+hc keybind $Alt-l spawn mpc next
 
 # basic movement in tiling and floating mode
 # focusing clients
@@ -51,7 +48,7 @@ hc keybind $Mod-Shift-l shift right
 hc keybind $Mod-u split bottom 0.5
 hc keybind $Mod-o split right 0.5
 # let the current frame explode into subframes
-hc keybind $Mod-Control-space split explode
+# hc keybind $Mod-Control-space split explode
 
 # resizing frames and floating clients
 resizestep=0.02
@@ -61,18 +58,18 @@ hc keybind $Mod-Control-k resize up +$resizestep
 hc keybind $Mod-Control-l resize right +$resizestep
 
 # tags
-tag_names=({1..9})
-tag_keys=({1..9} 0)
+# tag_names=({1..9})
+# tag_keys=({1..9} 0)
 
-hc rename default "${tag_names[0]}" || true
-for i in "${!tag_names[@]}"; do
-	hc add "${tag_names[$i]}"
-	# key="${tag_keys[$i]}"
-	# if [ -n "$key" ]; then
-	# 	hc keybind "$Mod-$key" use_index "$i"
-	# 	hc keybind "$Mod-Shift-$key" move_index "$i"
-	# fi
-done
+# hc rename default "${tag_names[0]}" || true
+# for i in "${!tag_names[@]}"; do
+# hc add "${tag_names[$i]}"
+# key="${tag_keys[$i]}"
+# if [ -n "$key" ]; then
+# 	hc keybind "$Mod-$key" use_index "$i"
+# 	hc keybind "$Mod-Shift-$key" move_index "$i"
+# fi
+# done
 
 hc keybind $Mod-1 spawn herb-ws-switch 1
 hc keybind $Mod-2 spawn herb-ws-switch 2
@@ -188,6 +185,7 @@ run() {
 nitrogen --restore &
 run "copyq"
 run "flameshot"
+run "eww daemon"
 firefox https://wol.jw.org/en/wol/h/r1/lp-e &
 xset -dpms
 ddcutil --model VX2758-SERIES setvcp 10 90

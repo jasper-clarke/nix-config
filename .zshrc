@@ -4,6 +4,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Completions
 # fpath+="$HOME/.myzsh/zsh-completions/src"
 

@@ -1,0 +1,64 @@
+(defpoll cover_art :interval "3s" "playerctl metadata mpris:artUrl")
+
+(defwindow header-bar
+  :monitor 0
+  :stacking "bg"
+  :windowtype "dock"
+  :wm-ignore true
+  :geometry (geometry
+              :x "0%"
+              :y "2%"
+              :width "96%"
+              :height "50px"
+              :anchor "top center")
+  (header_layout))
+
+(defwidget header_layout []
+  (box :class "header-bar"
+       :orientation "h"
+  ;; (left)
+  (center)
+  ;; (right)
+  ))
+
+;; (defwidget left []
+;;   (box :orientation "h"
+;;        :space-evenly false
+;;        :halign "end"
+;;        :class "header_left"
+;;   (item)
+;;   ))
+
+(defwidget center []
+  (box :orientation "h"
+       :space-evenly false
+       :halign "center"
+       :class "header_center"
+  (music)
+  ))
+
+(defwidget music []
+  (eventbox :onhover "eww update music_reveal=true"
+			      :onhoverlost "eww update music_reveal=false"
+		(box :class "module-2" :orientation "h" :space-evenly "false" :vexpand "false" :hexpand "false"
+			(box :class "song_cover_art" :vexpand "false" :hexpand "false" :style "background-image: url('${cover_art}');")
+	    (revealer :transition "slideright"
+			      :reveal music_reveal
+			      :duration "350ms"
+          (box :vexpand "false" :hexpand "false" :oreintation "h"
+            (button :class "song_btn_prev" :onclick "playerctl previous" "")
+            (button :class "song_btn_play" :onclick "playerctl metadata title")
+            (button :class "song_btn_next" :onclick "playerctl next" "")
+          )
+        )
+    )
+  )
+)
+
+;; (defwidget right []
+;;   (box :orientation "h"
+;;        :space-evenly false
+;;        :halign "start"
+;;        :class "header_right"
+;;   (item)
+;;   ))
