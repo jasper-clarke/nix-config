@@ -14,43 +14,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    grub2-themes = {
-      url = "github:vinceliuice/grub2-themes";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    #
-    # hyprgrass = {
-    #   url = "github:horriblename/hyprgrass";
-    #   inputs.hyprland.follows = "hyprland"; # IMPORTANT
-    # };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Spicetify
     spicetify-nix = {
-      url = "github:the-argus/spicetify-nix";
+      url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    stylix = {
-      url = "github:danth/stylix";
-    };
-
-    # aagl = {
-    #  url = "github:ezKEa/aagl-gtk-on-nix";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
-    grub2-themes,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -69,7 +42,6 @@
         specialArgs = {inherit user hostname version inputs;};
         modules = [
           ./nix/configuration.nix
-          inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -77,16 +49,10 @@
             home-manager.extraSpecialArgs = {inherit user inputs system version pkgs;};
             home-manager.users.${user} = {
               imports = [
-                ./home/home.nix
+                ./nix/home/home.nix
               ];
             };
           }
-          # grub2-themes.nixosModules.default
-          # {
-          #   nix.settings = aagl.nixConfig;
-          #   imports = [ aagl.nixosModules.default ];
-          #   programs.anime-game-launcher.enable = true;
-          # }
         ];
       };
     };

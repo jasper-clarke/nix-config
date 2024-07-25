@@ -12,61 +12,17 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
-    ../modules/steam.nix
-    ../modules/audio.nix
-    ../modules/utilities.nix
-    inputs.sops-nix.nixosModules.sops
+    ./modules/steam.nix
+    ./modules/audio.nix
+    ./modules/utilities.nix
   ];
-
-  stylix = {
-    enable = false;
-    image = ../wallpapers/cherry-blossom.jpg;
-    polarity = "dark";
-    cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-      size = 44;
-    };
-    fonts = {
-      monospace = {
-        name = "JetBrains Mono";
-        package = pkgs.jetbrains-mono;
-      };
-      sansSerif = {
-        name = "Inter";
-        package = pkgs.inter;
-      };
-      sizes = {
-        terminal = 15;
-      };
-    };
-    opacity = {
-      terminal = 0.9;
-    };
-    targets = {
-      nixvim.enable = lib.mkForce false;
-    };
-    homeManagerIntegration.followSystem = true;
-  };
-
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-
-  sops.age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
-
-  # sops.secrets.git_sshkey = {};
 
   hardware.i2c.enable = true;
 
   boot = {
-    supportedFilesystems = ["ntfs"];
     kernelModules = ["i2c-dev"];
+    supportedFilesystems = ["ntfs"];
     kernelPackages = pkgs.linuxPackages_6_8;
-    extraModprobeConfig = ''
-      options kvm_intel nested=1
-      options kvm_intel emulate_invalid_guest_state=0
-      options kvm ignore_msrs=1
-    '';
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -76,12 +32,6 @@
         efiSupport = true;
         device = "nodev";
       };
-      # grub2-theme = {
-      # enable = true;
-      # theme = "whitesur";
-      # screen = "2k";
-      # footer = true;
-      # };
     };
   };
 
@@ -129,7 +79,6 @@
 
   security = {
     polkit.enable = true;
-    # pam.services.swaylock = {};
   };
 
   services = {
@@ -137,16 +86,6 @@
       enable = true;
       acceleration = "cuda";
     };
-
-    # greetd = {
-    #   enable = true;
-    #   settings = {
-    #     default_session = {
-    #       command = "Hyprland";
-    #       user = "${user}";
-    #     };
-    #   };
-    # };
 
     xserver = {
       enable = true;
@@ -178,62 +117,22 @@
       windowManager.herbstluftwm = {
         enable = true;
       };
-
-      # windowManager.xmonad = {
-      #   enable = true;
-      #   enableContribAndExtras = true;
-      #   config = builtins.readFile ../xmonad/xmonad.hs;
-      # };
-
-      # windowManager.awesome = {
-      #   enable = true;
-      #   package = pkgs.awesome.overrideAttrs (oldAttrs: rec {
-      #     version = "8b1f8958b46b3e75618bc822d512bb4d449a89aa";
-      #     src = pkgs.fetchFromGitHub {
-      #       owner = "awesomewm";
-      #       repo = "awesome";
-      #       rev = version;
-      #       hash = "sha256-ZGZ53IWfQfNU8q/hKexFpb/2mJyqtK5M9t9HrXoEJCg=";
-      #     };
-      #     patches = [];
-      #     postPatch = ''
-      #       patchShebangs tests/examples/_postprocess.lua
-      #     '';
-      #   });
-      # };
     };
-
-    # udev.extraRules = ''
-    #   KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0ab5", TAG+="uaccess" ACTION=="add" RUN+="${pkgs.headsetcontrol}/bin/headsetcontrol -l 0"
-    # '';
 
     dbus.enable = true;
     openssh = {
       enable = true;
-      allowSFTP = true;
     };
     gvfs.enable = true;
   };
 
   programs = {
-    # weylus = {
-    #   enable = true;
-    #   openFirewall = true;
-    #   users = ["${user}"];
-    # };
-
-    # hyprland = {
-    #   enable = true;
-    #   package = hyprland.packages.${pkgs.system}.hyprland;
-    #   portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-    # };
-
     zsh.enable = true;
     dconf.enable = true;
 
     nh = {
       enable = true;
-      flake = "/home/${user}/.flake";
+      flake = "/home/${user}/.files";
     };
 
     nix-ld = {
@@ -297,17 +196,53 @@
 
   systemd = {
     timers = {
-      "display-brightness" = {
+      "display-brightness-down" = {
         wantedBy = ["timers.target"];
         timerConfig = {
           OnCalendar = "*-*-* 17:30:00";
           Persistent = true;
         };
       };
+      "headset-lights" = {
+        wantedBy = ["timers.target"];
+        timerConfig = {
+          OnBootSec = "1m";
+        };
+      };
     };
     services = {
       NetworkManager-wait-online.enable = lib.mkForce false;
-      "display-brightness" = {
+      "headset-lights" = {
+        script = ''
+          #!/usr/bin/env bash
+          while true; do
+            LAST_BATTERY_LEVEL="$BATTERY_LEVEL"
+            BATTERY_LEVEL=$(${pkgs.headsetcontrol}/bin/headsetcontrol -cb 2>/dev/null)
+
+            if [ -z "$LAST_BATTERY_LEVEL" ] && [ -n "$BATTERY_LEVEL" ]; then
+              # Headset connected
+              ${pkgs.headsetcontrol}/bin/headsetcontrol -l 0
+            fi
+            sleep 2
+          done
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+        };
+      };
+      "display-brightness-up" = {
+        script = ''
+          ${pkgs.ddcutil}/bin/ddcutil --model VG258 setvcp 10 50
+          ${pkgs.ddcutil}/bin/ddcutil --model VX2758-SERIES setvcp 10 80
+          ${pkgs.ddcutil}/bin/ddcutil --model 'DELL S2421HS' setvcp 10 70
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+        };
+      };
+      "display-brightness-down" = {
         script = ''
           ${pkgs.ddcutil}/bin/ddcutil --model VG258 setvcp 10 20
           ${pkgs.ddcutil}/bin/ddcutil --model VX2758-SERIES setvcp 10 50
@@ -332,19 +267,6 @@
         TimeoutStopSec = 10;
       };
     };
-    # user.services.headsetlights = {
-    #   description = "headsetlights";
-    #   wantedBy = ["graphical-session.target"];
-    #   wants = ["graphical-session.target"];
-    #   after = ["graphical-session.target"];
-    #   serviceConfig = {
-    #     Type = "simple";
-    #     ExecStart = "/etc/profiles/per-user/allusive/bin/lights";
-    #     Restart = "on-failure";
-    #     RestartSec = 1;
-    #     TimeoutStopSec = 10;
-    #   };
-    # };
   };
 
   qt = {
@@ -355,12 +277,11 @@
   virtualisation = {
     virtualbox.host.enable = true;
     docker.enable = true;
-    libvirtd.enable = true;
   };
 
   users.users.${user} = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "vboxusers" "docker" "libvirtd"];
+    extraGroups = ["wheel" "networkmanager" "vboxusers" "docker"];
     home = "/home/${user}";
     description = "Jasper C";
     shell = pkgs.zsh;
@@ -370,12 +291,12 @@
 
   environment = {
     sessionVariables = {
-      NNN_TRASH = 1;
-      NNN_FIFO = "/tmp/nnn.fifo";
       __GL_SYNC_DISPLAY_DEVICE = "DP-2";
+      EDITOR = "nvim";
     };
 
     systemPackages = with pkgs; [
+      stow
       vim
       wget
       sassc
@@ -384,7 +305,6 @@
       unzip
       ripgrep
       usbutils
-      devenv
     ];
   };
   xdg = {
@@ -392,7 +312,6 @@
       enable = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        # hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
       ];
       config.common.default = "*";
     };

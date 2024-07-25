@@ -1,0 +1,9 @@
+\.git
+\.gitignore
+\.gitmodules
+\.gitattributes
+\.ignore
+^/README.*
+nix/
+flake.nix
+flake.lock
