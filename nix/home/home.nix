@@ -110,6 +110,10 @@
       vscodium
       neovide
 
+      ryujinx
+      prismlauncher
+      jetbrains.idea-ultimate
+
       # (
       #   picom.overrideAttrs
       #   (oldAttrs: rec {

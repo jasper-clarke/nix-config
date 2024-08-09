@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 hc() {
 	herbstclient "$@"
@@ -51,25 +51,18 @@ hc keybind $Mod-o split right 0.5
 # hc keybind $Mod-Control-space split explode
 
 # resizing frames and floating clients
-resizestep=0.02
+resizestep=0.05
 hc keybind $Mod-Control-h resize left +$resizestep
 hc keybind $Mod-Control-j resize down +$resizestep
 hc keybind $Mod-Control-k resize up +$resizestep
 hc keybind $Mod-Control-l resize right +$resizestep
 
 # tags
-# tag_names=({1..9})
-# tag_keys=({1..9} 0)
-
-# hc rename default "${tag_names[0]}" || true
-# for i in "${!tag_names[@]}"; do
-# hc add "${tag_names[$i]}"
-# key="${tag_keys[$i]}"
-# if [ -n "$key" ]; then
-# 	hc keybind "$Mod-$key" use_index "$i"
-# 	hc keybind "$Mod-Shift-$key" move_index "$i"
-# fi
-# done
+tag_names=({1..9})
+hc rename default "${tag_names[0]}" || true
+for i in "${!tag_names[@]}"; do
+	hc add "${tag_names[$i]}"
+done
 
 hc keybind $Mod-1 spawn herb-ws-switch 1
 hc keybind $Mod-2 spawn herb-ws-switch 2
@@ -123,16 +116,12 @@ hc load 7 "(clients horizontal:1)"
 hc attr theme.background_color '#00000000'
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
-# hc set frame_border_active_color '#222222cc'
-# hc set frame_border_normal_color '#101010cc'
-# hc set frame_bg_normal_color '#565656aa'
-# hc set frame_bg_active_color '#345F0Caa'
 
 hc set show_frame_decorations none
 hc attr theme.title_when never
 
-hc attr theme.active.color '#8ccf7eee'
-hc attr theme.normal.color '#232A2Eff'
+hc attr theme.normal.color '#000000aa'
+hc attr theme.active.color '#232A2Ecc'
 
 hc attr theme.inner_width 0
 hc attr theme.border_width 2
@@ -185,9 +174,11 @@ run() {
 nitrogen --restore &
 run "copyq"
 run "flameshot"
-run "eww daemon"
+# run "eww daemon"
+run "compfy" &
 firefox https://wol.jw.org/en/wol/h/r1/lp-e &
 xset -dpms
+xset s off
 ddcutil --model VX2758-SERIES setvcp 10 90
 ddcutil --model VG258 setvcp 10 50
 ddcutil --model 'DELL S2421HS' setvcp 10 70

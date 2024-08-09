@@ -14,9 +14,12 @@
     gamemode.enable = true;
   };
 
+  services.joycond.enable = true;
+
   environment.systemPackages = with pkgs; [
     protonup
     mangohud
+    joycond-cemuhook
   ];
 
   environment.sessionVariables = {

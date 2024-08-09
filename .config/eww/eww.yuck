@@ -1,4 +1,4 @@
-(defpoll cover_art :interval "3s" "playerctl metadata mpris:artUrl")
+;; (defpoll cover_art :interval "3s" "playerctl metadata mpris:artUrl")
 
 (defwindow header-bar
   :monitor 0

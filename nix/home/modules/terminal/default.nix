@@ -29,10 +29,10 @@ in {
 
   config = {
     programs = {
-      kitty.enable = config.kitty;
+      # kitty.enable = config.kitty;
       git.enable = true;
       zoxide.enable = true;
-      zsh.enable = true;
+      # zsh.enable = true;
       oh-my-posh.enable = true;
       fzf.enable = true;
       yazi.enable = true;
@@ -49,6 +49,8 @@ in {
       lazygit
       alejandra
       dust
+      zsh
+      (lib.mkIf config.kitty kitty)
 
       nodejs # Copilot requires
       neovim

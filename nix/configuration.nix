@@ -82,10 +82,14 @@
   };
 
   services = {
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-    };
+    # ollama = {
+    #   enable = true;
+    #   acceleration = "cuda";
+    #   environmentVariables = {
+    #     OLLAMA_LLM_LIBRARY = "cuda";
+    #     LD_LIBRARY_PATH = "run/opengl-driver/lib";
+    #   };
+    # };
 
     xserver = {
       enable = true;
@@ -156,6 +160,9 @@
         icu
         wayland
         libGL
+        libGLU
+        glfw
+        glew
         libappindicator-gtk3
         libdrm
         libglvnd
@@ -223,7 +230,7 @@
               # Headset connected
               ${pkgs.headsetcontrol}/bin/headsetcontrol -l 0
             fi
-            sleep 2
+            sleep 2s
           done
         '';
         serviceConfig = {
@@ -277,6 +284,19 @@
   virtualisation = {
     virtualbox.host.enable = true;
     docker.enable = true;
+    docker.enableNvidia = true;
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        ollama = {
+          autoStart = true;
+          image = "ollama/ollama";
+          extraOptions = ["--gpus" "all"];
+          ports = ["11434:11434"];
+          volumes = ["ollama:/root/.ollama"];
+        };
+      };
+    };
   };
 
   users.users.${user} = {
@@ -305,6 +325,7 @@
       unzip
       ripgrep
       usbutils
+      distrobox
     ];
   };
   xdg = {

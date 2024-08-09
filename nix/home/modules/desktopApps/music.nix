@@ -34,6 +34,13 @@
       };
     };
 
+    # programs.spotify-player = {
+    #   enable = true;
+    #   settings = {
+    #     border_type = "Rounded";
+    #   };
+    # };
+
     programs.ncmpcpp = {
       enable = true;
       package = pkgs.ncmpcpp.override {
@@ -106,6 +113,7 @@
     home.packages = with pkgs; [
       playerctl
       mpc-cli
+      mpdris2
       libmpdclient
       (writers.writeBashBin "toggle-players" ../hyprwm/scripts/playerctl.sh)
     ];
